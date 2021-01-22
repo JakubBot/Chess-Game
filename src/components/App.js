@@ -9,7 +9,7 @@ import './App.css';
 
 function App() {
   return (
-    <div className="container">
+    <>
       <Router>
         <Switch>
           <Route exact path="/" component={HomePage} />
@@ -18,7 +18,7 @@ function App() {
           <Route component={PageNotFound} />
         </Switch>
       </Router>
-    </div>
+    </>
   );
 }
 
