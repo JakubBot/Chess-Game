@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/Chess-Game/static/css/main.7686a7b4.chunk.css",
-    "main.js": "/Chess-Game/static/js/main.14fd8760.chunk.js",
-    "main.js.map": "/Chess-Game/static/js/main.14fd8760.chunk.js.map",
+    "main.css": "/Chess-Game/static/css/main.e4417194.chunk.css",
+    "main.js": "/Chess-Game/static/js/main.d7642853.chunk.js",
+    "main.js.map": "/Chess-Game/static/js/main.d7642853.chunk.js.map",
     "runtime-main.js": "/Chess-Game/static/js/runtime-main.f0937801.js",
     "runtime-main.js.map": "/Chess-Game/static/js/runtime-main.f0937801.js.map",
     "static/css/2.ee0e07af.chunk.css": "/Chess-Game/static/css/2.ee0e07af.chunk.css",
     "static/js/2.0728ecca.chunk.js": "/Chess-Game/static/js/2.0728ecca.chunk.js",
     "static/js/2.0728ecca.chunk.js.map": "/Chess-Game/static/js/2.0728ecca.chunk.js.map",
     "index.html": "/Chess-Game/index.html",
-    "precache-manifest.6ba5cd4f5cef495d339c18a15307dabe.js": "/Chess-Game/precache-manifest.6ba5cd4f5cef495d339c18a15307dabe.js",
+    "precache-manifest.a71b334ff7615d558c8171fab3a13875.js": "/Chess-Game/precache-manifest.a71b334ff7615d558c8171fab3a13875.js",
     "service-worker.js": "/Chess-Game/service-worker.js",
     "static/css/2.ee0e07af.chunk.css.map": "/Chess-Game/static/css/2.ee0e07af.chunk.css.map",
-    "static/css/main.7686a7b4.chunk.css.map": "/Chess-Game/static/css/main.7686a7b4.chunk.css.map",
+    "static/css/main.e4417194.chunk.css.map": "/Chess-Game/static/css/main.e4417194.chunk.css.map",
     "static/js/2.0728ecca.chunk.js.LICENSE.txt": "/Chess-Game/static/js/2.0728ecca.chunk.js.LICENSE.txt",
     "static/media/Navbar.scss": "/Chess-Game/static/media/backgroundGameImg.354ebc2d.jpg",
     "static/media/index.scss": "/Chess-Game/static/media/fontello.b94a2163.woff",
@@ -22,7 +22,7 @@
     "static/js/runtime-main.f0937801.js",
     "static/css/2.ee0e07af.chunk.css",
     "static/js/2.0728ecca.chunk.js",
-    "static/css/main.7686a7b4.chunk.css",
-    "static/js/main.14fd8760.chunk.js"
+    "static/css/main.e4417194.chunk.css",
+    "static/js/main.d7642853.chunk.js"
   ]
 }
