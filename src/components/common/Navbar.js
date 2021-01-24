@@ -47,12 +47,12 @@ const Navbar = () => {
 
           <div className="buttons">
             <div className="buttons__signIn">
-              <a href="Sign" className="buttons__item flex-c-c">
+              <a href="login" className="buttons__item flex-c-c">
                 <span>Sign In</span>
               </a>
             </div>
             <div className="buttons__signUp">
-              <a href="Sign" className="buttons__item flex-c-c">
+              <a href="login" className="buttons__item flex-c-c">
                 <span>Sign Up</span>
               </a>
             </div>
