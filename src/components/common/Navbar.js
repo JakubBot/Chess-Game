@@ -57,7 +57,7 @@ const Navbar = () => {
               </a>
             </div>
           </div>
-          <div className="navbar__menu--bottom ">
+          <div className="navbar__menu--bottom">
             <div className="navbar__menu__item--small ">
               <span className="icon-resize-horizontal"></span>
               <Link to="/">Collapse</Link>
