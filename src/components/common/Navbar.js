@@ -7,6 +7,7 @@ import './Navbar.scss';
 const $ = window.jQuery;
 const Navbar = () => {
   const handleMenuClick = () => {
+    if ($(window).width() > 576) return;
     const menuButton = $('.menu-btn');
 
     const navbar = $('.navbar');
