@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../img/logo.png';
 
 import './Navbar.scss';
+
 const $ = window.jQuery;
 const Navbar = () => {
   const handleMenuClick = () => {
@@ -24,23 +25,23 @@ const Navbar = () => {
           <div className="navbar__menu">
             <img src={logo} alt="logo" />
             <div className="navbar__menu__item">
-              <span className="icon-home"></span>
+              <span className="icon-home" />
               <Link to="/">Home</Link>
             </div>
             <div className="navbar__menu__item">
-              <span className="icon-gamepad"></span>
+              <span className="icon-gamepad" />
               <Link to="/">Play</Link>
             </div>
             <div className="navbar__menu__item">
-              <span className="icon-puzzle"></span>
+              <span className="icon-puzzle" />
               <Link to="/">Puzzles</Link>
             </div>
             <div className="navbar__menu__item">
-              <span className="icon-graduation-cap"></span>
+              <span className="icon-graduation-cap" />
               <Link to="/">Learn</Link>
             </div>
             <div className="navbar__menu__item">
-              <span className="icon-dot-3"></span>
+              <span className="icon-dot-3" />
               <Link to="/">More</Link>
             </div>
           </div>
@@ -59,22 +60,27 @@ const Navbar = () => {
           </div>
           <div className="navbar__menu--bottom">
             <div className="navbar__menu__item--small ">
-              <span className="icon-resize-horizontal"></span>
+              <span className="icon-resize-horizontal" />
               <Link to="/">Collapse</Link>
             </div>
             <div className="navbar__menu__item--small">
-              <span className="icon-cog"></span>
+              <span className="icon-cog" />
               <Link to="/">Settings</Link>
             </div>
             <div className="navbar__menu__item--small">
-              <span className="icon-help"></span>
+              <span className="icon-help" />
               <Link to="/">Help</Link>
             </div>
           </div>
         </div>
       </div>
-      <div className="menu-btn" onClick={handleMenuClick}>
-        <div className="menu-btn__burger"></div>
+      <div
+        className="menu-btn"
+        role="button"
+        tabIndex="0"
+        onClick={handleMenuClick}
+      >
+        <div className="menu-btn__burger" />
       </div>
     </>
   );
