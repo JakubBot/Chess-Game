@@ -71,21 +71,18 @@
   padding-top: 20px;
   background-color: $navbarColor;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
   transform: translateX(-100%);
   transition: transform 1s ease;
 
-  @include sm {
-    width: 200px;
-    transform: translateX(0);
-    padding-top: 0px;
-    background-color: $navbarExpanded;
-  }
+  font-size: 18px;
 
   &__menu img {
     width: 140px;
+    display: inline-block;
+    margin-bottom: 40px;
   }
 
   &__menu__item {
@@ -101,7 +98,7 @@
   &__menu__item--small {
     display: flex;
     font-size: 1.2em;
-    width: 200px;
+    width: 100%;
 
     justify-content: flex-start;
     align-items: center;
@@ -111,17 +108,39 @@
       color: $darkWhite;
     }
   }
+  @include sm {
+    width: 200px;
+    transform: translateX(0);
+    padding-top: 0px;
+    background-color: $navbarExpanded;
+    display: grid;
+    grid-template-rows: 4fr 1.5fr 1.5fr;
+
+    &__menu img {
+      width: 170px;
+    }
+    &__menu__item {
+      margin: 3px 0;
+    }
+  }
 }
 
 .navbar__menu--bottom {
   display: none;
-  position: absolute;
-  left: 20px;
-  bottom: 20px;
+
+  @include sm {
+    display: initial;
+  }
 }
 
 .buttons {
   margin: 10px;
+
+  &__sign {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 .buttons__item {
@@ -132,16 +151,9 @@
   text-transform: uppercase;
   font-weight: bold;
   width: 150px;
-  border-radius: 5px;
+  border-radius: 2px;
   transition: 0.5s ease;
-  &:hover {
-    background-color: $black;
-    color: white;
-  }
 
-  @include sm {
-    border: 2px solid black;
-  }
   &::before {
     content: '';
     position: absolute;
@@ -153,9 +165,6 @@
     transition: transform 0.5s 0.5s ease-in-out;
     transform: scaleY(1);
     z-index: 22;
-    @include sm {
-      display: none;
-    }
   }
   &:hover::before {
     transform: scaleY(0);
@@ -171,26 +180,56 @@
     background: $navbarColor;
     transition: transform 0.5s ease-in-out;
     transform: scaleX(1);
-    @include sm {
-      display: none;
-    }
   }
   &:hover::after {
     transform: scaleX(0);
   }
   & span {
     position: relative;
-    z-index: 3;
-    @include sm {
+    z-index: 100;
+    color: white;
+  }
+
+  @include sm {
+    border: 2px solid black;
+    padding: 10px;
+    width: 130px;
+    margin-top: 12px;
+    border-radius: 8px;
+    &:hover {
+      background-color: $black;
+    }
+    &:hover span {
+      color: white;
+    }
+    & span {
       color: black;
     }
+    &::after,
+    &::before {
+      display: none;
+    }
   }
-  &:hover span {
-    color: white;
+  @include md {
+    font-size: 24px;
+    width: 140px;
+
   }
 }
 
+.showNavbar {
+  transform: translateX(0);
+}
+
+//flex center center column
 .flex-c-c {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+//flex center center
+.flex-c {
   display: flex;
   justify-content: center;
   align-items: center;

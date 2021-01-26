@@ -12,9 +12,9 @@ const Navbar = () => {
 
     const navbar = $('.navbar');
     if (!menuButton.hasClass('open')) {
-      navbar.css('transform', 'translateX(0)');
+      navbar.addClass('showNavbar');
     } else {
-      navbar.css('transform', 'translateX(-100%)');
+      navbar.removeClass('showNavbar');
     }
     menuButton.toggleClass('open');
   };
@@ -23,7 +23,7 @@ const Navbar = () => {
     <>
       <div className="container">
         <div className="navbar">
-          <div className="navbar__menu">
+          <div className="navbar__menu flex-c-c">
             <img src={logo} alt="logo" />
             <div className="navbar__menu__item">
               <span className="icon-home" />
@@ -48,12 +48,12 @@ const Navbar = () => {
           </div>
 
           <div className="buttons">
-            <div className="buttons__signIn">
+            <div className="buttons__sign">
               <a href="login" className="buttons__item flex-c-c">
                 <span>Sign In</span>
               </a>
             </div>
-            <div className="buttons__signUp">
+            <div className="buttons__sign">
               <a href="login" className="buttons__item flex-c-c">
                 <span>Sign Up</span>
               </a>
