@@ -23,7 +23,7 @@ const Navbar = () => {
     <>
       <div className="container">
         <div className="navbar">
-          <div className="navbar__menu flex-c-c">
+          <div className="navbar__menu ">
             <img src={logo} alt="logo" />
             <div className="navbar__menu__item">
               <span className="icon-home" />

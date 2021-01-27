@@ -1,21 +1,21 @@
 @import './breakPoints';
 
-@mixin sm {
+@mixin phone {
   @media screen and (min-width: $screen-sm-min) {
     @content;
   }
 }
-@mixin md {
+@mixin tablet {
   @media screen and (min-width: $screen-md-min) {
     @content;
   }
 }
-@mixin lg {
+@mixin sDesktop {
   @media (min-width: $screen-lg-min) {
     @content;
   }
 }
-@mixin lx {
+@mixin lDesktop {
   @media (min-width: $screen-xl-min) {
     @content;
   }

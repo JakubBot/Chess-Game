@@ -20,7 +20,7 @@
   cursor: pointer;
   outline: none;
 
-  @include sm {
+  @include phone {
     display: none;
   }
 
@@ -79,6 +79,17 @@
 
   font-size: 18px;
 
+  &__menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    @include phone {
+      align-items: flex-start;
+
+    }
+  }
   &__menu img {
     width: 140px;
     display: inline-block;
@@ -108,14 +119,13 @@
       color: $darkWhite;
     }
   }
-  @include sm {
+  @include phone {
     width: 200px;
     transform: translateX(0);
     padding-top: 0px;
     background-color: $navbarExpanded;
     display: grid;
     grid-template-rows: 4fr 1.5fr 1.5fr;
-
     &__menu img {
       width: 170px;
     }
@@ -128,7 +138,7 @@
 .navbar__menu--bottom {
   display: none;
 
-  @include sm {
+  @include phone {
     display: initial;
   }
 }
@@ -190,7 +200,7 @@
     color: white;
   }
 
-  @include sm {
+  @include phone {
     border: 2px solid black;
     padding: 10px;
     width: 130px;
@@ -210,7 +220,7 @@
       display: none;
     }
   }
-  @include md {
+  @include tablet {
     font-size: 24px;
     width: 140px;
 
