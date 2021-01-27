@@ -21,57 +21,55 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="container">
-        <div className="navbar">
-          <div className="navbar__menu ">
-            <img src={logo} alt="logo" />
-            <div className="navbar__menu__item">
-              <span className="icon-home" />
-              <Link to="/">Home</Link>
-            </div>
-            <div className="navbar__menu__item">
-              <span className="icon-gamepad" />
-              <Link to="/">Play</Link>
-            </div>
-            <div className="navbar__menu__item">
-              <span className="icon-puzzle" />
-              <Link to="/">Puzzles</Link>
-            </div>
-            <div className="navbar__menu__item">
-              <span className="icon-graduation-cap" />
-              <Link to="/">Learn</Link>
-            </div>
-            <div className="navbar__menu__item">
-              <span className="icon-dot-3" />
-              <Link to="/">More</Link>
-            </div>
+      <div className="navbar">
+        <div className="navbar__menu ">
+          <img src={logo} alt="logo" />
+          <div className="navbar__menu__item">
+            <span className="icon-home" />
+            <Link to="/">Home</Link>
           </div>
+          <div className="navbar__menu__item">
+            <span className="icon-gamepad" />
+            <Link to="/">Play</Link>
+          </div>
+          <div className="navbar__menu__item">
+            <span className="icon-puzzle" />
+            <Link to="/">Puzzles</Link>
+          </div>
+          <div className="navbar__menu__item">
+            <span className="icon-graduation-cap" />
+            <Link to="/">Learn</Link>
+          </div>
+          <div className="navbar__menu__item">
+            <span className="icon-dot-3" />
+            <Link to="/">More</Link>
+          </div>
+        </div>
 
-          <div className="buttons">
-            <div className="buttons__sign">
-              <a href="login" className="buttons__item flex-c-c">
-                <span>Sign In</span>
-              </a>
-            </div>
-            <div className="buttons__sign">
-              <a href="login" className="buttons__item flex-c-c">
-                <span>Sign Up</span>
-              </a>
-            </div>
+        <div className="buttons">
+          <div className="buttons__sign">
+            <a href="login" className="buttons__item flex-c-c">
+              <span>Sign In</span>
+            </a>
           </div>
-          <div className="navbar__menu--bottom">
-            <div className="navbar__menu__item--small ">
-              <span className="icon-resize-horizontal" />
-              <Link to="/">Collapse</Link>
-            </div>
-            <div className="navbar__menu__item--small">
-              <span className="icon-cog" />
-              <Link to="/">Settings</Link>
-            </div>
-            <div className="navbar__menu__item--small">
-              <span className="icon-help" />
-              <Link to="/">Help</Link>
-            </div>
+          <div className="buttons__sign">
+            <a href="login" className="buttons__item flex-c-c">
+              <span>Sign Up</span>
+            </a>
+          </div>
+        </div>
+        <div className="navbar__menu--bottom">
+          <div className="navbar__menu__item--small ">
+            <span className="icon-resize-horizontal" />
+            <Link to="/">Collapse</Link>
+          </div>
+          <div className="navbar__menu__item--small">
+            <span className="icon-cog" />
+            <Link to="/">Settings</Link>
+          </div>
+          <div className="navbar__menu__item--small">
+            <span className="icon-help" />
+            <Link to="/">Help</Link>
           </div>
         </div>
       </div>

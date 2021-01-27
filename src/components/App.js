@@ -1,9 +1,9 @@
 import React from 'react';
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import GamePage from './GamePage/GamePage';
 import HomePage from './HomePage/HomePage';
 import LoginPage from './LoginPage/LoginPage';
 import PageNotFound from './PageNotFound/PageNotFound';
-import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
 import './App.scss';
 

@@ -1,12 +1,5 @@
 @import '../../assets/styles/style';
 
-.container {
-  background: url('../../img/backgroundGameImg.jpg') center center/cover
-    no-repeat;
-  width: 100%;
-  height: 100vh;
-  overflow: auto;
-}
 
 .menu-btn {
   position: fixed;
@@ -19,7 +12,7 @@
   height: 80px;
   cursor: pointer;
   outline: none;
-
+  z-index: 1000;
   @include phone {
     display: none;
   }
@@ -76,9 +69,11 @@
   flex-direction: column;
   transform: translateX(-100%);
   transition: transform 1s ease;
-
+  position: absolute;
+  left: 0;
+  top: 0;
   font-size: 18px;
-
+  z-index: 1000;
   &__menu {
     display: flex;
     justify-content: center;
@@ -87,7 +82,6 @@
 
     @include phone {
       align-items: flex-start;
-
     }
   }
   &__menu img {
@@ -126,6 +120,8 @@
     background-color: $navbarExpanded;
     display: grid;
     grid-template-rows: 4fr 1.5fr 1.5fr;
+    position: initial;
+
     &__menu img {
       width: 170px;
     }
@@ -223,7 +219,6 @@
   @include tablet {
     font-size: 24px;
     width: 140px;
-
   }
 }
 
