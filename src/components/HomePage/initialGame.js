@@ -1,20 +1,24 @@
 import React, { useEffect } from 'react';
 import Chessboard from '@chrisoakman/chessboardjs/dist/chessboard-1.0.0';
 import Chess from 'chess.js/chess';
+
 import '@chrisoakman/chessboardjs/dist/chessboard-1.0.0.css';
+import './initialGame.scss';
 
 const $ = window.jQuery;
 
 const InitialGame = () => {
   useEffect(() => {
     const config = {
-      pieceTheme: `${process.env.PUBLIC_URL}/img/chesspieces/neo_wood/{piece}.png`,
+      pieceTheme: `${process.env.PUBLIC_URL}/img/chesspieces/wikipedia/{piece}.png`,
       position: 'start',
     };
     const board = Chessboard('board', config);
 
     const $board = $('.chessboard-63f37');
     $board.addClass('woodenBoard');
+
+    $(window).resize(board.resize);
   }, []);
   return (
     <>

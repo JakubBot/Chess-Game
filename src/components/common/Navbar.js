@@ -21,9 +21,26 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="navbar">
+      <header className="menu__top" aria-hidden="false">
+        <div
+          className="menu-btn"
+          role="button"
+          tabIndex="0"
+          onClick={handleMenuClick}
+        >
+          <div className="menu-btn__burger" />
+        </div>
+        <div className="menu__socials">
+          <span className="icon-home icon" />
+          <span className="icon-twitter-squared icon" />
+          <span className="icon-facebook-squared icon" />
+          <span className="icon-cog icon" />
+        </div>
+      </header>
+
+      <div className="navbar" aria-hidden="true">
         <div className="navbar__menu ">
-          <img src={logo} alt="logo" />
+          <img src={logo} className="menu__logo" alt="logo" />
           <div className="navbar__menu__item">
             <span className="icon-home" />
             <Link to="/">Home</Link>
@@ -72,14 +89,6 @@ const Navbar = () => {
             <Link to="/">Help</Link>
           </div>
         </div>
-      </div>
-      <div
-        className="menu-btn"
-        role="button"
-        tabIndex="0"
-        onClick={handleMenuClick}
-      >
-        <div className="menu-btn__burger" />
       </div>
     </>
   );
