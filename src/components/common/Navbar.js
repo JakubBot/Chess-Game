@@ -30,14 +30,13 @@ const Navbar = () => {
         >
           <div className="menu-btn__burger" />
         </div>
-        <div className="menu__socials">
-          <span className="icon-home icon" />
-          <span className="icon-twitter-squared icon" />
-          <span className="icon-facebook-squared icon" />
-          <span className="icon-cog icon" />
-        </div>
       </header>
-
+      <div className="menu__socials">
+        <span className="icon-home icon" />
+        <span className="icon-twitter-squared icon" />
+        <span className="icon-facebook-squared icon" />
+        <span className="icon-cog icon" />
+      </div>
       <div className="navbar" aria-hidden="true">
         <div className="navbar__menu ">
           <img src={logo} className="menu__logo" alt="logo" />

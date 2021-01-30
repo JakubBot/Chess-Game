@@ -1,8 +1,26 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import './ScoreBoard.scss';
 
+const $ = window.jQuery;
+
 const ScoreBoard = () => {
+  const [state, setState] = useState({
+    board: 'wooden',
+  });
+
+  const changeBoard = ({ target }) => {
+    const buttons = $('.scoreBoard__options__btn');
+    const activeButton = target;
+    buttons.removeClass('scoreBoard__options__btn--active');
+    $(activeButton).addClass('scoreBoard__options__btn--active');
+
+    setState({
+      ...state,
+      board: target.name,
+    });
+  };
+
   return (
     <>
       <div className="scoreBoard">
@@ -16,8 +34,22 @@ const ScoreBoard = () => {
                 <span>Your Board</span>
               </div>
               <div className="scoreBoard__options">
-                <button className="scoreBoard__options__btn flex-c">Wooden</button>
-                <button className="scoreBoard__options__btn">Classic</button>
+                <button
+                  type="button"
+                  name="wooden"
+                  className="scoreBoard__options__btn scoreBoard__options__btn--active"
+                  onClick={changeBoard}
+                >
+                  Wooden
+                </button>
+                <button
+                  type="button"
+                  name="classic"
+                  className="scoreBoard__options__btn"
+                  onClick={changeBoard}
+                >
+                  Classic
+                </button>
               </div>
             </div>
             <div className="scoreBoard__config__pieces">
@@ -25,9 +57,9 @@ const ScoreBoard = () => {
                 <span>Your Pieces</span>
               </div>
               <div className="pieces__options">
-                <button>Alpha</button>
-                <button>USCF</button>
-                <button>Classic</button>
+                <button type="button">Alpha</button>
+                <button type="button">USCF</button>
+                <button type="button">Classic</button>
               </div>
             </div>
             <div className="mode">
@@ -35,12 +67,14 @@ const ScoreBoard = () => {
                 <span>Mode</span>
               </div>
               <div className="pieces__options">
-                <button>against computer</button>
-                <button>with friend</button>
+                <button type="button">against computer</button>
+                <button type="button">with friend</button>
               </div>
             </div>
             <div className="findGame">
-              <button className="findGame__button">Find a game</button>
+              <button type="button" className="findGame__button">
+                Find a game
+              </button>
             </div>
           </div>
         </div>
