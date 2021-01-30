@@ -1,0 +1,42 @@
+%scoreBoard__options__btn {
+  width: 110px;
+  height: 40px;
+  background: none;
+  border: 3px solid $brightWhite;
+  color: $darkWhite;
+  // color: #3498db;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-size: 16px;
+  position: relative;
+  outline: none;
+  
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 4px;
+    background: #27292c;
+    // background: #353b48;
+    transform: skewX(50deg);
+    transition: 0.4s linear;
+  }
+
+  &::before {
+    top: -4px;
+    left: 10%;
+  }
+  &::after {
+    bottom: -4px;
+    right: 10%;
+  }
+  &:hover::before {
+    left: 80%;
+  }
+  &:hover::after {
+    right: 80%;
+  }
+}

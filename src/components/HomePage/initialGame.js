@@ -3,7 +3,7 @@ import Chessboard from '@chrisoakman/chessboardjs/dist/chessboard-1.0.0';
 import Chess from 'chess.js/chess';
 
 import '@chrisoakman/chessboardjs/dist/chessboard-1.0.0.css';
-import './initialGame.scss';
+import './InitialGame.scss';
 
 const $ = window.jQuery;
 

@@ -42,23 +42,23 @@ const Navbar = () => {
         <div className="navbar__menu ">
           <img src={logo} className="menu__logo" alt="logo" />
           <div className="navbar__menu__item">
-            <span className="icon-home" />
+            <span className="icon-home icon" />
             <Link to="/">Home</Link>
           </div>
           <div className="navbar__menu__item">
-            <span className="icon-gamepad" />
+            <span className="icon-gamepad icon" />
             <Link to="/">Play</Link>
           </div>
-          <div className="navbar__menu__item">
+          <div className="navbar__menu__item icon">
             <span className="icon-puzzle" />
             <Link to="/">Puzzles</Link>
           </div>
           <div className="navbar__menu__item">
-            <span className="icon-graduation-cap" />
+            <span className="icon-graduation-cap icon" />
             <Link to="/">Learn</Link>
           </div>
           <div className="navbar__menu__item">
-            <span className="icon-dot-3" />
+            <span className="icon-dot-3 icon" />
             <Link to="/">More</Link>
           </div>
         </div>

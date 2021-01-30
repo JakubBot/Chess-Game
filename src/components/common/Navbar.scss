@@ -1,6 +1,5 @@
 @import '../../assets/styles/style';
 
-
 .menu__top {
   display: flex;
   justify-content: space-between;
@@ -9,13 +8,12 @@
   position: absolute;
   left: 0;
   top: 0;
- 
+
   @include phone {
     display: none;
   }
 }
 .icon {
-  font-size: 1.7em;
   opacity: 0.8;
 }
 .menu-btn {
@@ -107,8 +105,9 @@
   }
 
   &__menu__item {
+    cursor: pointer;
     display: flex;
-    font-size: 1.5em;
+    font-size: 1.3em;
     color: $brightWhite;
     justify-content: center;
     align-items: center;
@@ -118,9 +117,9 @@
   }
   &__menu__item--small {
     display: flex;
-    font-size: 1.2em;
+    font-size: 1em;
     width: 100%;
-
+    cursor: pointer;
     justify-content: flex-start;
     align-items: center;
     height: 30px;
@@ -128,9 +127,12 @@
     & a {
       color: $darkWhite;
     }
+    &:hover {
+      background: rgba(0, 0, 0, 0.25);
+    }
   }
   @include phone {
-    width: 200px;
+    width: 160px;
     transform: translateX(0);
     padding-top: 0px;
     background-color: $navbarExpanded;
@@ -139,14 +141,25 @@
     position: initial;
 
     &__menu .menu__logo {
-      width: 170px;
+      margin: 0 auto;
+      width: 130px;
+      margin-bottom: 40px;
     }
     &__menu__item {
+      font-size: 1.1em;
+      width: 100%;
+      justify-content: flex-start;
       margin: 3px 0;
+      padding: 0 5px;
     }
-    &__menu .menu__logo {
-    margin-bottom: 40px;
-      
+  
+    &__menu__item:hover {
+      background: rgba(0, 0, 0, 0.25);
+    }
+  }
+  @include sDesktop {
+    &__menu__item {
+      // font-size: 1.3em;
     }
   }
 }
@@ -163,6 +176,7 @@
   margin: 10px;
 
   &__sign {
+    
     display: flex;
     justify-content: center;
     align-items: center;
@@ -217,32 +231,35 @@
   }
 
   @include phone {
-    border: 2px solid black;
+    // border: 2px solid black;
     padding: 10px;
-    width: 130px;
+    width: 120px;
     margin-top: 12px;
     border-radius: 8px;
     &:hover {
-      background-color: $black;
+  border: 2px solid rgba(255, 255, 255, 0.563)
+
+      // background-color: $black;
     }
     &:hover span {
-      color: white;
+      color: rgba(255, 255, 255, 0.563);
     }
     & span {
-      color: black;
+      // color: black;
     }
     &::after,
     &::before {
       display: none;
     }
   }
-  @include tablet {
-    font-size: 24px;
+  @include sDesktop {
+    font-size: 20px;
     width: 140px;
   }
 }
 
+
+
 .showNavbar {
   transform: translateX(0);
 }
-
