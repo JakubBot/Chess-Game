@@ -7,10 +7,12 @@ const $ = window.jQuery;
 const ScoreBoard = () => {
   const [state, setState] = useState({
     board: 'wooden',
+    piece: 'alpha',
+    mode: 'computer',
   });
 
   const changeBoard = ({ target }) => {
-    const buttons = $('.scoreBoard__options__btn');
+    const buttons = $('.board__btn');
     const activeButton = target;
     buttons.removeClass('scoreBoard__options__btn--active');
     $(activeButton).addClass('scoreBoard__options__btn--active');
@@ -18,6 +20,27 @@ const ScoreBoard = () => {
     setState({
       ...state,
       board: target.name,
+    });
+  };
+
+  const changePiece = ({ target }) => {
+    const buttons = $('.piece__btn');
+    const activeButton = target;
+    buttons.removeClass('scoreBoard__options__btn--active');
+    $(activeButton).addClass('scoreBoard__options__btn--active');
+    setState({
+      ...state,
+      piece: target.name,
+    });
+  };
+  const changeMode = ({ target }) => {
+    const buttons = $('.mode__btn');
+    const activeButton = target;
+    buttons.removeClass('scoreBoard__options__btn--active');
+    $(activeButton).addClass('scoreBoard__options__btn--active');
+    setState({
+      ...state,
+      mode: target.name,
     });
   };
 
@@ -30,14 +53,14 @@ const ScoreBoard = () => {
           </div>
           <div className="scoreBoard__config">
             <div className="scoreBoard__config__board">
-              <div className="board__header">
+              <div className="config__header">
                 <span>Your Board</span>
               </div>
               <div className="scoreBoard__options">
                 <button
                   type="button"
                   name="wooden"
-                  className="scoreBoard__options__btn scoreBoard__options__btn--active"
+                  className="scoreBoard__options__btn scoreBoard__options__btn--active board__btn"
                   onClick={changeBoard}
                 >
                   Wooden
@@ -45,7 +68,7 @@ const ScoreBoard = () => {
                 <button
                   type="button"
                   name="classic"
-                  className="scoreBoard__options__btn"
+                  className="scoreBoard__options__btn board__btn"
                   onClick={changeBoard}
                 >
                   Classic
@@ -53,22 +76,54 @@ const ScoreBoard = () => {
               </div>
             </div>
             <div className="scoreBoard__config__pieces">
-              <div className="pieces__header">
+              <div className="config__header">
                 <span>Your Pieces</span>
               </div>
-              <div className="pieces__options">
-                <button type="button">Alpha</button>
-                <button type="button">USCF</button>
-                <button type="button">Classic</button>
+              <div className="scoreBoard__options">
+                <button
+                  type="button"
+                  className="scoreBoard__options__btn scoreBoard__options__btn--active piece__btn"
+                  onClick={changePiece}
+                >
+                  Alpha
+                </button>
+                <button
+                  onClick={changePiece}
+                  type="button"
+                  className="scoreBoard__options__btn piece__btn"
+                >
+                  USCF
+                </button>
+                <button
+                  onClick={changePiece}
+                  type="button"
+                  className="scoreBoard__options__btn piece__btn"
+                >
+                  Classic
+                </button>
               </div>
             </div>
             <div className="mode">
-              <div className="pieces__header">
+              <div className="config__header">
                 <span>Mode</span>
               </div>
-              <div className="pieces__options">
-                <button type="button">against computer</button>
-                <button type="button">with friend</button>
+              <div className="scoreBoard__options">
+                <button
+                  onClick={changeMode}
+                  type="button"
+                  className="scoreBoard__options__btn scoreBoard__options__btn--active mode__btn"
+                  name="computer"
+                >
+                  with computer
+                </button>
+                <button
+                  onClick={changeMode}
+                  type="button"
+                  className="scoreBoard__options__btn mode__btn"
+                  name="computer"
+                >
+                  with friend
+                </button>
               </div>
             </div>
             <div className="findGame">
