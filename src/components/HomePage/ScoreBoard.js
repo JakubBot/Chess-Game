@@ -48,14 +48,10 @@ const ScoreBoard = () => {
     <>
       <div className="scoreBoard">
         <div className="scoreBoard__wrapper">
-          <div className="scoreBoard__header flex-c">
-            <span>Play Chess</span>
-          </div>
+          <div className="scoreBoard__header flex-c">Play Chess</div>
           <div className="scoreBoard__config">
             <div className="scoreBoard__config__board">
-              <div className="config__header">
-                <span>Your Board</span>
-              </div>
+              <div className="config__header">Your Board</div>
               <div className="scoreBoard__options">
                 <button
                   type="button"
@@ -76,9 +72,7 @@ const ScoreBoard = () => {
               </div>
             </div>
             <div className="scoreBoard__config__pieces">
-              <div className="config__header">
-                <span>Your Pieces</span>
-              </div>
+              <div className="config__header">Your Pieces</div>
               <div className="scoreBoard__options">
                 <button
                   type="button"
@@ -104,9 +98,7 @@ const ScoreBoard = () => {
               </div>
             </div>
             <div className="mode">
-              <div className="config__header">
-                <span>Mode</span>
-              </div>
+              <div className="config__header">Mode</div>
               <div className="scoreBoard__options">
                 <button
                   onClick={changeMode}
@@ -126,9 +118,9 @@ const ScoreBoard = () => {
                 </button>
               </div>
             </div>
-            <div className="findGame">
+            <div className="findGame flex-c">
               <button type="button" className="findGame__button">
-                Find a game
+                Find game
               </button>
             </div>
           </div>

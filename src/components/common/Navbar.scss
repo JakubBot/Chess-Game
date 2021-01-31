@@ -132,6 +132,7 @@
       background: rgba(0, 0, 0, 0.25);
     }
   }
+
   @include phone {
     width: 160px;
     transform: translateX(0);
@@ -139,7 +140,7 @@
     background-color: $navbarExpanded;
     display: grid;
     grid-template-rows: 4fr 1.5fr 1.5fr;
-    position: initial;
+    position: fixed;
 
     &__menu .menu__logo {
       margin: 0 auto;

@@ -24,7 +24,11 @@
   overflow-x: hidden;
   justify-content: center;
   align-items: center;
-  @include sDesktop {
-    flex-wrap: nowrap;
+  @include phone {
+    margin-left: 160px;
   }
+  // @include sDesktop {
+  //   justify-content: flex-start;
+  // }
+
 }

@@ -1,21 +1,31 @@
 @import '../../assets/styles/style.scss';
 
 .game {
-  width: 100%;
+  flex: 1 1 auto;
   margin: 80px 0;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  @include sDesktop {
+    flex: 0 1 auto;
+  }
 }
 
 .board {
   width: calc(100% - 20px);
+  height: 100%;
   margin: 0 10px;
-  max-width: 500px;
   @include phone {
-    width: 90%;
+    width: unset;
+    min-width: 402px;
+  }
+  @include tablet {
+    min-width: 506px;
+  }
+  @include lDesktop {
+    min-width: 602px;
   }
 }
 .board-b72b1 {

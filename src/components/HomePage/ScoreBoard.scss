@@ -2,13 +2,14 @@
 
 .scoreBoard {
   width: calc(100% - 60px);
-  margin: 0 30px;
-  background: #00000040;
+  margin: 0 30px 30px;
+  background: #00000030;
   color: white;
-  // height: 500px;
+ 
   border-radius: 10px;
   font-weight: bold;
-  max-width: 400px;
+  max-width: 360px;
+
   &__wrapper {
     width: 100%;
     height: 100%;
@@ -29,19 +30,42 @@
     flex-wrap: wrap;
     margin: 0px 0 5px;
   }
+  @include phone {
+    & {
+      max-width: 360px;
+      margin: 0 10px;
+    }
+  }
+  @include lDesktop {
+    margin-left: 50px;
+  }
 }
 .config__header {
   font-size: 1.3em;
   font-weight: bold;
-  color: $brightWhite
+  color: $brightWhite;
 }
 
 .mode__btn {
-  font-size: .75em;
+  font-size: 0.75em;
   padding: 2px 4px;
   height: 50px;
 }
-
+.findGame {
+  margin-top: 15px;
+  &__button {
+    cursor: pointer;
+    font-size: 1.2em;
+    letter-spacing: 1px;
+    color: white;
+    width: 80%;
+    outline: none;
+    border: none;
+    padding: 20px 0;
+    background: url('../../img/btn-background-blue.png') center center/contain
+      no-repeat;
+  }
+}
 .scoreBoard__options__btn {
   @extend %scoreBoard__options__btn;
 }
