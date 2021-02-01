@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import Navbar from '../common/Navbar';
 import InitialGame from './InitialGame';
 import ScoreBoard from './ScoreBoard';
-import { connect } from "react-redux";
 import './HomePage.scss';
-
 
 const HomePage = () => {
   const [state, setState] = useState({
