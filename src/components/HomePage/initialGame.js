@@ -7,10 +7,15 @@ import './InitialGame.scss';
 
 const $ = window.jQuery;
 
-const InitialGame = () => {
+const InitialGame = ({ piece }) => {
+  console.log(piece);
   useEffect(() => {
+    cos();
+  }, [piece]);
+
+  function cos() {
     const config = {
-      pieceTheme: `${process.env.PUBLIC_URL}/img/chesspieces/wikipedia/{piece}.png`,
+      pieceTheme: `${process.env.PUBLIC_URL}/img/chesspieces/${piece}/{piece}.png`,
       position: 'start',
     };
     const board = Chessboard('board', config);
@@ -19,7 +24,7 @@ const InitialGame = () => {
     $board.addClass('woodenBoard');
 
     $(window).resize(board.resize);
-  }, []);
+  }
   return (
     <>
       <div className="game">

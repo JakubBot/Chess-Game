@@ -4,13 +4,8 @@ import './ScoreBoard.scss';
 
 const $ = window.jQuery;
 
-const ScoreBoard = () => {
-  const [state, setState] = useState({
-    board: 'wooden',
-    piece: 'alpha',
-    mode: 'computer',
-  });
-
+const ScoreBoard = ({ state, setState }) => {
+  
   const changeBoard = ({ target }) => {
     const buttons = $('.board__btn');
     const activeButton = target;
@@ -76,12 +71,22 @@ const ScoreBoard = () => {
               <div className="scoreBoard__options">
                 <button
                   type="button"
-                  className="scoreBoard__options__btn scoreBoard__options__btn--active piece__btn"
+                  name="neo_wood"
+                  className="scoreBoard__options__btn--small scoreBoard__options__btn--active piece__btn"
+                  onClick={changePiece}
+                >
+                  Neo wood
+                </button>
+                <button
+                  type="button"
+                  name="alpha"
+                  className="scoreBoard__options__btn scoreBoard__options__btn piece__btn"
                   onClick={changePiece}
                 >
                   Alpha
                 </button>
                 <button
+                  name="uscf"
                   onClick={changePiece}
                   type="button"
                   className="scoreBoard__options__btn piece__btn"
@@ -89,6 +94,7 @@ const ScoreBoard = () => {
                   USCF
                 </button>
                 <button
+                  name="classic"
                   onClick={changePiece}
                   type="button"
                   className="scoreBoard__options__btn piece__btn"
@@ -103,7 +109,7 @@ const ScoreBoard = () => {
                 <button
                   onClick={changeMode}
                   type="button"
-                  className="scoreBoard__options__btn scoreBoard__options__btn--active mode__btn"
+                  className="scoreBoard__options__btn--big scoreBoard__options__btn--active mode__btn"
                   name="computer"
                 >
                   with computer
@@ -111,8 +117,8 @@ const ScoreBoard = () => {
                 <button
                   onClick={changeMode}
                   type="button"
-                  className="scoreBoard__options__btn mode__btn"
-                  name="computer"
+                  className="scoreBoard__options__btn--big mode__btn"
+                  name="friend"
                 >
                   with friend
                 </button>

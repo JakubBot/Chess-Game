@@ -5,7 +5,7 @@
   margin: 0 30px 30px;
   background: #00000030;
   color: white;
- 
+
   border-radius: 10px;
   font-weight: bold;
   max-width: 360px;
@@ -24,12 +24,15 @@
 
   &__options {
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
+    justify-content: center;
     padding: 20px 0;
     flex-wrap: wrap;
     margin: 0px 0 5px;
+    @include rwd(360) {
+      justify-content: flex-start;
+    }
   }
+
   @include phone {
     & {
       max-width: 360px;
@@ -46,11 +49,6 @@
   color: $brightWhite;
 }
 
-.mode__btn {
-  font-size: 0.75em;
-  padding: 2px 4px;
-  height: 50px;
-}
 .findGame {
   margin-top: 15px;
   &__button {
@@ -68,6 +66,22 @@
 }
 .scoreBoard__options__btn {
   @extend %scoreBoard__options__btn;
+}
+.scoreBoard__options__btn--small {
+  @extend %scoreBoard__options__btn;
+  font-size: 0.8em;
+}
+.scoreBoard__options__btn--big {
+  @extend %scoreBoard__options__btn;
+  height: 50px;
+  font-size: 0.9em;
+
+  @include rwd(360) {
+    width: 110px;
+    font-size: 0.75em;
+    padding: 2px 4px;
+    height: 50px;
+  }
 }
 .scoreBoard__options__btn--active {
   border: 3px solid rgba(255, 255, 255, 1);
