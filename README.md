@@ -5,6 +5,10 @@
 This Project was cretated for users which are bored and wanna play some chess games!
 Game is simple and I'm sure you'll like it. Good luck!
 
+## Online Version
+
+Online Version
+- [LINK](https://jakubbot.github.io/Chess-Game)
 
 ## Getting Started
 
