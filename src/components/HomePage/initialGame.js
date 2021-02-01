@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import Chessboard from '@chrisoakman/chessboardjs/dist/chessboard-1.0.0';
-import Chess from 'chess.js/chess';
+// import Chess from 'chess.js/chess';
 
 import '@chrisoakman/chessboardjs/dist/chessboard-1.0.0.css';
 import './InitialGame.scss';
@@ -8,12 +8,11 @@ import './InitialGame.scss';
 const $ = window.jQuery;
 
 const InitialGame = ({ piece }) => {
-  console.log(piece);
   useEffect(() => {
-    cos();
+    updateConfig();
   }, [piece]);
 
-  function cos() {
+  const updateConfig = () => {
     const config = {
       pieceTheme: `${process.env.PUBLIC_URL}/img/chesspieces/${piece}/{piece}.png`,
       position: 'start',
@@ -24,7 +23,8 @@ const InitialGame = ({ piece }) => {
     $board.addClass('woodenBoard');
 
     $(window).resize(board.resize);
-  }
+  };
+
   return (
     <>
       <div className="game">

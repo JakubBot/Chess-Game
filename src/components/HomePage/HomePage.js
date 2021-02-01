@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import Navbar from '../common/Navbar';
 import InitialGame from './InitialGame';
 import ScoreBoard from './ScoreBoard';
+import { connect } from "react-redux";
 import './HomePage.scss';
+
 
 const HomePage = () => {
   const [state, setState] = useState({
@@ -23,4 +25,4 @@ const HomePage = () => {
     </>
   );
 };
-export default HomePage;
+export default connect()(HomePage);

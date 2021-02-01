@@ -24,7 +24,8 @@
     "jsx-a11y/click-events-have-key-events": [0],
     "jsx-a11y/label-has-associated-control": [0],
     "import/no-cycle": "off",
-    "no-restricted-syntax": [0,"ForInStatement"]
+    "no-restricted-syntax": [0,"ForInStatement"],
+    "no-use-before-define": ["error", { "variables": false }]
     },
     "env": {
         "browser": true,

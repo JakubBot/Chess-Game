@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import './ScoreBoard.scss';
 
 const $ = window.jQuery;
 
 const ScoreBoard = ({ state, setState }) => {
-  
   const changeBoard = ({ target }) => {
     const buttons = $('.board__btn');
     const activeButton = target;
