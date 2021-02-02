@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import Navbar from '../common/Navbar';
-import InitialGame from './InitialGame';
-import ScoreBoard from './ScoreBoard';
+import Navbar from '../../components/Navbar/Navbar';
+import InitialGame from '../../components/InitialGame/InitialGame';
+import ScoreBoard from '../../components/ScoreBoard/ScoreBoard';
 import './HomePage.scss';
 
 const HomePage = () => {
@@ -24,4 +23,4 @@ const HomePage = () => {
     </>
   );
 };
-export default connect()(HomePage);
+export default HomePage;
