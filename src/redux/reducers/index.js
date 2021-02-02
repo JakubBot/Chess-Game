@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux';
-import userInfo from './userInfo';
-import points from './points';
+import boardInfo from './boardReducer';
 
-const rootReducer = combineReducers({ userInfo, points });
+const rootReducer = combineReducers({ boardInfo });
 export default rootReducer;

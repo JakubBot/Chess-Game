@@ -1,20 +1,21 @@
 import React from 'react';
-
+import { connect } from 'react-redux';
+import * as boardActions from '../../redux/actions/boardActions';
 import './ScoreBoard.scss';
 
 const $ = window.jQuery;
 
-const ScoreBoard = ({ state, setState }) => {
+const ScoreBoard = ({ board, piece, mode, ...props }) => {
+
+
   const changeBoard = ({ target }) => {
     const buttons = $('.board__btn');
     const activeButton = target;
     buttons.removeClass('scoreBoard__options__btn--active');
     $(activeButton).addClass('scoreBoard__options__btn--active');
 
-    setState({
-      ...state,
-      board: target.name,
-    });
+    const board = target.name;
+    props.changeBoard(board);
   };
 
   const changePiece = ({ target }) => {
@@ -22,20 +23,15 @@ const ScoreBoard = ({ state, setState }) => {
     const activeButton = target;
     buttons.removeClass('scoreBoard__options__btn--active');
     $(activeButton).addClass('scoreBoard__options__btn--active');
-    setState({
-      ...state,
-      piece: target.name,
-    });
+
+    props.changePiece(target.name);
   };
   const changeMode = ({ target }) => {
     const buttons = $('.mode__btn');
     const activeButton = target;
     buttons.removeClass('scoreBoard__options__btn--active');
     $(activeButton).addClass('scoreBoard__options__btn--active');
-    setState({
-      ...state,
-      mode: target.name,
-    });
+    props.changeMode(target.name);
   };
 
   return (
@@ -135,4 +131,17 @@ const ScoreBoard = ({ state, setState }) => {
   );
 };
 
-export default ScoreBoard;
+function mapStateToProps(state) {
+  const { boardInfo } = state;
+  return {
+    board: boardInfo.board,
+    piece: boardInfo.piece,
+    mode: boardInfo.mode,
+  };
+}
+const mapDispatchToProps = {
+  changeBoard: boardActions.changeBoard,
+  changePiece: boardActions.changePiece,
+  changeMode: boardActions.changeMode,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(ScoreBoard);

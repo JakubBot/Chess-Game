@@ -18,9 +18,9 @@ ReactDOM.render(
       <Router basename={process.env.PUBLIC_URL}>
         <Switch>
           <Route exact path="/" component={HomePage} />
-          <Route path="/login" component={LoginPage} />
-          <Route path="/game" component={GamePage} />
-          <Route component={PageNotFound} />
+          {/* <Route path="/login" component={LoginPage} /> */}
+          {/* <Route path="/game" component={GamePage} /> */}
+          {/* <Route component={PageNotFound} /> */}
         </Switch>
       </Router>
     </ReduxProvider>
