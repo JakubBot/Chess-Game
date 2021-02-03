@@ -1,17 +1,16 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Chessboard from '@chrisoakman/chessboardjs/dist/chessboard-1.0.0';
 
 // import Chess from 'chess.js/chess';
 import { connect } from 'react-redux';
 import * as boardActions from '../../redux/actions/boardActions';
-
+import { convertTime } from '../utils/utils';
 import '@chrisoakman/chessboardjs/dist/chessboard-1.0.0.css';
 import './InitialGame.scss';
 
 const $ = window.jQuery;
 
 const InitialGame = ({ board, piece, mode }) => {
-  console.log(board);
   useEffect(() => {
     updateConfig();
   }, [board, piece, mode]);
@@ -21,6 +20,7 @@ const InitialGame = ({ board, piece, mode }) => {
       pieceTheme: `${process.env.PUBLIC_URL}/img/chesspieces/${piece}/{piece}.png`,
       position: 'start',
     };
+    // eslint-disable-next-line no-unused-vars
     const chessBoard = Chessboard('board', config);
 
     const $board = $('.chessboard-63f37');
@@ -34,20 +34,26 @@ const InitialGame = ({ board, piece, mode }) => {
       squares.removeClass('transparent');
     }
 
-    $(window).resize(board.resize);
+    $(window).resize(chessBoard.resize);
   };
 
   return (
     <>
       <div className="game">
         <div className="userInformations">
-          <span className="playerName">Guest 123</span>
-          <span className="points">(500)</span>
+          <div className="userWrapper">
+            <span className="playerName">Guest 123</span>
+            <span className="points">(500)</span>
+          </div>
+          <div className="timer">3: 00</div>
         </div>
         <div id="board" className="board" />
         <div className="userInformations">
-          <span className="playerName">Guest 123</span>
-          <span className="points">(500)</span>
+          <div className="userWrapper">
+            <span className="playerName">Guest 123</span>
+            <span className="points">(500)</span>
+          </div>
+          <div className="timer">3: 00</div>
         </div>
       </div>
     </>

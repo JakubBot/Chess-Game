@@ -8,8 +8,10 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  @include sDesktop {
+
+  @include phone {
     flex: 0 1 auto;
+    
   }
 }
 
@@ -51,14 +53,8 @@
   user-select: none;
 }
 
-// .black-3c85d,
-// .white-1e1d7 {
-//   background-color: transparent;
-// }
-
 .transparent {
   background-color: transparent;
-
 }
 //standart colors
 // .black-3c85d {
@@ -76,28 +72,56 @@
 
 .square {
   position: relative;
-}
-.square::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  background-color: rgba(0, 0, 0, 0.3);
-  border-radius: 50%;
-  z-index: 1;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    z-index: 1;
+  }
 }
 
-.highlight-from {
-  background-color: rgba(209, 165, 45, 0.7);
-  position: relative;
-  z-index: 200;
+.highlight {
+  &-from {
+    background-color: rgba(209, 165, 45, 0.7);
+    position: relative;
+    z-index: 200;
+  }
+  &-to {
+    position: relative;
+    z-index: 200;
+    background-color: rgba(209, 165, 45, 0.5);
+  }
 }
-.highlight-to {
-  position: relative;
-  z-index: 200;
-  background-color: rgba(209, 165, 45, 0.5);
+
+.userInformations {
+  // max-width: 440px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  color: $brightWhite;
+  margin: 10px 0;
+  .timer {
+    padding: 12px 10px 12px 50px;
+    opacity: 0.65;
+    font-weight: bold;
+    background-color: #26211b;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: #fff;
+    @include tablet {
+      padding: 10px 10px 10px 60px;
+      font-size: 1.2em;
+    }
+  }
 }
