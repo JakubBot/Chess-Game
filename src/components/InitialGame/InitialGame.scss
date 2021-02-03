@@ -26,8 +26,11 @@
   @include tablet {
     min-width: 506px;
   }
-  @include lDesktop {
+  @include desktop {
     min-width: 602px;
+  }
+  @include lDesktop {
+    min-width: 650px;
   }
 }
 .board-b72b1 {
@@ -122,6 +125,9 @@
     @include tablet {
       padding: 10px 10px 10px 60px;
       font-size: 1.2em;
+    }
+    @include desktop {
+      padding: 12px 12px 12px 70px;
     }
   }
 }

@@ -21,16 +21,14 @@ const Navbar = () => {
 
   return (
     <>
-      <header className="menu__top" aria-hidden="false">
-        <div
-          className="menu-btn"
-          role="button"
-          tabIndex="0"
-          onClick={handleMenuClick}
-        >
-          <div className="menu-btn__burger" />
-        </div>
-      </header>
+      <div
+        className="menu-btn"
+        role="button"
+        tabIndex="0"
+        onClick={handleMenuClick}
+      >
+        <div className="menu-btn__burger" />
+      </div>
       <div className="menu__socials">
         <span className="icon-home icon" />
         <span className="icon-twitter-squared icon" />

@@ -39,7 +39,7 @@
       margin: 0 10px;
     }
   }
-  @include lDesktop {
+  @include desktop {
     margin-left: 50px;
   }
 }
@@ -87,3 +87,4 @@
   border: 3px solid rgba(255, 255, 255, 1);
   color: rgb(255, 255, 255);
 }
+

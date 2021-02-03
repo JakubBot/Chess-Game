@@ -1,23 +1,10 @@
 @import '../../assets/styles/style';
 
-.menu__top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
-
-  @include phone {
-    display: none;
-  }
-}
 .icon {
   opacity: 0.8;
 }
 .menu-btn {
-  position: relative;
+  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,7 +13,7 @@
   cursor: pointer;
   outline: none;
   z-index: 1000;
-  opacity: 0.95;
+  opacity: 0.9;
   @include phone {
     display: none;
   }
@@ -159,10 +146,8 @@
       background: rgba(0, 0, 0, 0.25);
     }
   }
-  @include sDesktop {
-    &__menu__item {
-      // font-size: 1.3em;
-    }
+  @include lDesktop {
+    width: 180px;
   }
 }
 
@@ -232,7 +217,6 @@
   }
 
   @include phone {
-    // border: 2px solid black;
     padding: 10px;
     width: 120px;
     margin-top: 12px;
@@ -240,22 +224,14 @@
     &:hover {
       border: 2px solid rgba(255, 255, 255, 0.563);
 
-      // background-color: $black;
     }
     &:hover span {
       color: rgba(255, 255, 255, 0.563);
-    }
-    & span {
-      // color: black;
     }
     &::after,
     &::before {
       display: none;
     }
-  }
-  @include sDesktop {
-    font-size: 20px;
-    width: 140px;
   }
 }
 
