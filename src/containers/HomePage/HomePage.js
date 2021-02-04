@@ -7,13 +7,11 @@ import './HomePage.scss';
 const HomePage = () => {
   return (
     <>
-      <div className="container">
-        <Navbar />
-        <div className="wrapper">
-          <InitialGame />
+      <Navbar />
+      <div className="homePage__wrapper">
+        <InitialGame />
 
-          <ScoreBoard />
-        </div>
+        <ScoreBoard />
       </div>
     </>
   );

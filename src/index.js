@@ -15,14 +15,16 @@ const store = configureStore();
 ReactDOM.render(
   <React.StrictMode>
     <ReduxProvider store={store}>
-      <Router basename={process.env.PUBLIC_URL}>
-        <Switch>
-          <Route exact path="/" component={HomePage} />
-          {/* <Route path="/login" component={LoginPage} /> */}
-          {/* <Route path="/game" component={GamePage} /> */}
-          {/* <Route component={PageNotFound} /> */}
-        </Switch>
-      </Router>
+      <div className="container">
+        <Router basename={process.env.PUBLIC_URL}>
+          <Switch>
+            <Route exact path="/" component={HomePage} />
+            <Route path="/login" component={LoginPage} />
+            <Route path="/game" component={GamePage} />
+            <Route component={PageNotFound} />
+          </Switch>
+        </Router>
+      </div>
     </ReduxProvider>
   </React.StrictMode>,
   document.getElementById('root')

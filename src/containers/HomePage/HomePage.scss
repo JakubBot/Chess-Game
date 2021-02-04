@@ -1,21 +1,10 @@
 @import '../../assets/styles/style.scss';
 
-*,
-*::after,
-*::before {
-  box-sizing: border-box;
-}
 
-.container {
-  display: flex;
-  background: url('../../assets/img/backgroundGameImg.jpg') center center/cover
-    no-repeat;
-  width: 100%;
-  height: 100vh;
-  overflow: auto;
-}
 
-.wrapper {
+
+
+.homePage__wrapper {
   display: flex;
   flex-wrap: wrap;
   flex: 1 1 auto;
@@ -23,7 +12,7 @@
   justify-content: center;
   align-items: center;
   @include phone {
-    margin-left: 160px;
+    padding-left: 160px;
   }
   // @include sDesktop {
   //   justify-content: flex-start;

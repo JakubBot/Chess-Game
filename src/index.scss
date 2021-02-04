@@ -1,5 +1,10 @@
 @import './assets/fontello/css/fontello.css';
 @import './assets/styles/style.scss';
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
@@ -8,6 +13,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.container {
+  background: url('./assets/img/backgroundGameImg.jpg') center center/cover
+    no-repeat;
+  width: 100%;
+  min-height: 100vh;
+  overflow: auto;
+}
 
 a[href] {
   color: $brightWhite;

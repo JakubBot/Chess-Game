@@ -35,7 +35,6 @@ const ScoreBoard = ({ board, piece, mode, ...props }) => {
   return (
     <>
       <div className="scoreBoard">
-
         <div className="scoreBoard__wrapper">
           <div className="scoreBoard__header flex-c">Play Chess</div>
           <div className="scoreBoard__config">

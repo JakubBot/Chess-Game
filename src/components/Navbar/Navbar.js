@@ -62,14 +62,14 @@ const Navbar = () => {
 
         <div className="buttons">
           <div className="buttons__sign">
-            <a href="login" className="buttons__item flex-c-c">
+            <Link to="login" className="buttons__item flex-c-c">
               <span>Sign In</span>
-            </a>
+            </Link>
           </div>
           <div className="buttons__sign">
-            <a href="login" className="buttons__item flex-c-c">
+            <Link to="login" className="buttons__item flex-c-c">
               <span>Sign Up</span>
-            </a>
+            </Link>
           </div>
         </div>
         <div className="navbar__menu--bottom">

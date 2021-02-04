@@ -16,7 +16,7 @@
 }
 
 .board {
-  width: calc(100% - 20px);
+  width: calc(100% - 23px);
   height: 100%;
   margin: 0 10px;
   @include phone {
@@ -105,16 +105,15 @@
 }
 
 .userInformations {
-  // max-width: 440px;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 10px;
+  padding: 0 11px;
   color: $brightWhite;
   margin: 10px 0;
   .timer {
-    padding: 12px 10px 12px 50px;
+    padding: 10px 10px 10px 50px;
     opacity: 0.65;
     font-weight: bold;
     background-color: #26211b;
