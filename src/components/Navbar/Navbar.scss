@@ -170,69 +170,12 @@
 }
 
 .buttons__item {
-  margin-top: 8px;
-  position: relative;
-  padding: 15px 30px;
-  border: 2px solid #fff;
-  text-transform: uppercase;
+  cursor: pointer;
+  background-color: unset;
+  font: inherit;
   font-weight: bold;
-  width: 150px;
-  border-radius: 2px;
-  transition: 0.5s ease;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 6px;
-    left: -2px;
-    width: calc(100% + 4px);
-    height: calc(100% - 12px);
-    background: $navbarColor;
-    transition: transform 0.5s 0.5s ease-in-out;
-    transform: scaleY(1);
-    z-index: 22;
-  }
-  &:hover::before {
-    transform: scaleY(0);
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    left: 6px;
-    top: -2px;
-    height: calc(100% + 4px);
-    width: calc(100% - 12px);
-    background: $navbarColor;
-    transition: transform 0.5s ease-in-out;
-    transform: scaleX(1);
-  }
-  &:hover::after {
-    transform: scaleX(0);
-  }
-  & span {
-    position: relative;
-    z-index: 100;
-    color: white;
-  }
-
-  @include phone {
-    padding: 10px;
-    width: 120px;
-    margin-top: 12px;
-    border-radius: 8px;
-    &:hover {
-      border: 2px solid rgba(255, 255, 255, 0.563);
-
-    }
-    &:hover span {
-      color: rgba(255, 255, 255, 0.563);
-    }
-    &::after,
-    &::before {
-      display: none;
-    }
-  }
+  @extend %rectangle__button;
+  @extend %rectangle__button__transform;
 }
 
 .menu__socials {
@@ -246,7 +189,6 @@
 
   @include phone {
     display: none;
-    
   }
 }
 
