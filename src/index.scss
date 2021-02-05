@@ -21,7 +21,7 @@ body {
   overflow: auto;
 }
 
-a[href] {
+a {
   color: $brightWhite;
   text-decoration: none;
 }
@@ -38,4 +38,7 @@ a[href] {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+button {
+  outline: none;
 }

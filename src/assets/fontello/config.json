@@ -65,6 +65,12 @@
       "css": "gamepad",
       "code": 61723,
       "src": "fontawesome"
+    },
+    {
+      "uid": "f06fe7ff18d1c591bc1183cb3ab105e9",
+      "css": "google",
+      "code": 61856,
+      "src": "fontawesome"
     }
   ]
 }

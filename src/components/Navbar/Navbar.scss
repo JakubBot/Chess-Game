@@ -2,7 +2,9 @@
 
 .icon {
   opacity: 0.8;
+  color: $brightWhite;
 }
+
 .menu-btn {
   position: absolute;
   display: flex;
@@ -166,6 +168,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+ 
   }
 }
 

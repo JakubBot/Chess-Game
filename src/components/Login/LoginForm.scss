@@ -1,0 +1,117 @@
+@import '../../assets/styles/style.scss';
+
+.login {
+  width: 90%;
+  max-width: 350px;
+  background: rgb(255, 255, 255);
+  border-radius: 20px 20px 0 0;
+
+  &__form {
+    width: 100%;
+    padding: 30px 30px;
+    display: flex;
+    flex-direction: column;
+    &__email {
+      margin-bottom: 20px;
+    }
+    &__header {
+      color: black;
+      font-size: 1.2em;
+    }
+    &__input {
+      border: unset;
+      border-bottom: 2px solid #202020;
+      background: transparent;
+      outline: none;
+      width: 90%;
+    }
+    &__button {
+      background-color: unset;
+      @extend %rectangle__button;
+      border: 2px solid #1f1f1f;
+      color: #202020;
+      margin: 30px 0 10px;
+      align-self: center;
+      &::before {
+        background: white;
+      }
+      &::after {
+        background: white;
+      }
+      & span {
+        color: #1f1f1f;
+      }
+    }
+
+    @include phone {
+      &__input {
+        width: 80%;
+      }
+    }
+  }
+  &__buttons {
+    &__header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.2em;
+      color: rgba(31, 31, 31, 0.8);
+      text-align: center;
+      font-size: 1em;
+      margin-bottom: 30px;
+    }
+    &__button {
+      outline: none;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1em;
+    }
+  }
+  &__icons {
+    &__icon {
+      margin: 18px 20% 24px;
+    
+      cursor: pointer;
+    }
+  }
+}
+.footer {
+  width: 90%;
+  max-width: 350px;
+  background: #f1f1f1;
+  padding: 30px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 0.9em;
+
+  &__link {
+    color: #005e94;
+    margin: 0 8px;
+  }
+}
+
+.line {
+  display: inline-block;
+  flex-grow: 1;
+  margin: 0 12px;
+  background-color: #3c3c3cd0;
+  height: 0.5px;
+}
+.google {
+  color: #db4437;
+}
+
+.google::before {
+  color: #db4437;
+  font-size: 1.3em;
+}
+.login__icons__icon:hover {
+  filter: brightness(130%);
+}
+.facebook::before {
+  color: #1778f2;
+  font-size: 1.3em;
+}
+.facebook {
+  color: #1778f2;
+}
