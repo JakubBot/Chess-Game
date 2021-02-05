@@ -4,4 +4,5 @@ export default {
     piece: 'neo_wood',
     mode: 'computer',
   },
+  user: {},
 };
