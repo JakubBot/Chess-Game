@@ -8,10 +8,10 @@
 
   &__form {
     width: 100%;
-    padding: 30px 30px;
+    padding: 35px 30px 30px;
     display: flex;
     flex-direction: column;
-    &__email {
+    &__item {
       margin-bottom: 20px;
     }
     &__header {
@@ -75,7 +75,7 @@
     }
   }
 }
-.footer {
+.login__footer {
   width: 90%;
   max-width: 350px;
   background: #f1f1f1;

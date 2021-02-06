@@ -15,7 +15,7 @@ const LoginForm = ({
     <>
       <div className="login">
         <form className="login__form" onSubmit={onSubmit}>
-          <div className="login__form__email">
+          <div className="login__form__item">
             <label htmlFor="email" className="login__form__header">
               e-mail :
             </label>
@@ -28,7 +28,7 @@ const LoginForm = ({
               className="login__form__input"
             />
           </div>
-          <div className="login__form__email">
+          <div className="login__form__item">
             <label htmlFor="password" className="login__form__header">
               password :
             </label>
@@ -101,9 +101,9 @@ const LoginForm = ({
         </div>
       </div>
 
-      <footer className="footer">
+      <footer className="login__footer">
         New?
-        <Link to="register" className="footer__link">
+        <Link to="register" className="login__footer__link">
           Sign up for FREE!
         </Link>
       </footer>
