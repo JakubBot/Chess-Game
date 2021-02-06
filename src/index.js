@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import { Provider as ReduxProvider } from 'react-redux';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
-import GamePage from './containers/GamePage/GamePage';
-import HomePage from './containers/HomePage/HomePage';
-import LoginPage from './containers/LoginPage/LoginPage';
-import RegisterPage from './containers/RegisterPage/RegisterPage';
-import PageNotFound from './containers/PageNotFound/PageNotFound';
+import GamePage from './containers/GamePage';
+import HomePage from './containers/HomePage';
+import LoginPage from './containers/LoginPage';
+import RegisterPage from './containers/RegisterPage';
+import PageNotFound from './containers/PageNotFound';
 
 import configureStore from './redux/store';
 

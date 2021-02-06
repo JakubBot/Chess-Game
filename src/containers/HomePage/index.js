@@ -2,7 +2,7 @@ import React from 'react';
 import Navbar from '../../components/Navbar';
 import InitialGame from '../../components/InitialGame';
 import ScoreBoard from '../../components/ScoreBoard';
-import './HomePage.scss';
+import './index.scss';
 
 const HomePage = () => {
   return (
