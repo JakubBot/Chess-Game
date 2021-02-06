@@ -7,8 +7,8 @@
 
   &__header {
     text-align: center;
-    padding: 25px 20px 10px;
-    font-size: 1.5em;
+    padding: 35px 25px 10px;
+    font-size: 1.4em;
     font-weight: bold;
     color: #1f1f1f;
     & span {
@@ -58,6 +58,11 @@
       }
     }
   }
+}
+
+.small-dash {
+  font-size: .7em;
+  margin: 0 1.5px;
 }
 
 .italic {

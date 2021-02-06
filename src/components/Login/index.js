@@ -36,9 +36,11 @@ const Login = ({ logIn }) => {
     auth.signInWithPopup(facebookProvider);
   };
   const handleChange = ({ target }) => {
+    const { name, value } = target;
+
     setForm((prevState) => ({
       ...prevState,
-      [target.name]: target.value,
+      [name]: value,
     }));
   };
   const handleSubmit = (event) => {

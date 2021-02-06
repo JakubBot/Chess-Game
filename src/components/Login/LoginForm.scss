@@ -48,6 +48,10 @@
         width: 80%;
       }
     }
+    @include tablet {
+      padding: 50px 30px 30px;
+
+    }
   }
   &__buttons {
     &__header {
