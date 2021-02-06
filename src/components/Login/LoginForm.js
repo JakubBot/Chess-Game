@@ -2,16 +2,31 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './LoginForm.scss';
 
-const LoginForm = ({ user, loginGoogle, signOut, loginFacebook }) => {
+const LoginForm = ({
+  user,
+  loginGoogle,
+  signOut,
+  loginFacebook,
+  onChange,
+  forms,
+  onSubmit,
+}) => {
   return (
     <>
       <div className="login">
-        <div className="login__form">
+        <form className="login__form" onSubmit={onSubmit}>
           <div className="login__form__email">
             <label htmlFor="email" className="login__form__header">
               e-mail :
             </label>
-            <input type="text" id="email" className="login__form__input" />
+            <input
+              type="text"
+              id="email"
+              value={forms.email}
+              onChange={onChange}
+              name="email"
+              className="login__form__input"
+            />
           </div>
           <div className="login__form__email">
             <label htmlFor="password" className="login__form__header">
@@ -20,13 +35,17 @@ const LoginForm = ({ user, loginGoogle, signOut, loginFacebook }) => {
             <input
               type="password"
               id="password"
+              value={forms.password}
+              onChange={onChange}
+              name="password"
+              autoComplete="on"
               className="login__form__input"
             />
           </div>
-          <button type="button" className="login__form__button">
+          <button type="submit" className="login__form__button">
             <span> Log in</span>
           </button>
-        </div>
+        </form>
         <div className="login__buttons">
           <div className="login__buttons__header ">
             <span className="line" />
@@ -84,7 +103,7 @@ const LoginForm = ({ user, loginGoogle, signOut, loginFacebook }) => {
 
       <footer className="footer">
         New?
-        <Link to="/register" className="footer__link">
+        <Link to="register" className="footer__link">
           Sign up for FREE!
         </Link>
       </footer>

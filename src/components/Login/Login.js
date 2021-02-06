@@ -7,16 +7,11 @@ import * as userActions from '../../redux/actions/userActions';
 import './Login.scss';
 
 const LoginPage = ({ logIn }) => {
+  const [form, setForm] = useState({
+    email: '',
+    password: '',
+  });
   const [user] = useAuthState(auth);
-  const loginGoogle = () => {
-    auth.signInWithPopup(googleProvider);
-  };
-  const signOut = () => {
-    auth.signOut();
-  };
-  const loginFacebook = () => {
-    auth.signInWithPopup(facebookProvider);
-  };
 
   useEffect(() => {
     if (!user) return;
@@ -30,9 +25,31 @@ const LoginPage = ({ logIn }) => {
 
     logIn(_user);
   }, [user]);
+
+  const loginGoogle = () => {
+    auth.signInWithPopup(googleProvider);
+  };
+  const signOut = () => {
+    auth.signOut();
+  };
+  const loginFacebook = () => {
+    auth.signInWithPopup(facebookProvider);
+  };
+  const handleChange = ({ target }) => {
+    setForm((prevState) => ({
+      ...prevState,
+      [target.name]: target.value,
+    }));
+  };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  };
   return (
     <>
       <LoginForm
+        forms={form}
+        onChange={handleChange}
+        onSubmit={handleSubmit}
         user={user}
         loginGoogle={loginGoogle}
         signOut={signOut}
