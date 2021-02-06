@@ -5,7 +5,7 @@ import Chessboard from '@chrisoakman/chessboardjs/dist/chessboard-1.0.0';
 import { connect } from 'react-redux';
 import * as boardActions from '../../redux/actions/boardActions';
 import '@chrisoakman/chessboardjs/dist/chessboard-1.0.0.css';
-import './InitialGame.scss';
+import './index.scss';
 
 const $ = window.jQuery;
 

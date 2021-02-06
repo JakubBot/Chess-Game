@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as boardActions from '../../redux/actions/boardActions';
-import './ScoreBoard.scss';
+import './index.scss';
 
 const $ = window.jQuery;
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/img/logo.png';
 
-import './Navbar.scss';
+import './index.scss';
 
 const $ = window.jQuery;
 const Navbar = () => {

@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { auth, googleProvider, facebookProvider } from '../../firebase-config';
 import LoginForm from './LoginForm';
 import * as userActions from '../../redux/actions/userActions';
-import './Login.scss';
+import './index.scss';
 
-const LoginPage = ({ logIn }) => {
+const Login = ({ logIn }) => {
   const [form, setForm] = useState({
     email: '',
     password: '',
@@ -62,4 +62,4 @@ const LoginPage = ({ logIn }) => {
 const mapDispatchToProps = {
   logIn: userActions.logIn,
 };
-export default connect(null, mapDispatchToProps)(LoginPage);
+export default connect(null, mapDispatchToProps)(Login);

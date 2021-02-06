@@ -6,6 +6,7 @@ import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import GamePage from './containers/GamePage/GamePage';
 import HomePage from './containers/HomePage/HomePage';
 import LoginPage from './containers/LoginPage/LoginPage';
+import RegisterPage from './containers/RegisterPage/RegisterPage';
 import PageNotFound from './containers/PageNotFound/PageNotFound';
 
 import configureStore from './redux/store';
@@ -20,6 +21,7 @@ ReactDOM.render(
           <Switch>
             <Route exact path="/" component={HomePage} />
             <Route path="/login" component={LoginPage} />
+            <Route path="/register" component={RegisterPage} />
             <Route path="/game" component={GamePage} />
             <Route component={PageNotFound} />
           </Switch>

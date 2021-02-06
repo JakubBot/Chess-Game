@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Login from '../../components/Login/Login';
-import Navbar from '../../components/Navbar/Navbar';
+import Login from '../../components/Login';
+import Navbar from '../../components/Navbar';
 import './LoginPage.scss';
 
 const LoginPage = () => {
