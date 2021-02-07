@@ -19,7 +19,7 @@ const Register = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
   };
-  
+
   return (
     <>
       <RegisterForm

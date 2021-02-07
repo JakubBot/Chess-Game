@@ -6,10 +6,13 @@ export default function userReducer(state = initialState.user, action) {
     case types.LOG_IN:
       return {
         ...state,
-        name: action.name,
+        userName: action.userName,
         uid: action.uid,
         photo: action.photo,
+        points: action.points,
       };
+    case types.LOG_OUT:
+      return {};
     default:
       return state;
   }

@@ -3,4 +3,5 @@ export default {
   CHANGE_PIECE: 'CHANGE_PIECE',
   CHANGE_MODE: 'CHANGE_MODE',
   LOG_IN: 'LOG_IN',
+  LOG_OUT: 'LOG_OUT',
 };

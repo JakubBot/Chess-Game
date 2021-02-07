@@ -13,7 +13,7 @@ const RegisterForm = ({ form, onChange, onSubmit }) => {
         </header>
         <form className="register__form" onSubmit={onSubmit}>
           <div className="register__form__item">
-            <div className="register__form__header">name :</div>
+            <div className="register__form__header">username :</div>
             <input
               type="text"
               name="name"
