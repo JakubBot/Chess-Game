@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import RegisterForm from './RegisterForm';
 import { firestore } from '../../firebase-config';
 import { generateUID } from '../utils/utils';
+import * as userActions from '../../redux/actions/userActions';
+
 import './index.scss';
 
-const Register = () => {
+const Register = ({ logIn, history }) => {
   const [form, setForm] = useState({
     userName: '',
     email: '',
@@ -25,14 +29,31 @@ const Register = () => {
     const photo =
       'https://betacssjs.chesscomfiles.com/bundles/web/images/white_400.09ae248e.png';
     const { userName, email, password } = form;
-    firestore.collection('users').add({
+    const _user = {
+      email,
+      password,
       uid,
       userName,
       photo,
-      email,
-      password,
       points: 500,
+    };
+    const usersRef = firestore.collection('users');
+    usersRef.add(_user);
+    usersRef.onSnapshot((docs) => {
+      const user = docs.docs.find((doc) => doc.data().uid === uid);
+
+      logIn({
+        ..._user,
+        points: user.data().points,
+      });
     });
+
+    setForm({
+      userName: '',
+      email: '',
+      password: '',
+    });
+    history.push('/');
   };
 
   return (
@@ -45,4 +66,7 @@ const Register = () => {
     </>
   );
 };
-export default Register;
+const mapDispatchToProps = {
+  logIn: userActions.logIn,
+};
+export default withRouter(connect(null, mapDispatchToProps)(Register));

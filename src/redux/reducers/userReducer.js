@@ -4,12 +4,15 @@ import initialState from './initialState';
 export default function userReducer(state = initialState.user, action) {
   switch (action.type) {
     case types.LOG_IN:
+      const { userName, uid, photo, points, email, password } = action;
       return {
         ...state,
-        userName: action.userName,
-        uid: action.uid,
-        photo: action.photo,
-        points: action.points,
+        userName,
+        uid,
+        photo,
+        email,
+        password,
+        points,
       };
     case types.LOG_OUT:
       return {};
