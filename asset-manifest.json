@@ -1,27 +1,26 @@
 {
   "files": {
-    "main.css": "/Chess-Game/static/css/main.a690a0fb.chunk.css",
-    "main.js": "/Chess-Game/static/js/main.41225567.chunk.js",
-    "main.js.map": "/Chess-Game/static/js/main.41225567.chunk.js.map",
+    "main.css": "/Chess-Game/static/css/main.7ed1cd6a.chunk.css",
+    "main.js": "/Chess-Game/static/js/main.5bedb539.chunk.js",
+    "main.js.map": "/Chess-Game/static/js/main.5bedb539.chunk.js.map",
     "runtime-main.js": "/Chess-Game/static/js/runtime-main.f0937801.js",
     "runtime-main.js.map": "/Chess-Game/static/js/runtime-main.f0937801.js.map",
     "static/css/2.e2e7fc3e.chunk.css": "/Chess-Game/static/css/2.e2e7fc3e.chunk.css",
-    "static/js/2.2adab1f7.chunk.js": "/Chess-Game/static/js/2.2adab1f7.chunk.js",
-    "static/js/2.2adab1f7.chunk.js.map": "/Chess-Game/static/js/2.2adab1f7.chunk.js.map",
+    "static/js/2.fb53c6ae.chunk.js": "/Chess-Game/static/js/2.fb53c6ae.chunk.js",
+    "static/js/2.fb53c6ae.chunk.js.map": "/Chess-Game/static/js/2.fb53c6ae.chunk.js.map",
     "index.html": "/Chess-Game/index.html",
-    "precache-manifest.859cded4187ee02f4cea6418eb549f75.js": "/Chess-Game/precache-manifest.859cded4187ee02f4cea6418eb549f75.js",
+    "precache-manifest.0a57860660a011f88c212b8d866b8f64.js": "/Chess-Game/precache-manifest.0a57860660a011f88c212b8d866b8f64.js",
     "service-worker.js": "/Chess-Game/service-worker.js",
     "static/css/2.e2e7fc3e.chunk.css.map": "/Chess-Game/static/css/2.e2e7fc3e.chunk.css.map",
-    "static/css/main.a690a0fb.chunk.css.map": "/Chess-Game/static/css/main.a690a0fb.chunk.css.map",
-    "static/js/2.2adab1f7.chunk.js.LICENSE.txt": "/Chess-Game/static/js/2.2adab1f7.chunk.js.LICENSE.txt",
-    "static/media/index.scss": "/Chess-Game/static/media/fontello.e7421a64.woff",
-    "static/media/InitialGame.scss": "/Chess-Game/static/media/boardBackground.415c1d5d.png"
+    "static/css/main.7ed1cd6a.chunk.css.map": "/Chess-Game/static/css/main.7ed1cd6a.chunk.css.map",
+    "static/js/2.fb53c6ae.chunk.js.LICENSE.txt": "/Chess-Game/static/js/2.fb53c6ae.chunk.js.LICENSE.txt",
+    "static/media/index.scss": "/Chess-Game/static/media/fontello.e7421a64.woff"
   },
   "entrypoints": [
     "static/js/runtime-main.f0937801.js",
     "static/css/2.e2e7fc3e.chunk.css",
-    "static/js/2.2adab1f7.chunk.js",
-    "static/css/main.a690a0fb.chunk.css",
-    "static/js/main.41225567.chunk.js"
+    "static/js/2.fb53c6ae.chunk.js",
+    "static/css/main.7ed1cd6a.chunk.css",
+    "static/js/main.5bedb539.chunk.js"
   ]
 }
