@@ -7,6 +7,18 @@ export const convertTime = (_seconds) => {
   return `${minutes}: 0${seconds}`;
 };
 
+export const generateUID = () => {
+  let text = '';
+  const possible =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+  for (let i = 0; i < 28; i += 1) {
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+  }
+
+  return text;
+};
+
 // const [timer, setTimer] = useState(12);
 // useEffect(() => {
 //   const interval = setInterval(() => {

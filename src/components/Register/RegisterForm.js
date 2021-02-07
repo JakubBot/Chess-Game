@@ -16,8 +16,8 @@ const RegisterForm = ({ form, onChange, onSubmit }) => {
             <div className="register__form__header">username :</div>
             <input
               type="text"
-              name="name"
-              value={form.name}
+              name="userName"
+              value={form.userName}
               onChange={onChange}
               className="register__form__input"
             />
