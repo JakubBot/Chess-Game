@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/Chess-Game/static/css/main.7ed1cd6a.chunk.css",
+    "main.css": "/Chess-Game/static/css/main.3c696cd8.chunk.css",
     "main.js": "/Chess-Game/static/js/main.d49a270e.chunk.js",
     "main.js.map": "/Chess-Game/static/js/main.d49a270e.chunk.js.map",
     "runtime-main.js": "/Chess-Game/static/js/runtime-main.f0937801.js",
@@ -9,10 +9,10 @@
     "static/js/2.fb53c6ae.chunk.js": "/Chess-Game/static/js/2.fb53c6ae.chunk.js",
     "static/js/2.fb53c6ae.chunk.js.map": "/Chess-Game/static/js/2.fb53c6ae.chunk.js.map",
     "index.html": "/Chess-Game/index.html",
-    "precache-manifest.b1b26b729455abc263d4f78fb68a1782.js": "/Chess-Game/precache-manifest.b1b26b729455abc263d4f78fb68a1782.js",
+    "precache-manifest.7c9053dcce864689585e36ece3b2d751.js": "/Chess-Game/precache-manifest.7c9053dcce864689585e36ece3b2d751.js",
     "service-worker.js": "/Chess-Game/service-worker.js",
     "static/css/2.e2e7fc3e.chunk.css.map": "/Chess-Game/static/css/2.e2e7fc3e.chunk.css.map",
-    "static/css/main.7ed1cd6a.chunk.css.map": "/Chess-Game/static/css/main.7ed1cd6a.chunk.css.map",
+    "static/css/main.3c696cd8.chunk.css.map": "/Chess-Game/static/css/main.3c696cd8.chunk.css.map",
     "static/js/2.fb53c6ae.chunk.js.LICENSE.txt": "/Chess-Game/static/js/2.fb53c6ae.chunk.js.LICENSE.txt",
     "static/media/index.scss": "/Chess-Game/static/media/fontello.e7421a64.woff"
   },
@@ -20,7 +20,7 @@
     "static/js/runtime-main.f0937801.js",
     "static/css/2.e2e7fc3e.chunk.css",
     "static/js/2.fb53c6ae.chunk.js",
-    "static/css/main.7ed1cd6a.chunk.css",
+    "static/css/main.3c696cd8.chunk.css",
     "static/js/main.d49a270e.chunk.js"
   ]
 }
