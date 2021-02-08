@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import RegisterForm from './RegisterForm';
 import { firestore } from '../../firebase-config';
-import { generateUID } from '../utils/utils';
+import { generateID } from '../utils/utils';
 import * as userActions from '../../redux/actions/userActions';
 
 import './index.scss';
@@ -25,7 +25,7 @@ const Register = ({ logIn, history }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const uid = generateUID();
+    const uid = generateID();
     const photo =
       'https://betacssjs.chesscomfiles.com/bundles/web/images/white_400.09ae248e.png';
     const { userName, email, password } = form;

@@ -1,11 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import * as boardActions from '../../redux/actions/boardActions';
+import { generateID } from '../utils/utils';
+import { firestore } from '../../firebase-config';
 import './index.scss';
 
 const $ = window.jQuery;
 
-const ScoreBoard = ({ board, piece, mode, ...props }) => {
+const ScoreBoard = ({ board, piece, mode, history, ...props }) => {
   const changeBoard = ({ target }) => {
     const buttons = $('.board__btn');
     const activeButton = target;
@@ -30,6 +33,20 @@ const ScoreBoard = ({ board, piece, mode, ...props }) => {
     buttons.removeClass('scoreBoard__options__btn--active');
     $(activeButton).addClass('scoreBoard__options__btn--active');
     props.changeMode(target.name);
+  };
+
+  const createGame = () => {
+    const newGame = {
+      p1_token: generateID(),
+      p2_token: generateID(),
+    };
+    const gamesRef = firestore.collection('games');
+    gamesRef
+      .add(newGame)
+      .then(() => history.push(`./${newGame.p1_token}`))
+      .catch((err) => {
+        throw err;
+      });
   };
 
   return (
@@ -118,7 +135,11 @@ const ScoreBoard = ({ board, piece, mode, ...props }) => {
               </div>
             </div>
             <div className="findGame flex-c">
-              <button type="button" className="findGame__button">
+              <button
+                type="button"
+                className="findGame__button"
+                onClick={createGame}
+              >
                 Find game
               </button>
             </div>
@@ -142,4 +163,6 @@ const mapDispatchToProps = {
   changePiece: boardActions.changePiece,
   changeMode: boardActions.changeMode,
 };
-export default connect(mapStateToProps, mapDispatchToProps)(ScoreBoard);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(ScoreBoard)
+);

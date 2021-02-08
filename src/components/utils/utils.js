@@ -7,7 +7,7 @@ export const convertTime = (_seconds) => {
   return `${minutes}: 0${seconds}`;
 };
 
-export const generateUID = () => {
+export const generateID = () => {
   let text = '';
   const possible =
     'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
