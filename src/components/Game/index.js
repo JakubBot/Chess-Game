@@ -170,15 +170,18 @@ function ChessGame(props) {
 
       if (move === null) return 'snapback';
 
-      game = {
-        ...game,
+      // game = {
+      //   ...game,
+      //   fen: engine.fen(),
+      //   moveFrom: source,
+      //   moveTo: target,
+      // };
+      const chessRef = firestore.collection('games').doc(id);
+      chessRef.update({
         fen: engine.fen(),
         moveFrom: source,
         moveTo: target,
-      };
-
-      const chessRef = firestore.collection('games').doc(id);
-      chessRef.update(game);
+      });
     }
     function onSnapEnd() {
       songRef.current.play();
@@ -263,7 +266,7 @@ function ChessGame(props) {
           </a>
         </h3>
       </div> */}
-      {/* <audio id="myAudio" ref={songRef}>
+      <audio id="myAudio" ref={songRef}>
         <source
           src="https://images.chesscomfiles.com/chess-themes/sounds/_WEBM_/default/game-start.webm"
           type="audio/webm"
@@ -280,7 +283,7 @@ function ChessGame(props) {
           src="https://images.chesscomfiles.com/chess-themes/sounds/_WAV_/default/game-start.wav"
           type="audio/wav"
         />
-      </audio> */}
+      </audio>
     </>
   );
 }

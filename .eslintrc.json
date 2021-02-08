@@ -27,7 +27,8 @@
     "no-restricted-syntax": [0,"ForInStatement"],
     "no-use-before-define": ["error", { "variables": false }],
     "no-underscore-dangle":"off",
-    "camelcase": ["error", {"ignoreDestructuring": true, "properties": "never" }]
+    "camelcase": ["error", {"ignoreDestructuring": true, "properties": "never" }],
+    "jsx-a11y/media-has-caption": [0]
     },
     "env": {
         "browser": true,
