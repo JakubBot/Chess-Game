@@ -1,0 +1,135 @@
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+@import '../../assets/styles/style.scss';
+
+.game {
+  // flex: 1 1 auto;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  @include phone {
+    flex: 0 1 auto;
+  }
+}
+
+.board {
+  width: calc(100% - 23px);
+  height: 100%;
+  margin: 0 10px;
+  @include phone {
+    width: unset;
+    min-width: 402px;
+  }
+  @include tablet {
+    min-width: 506px;
+  }
+  @include desktop {
+    min-width: 602px;
+  }
+  @include lDesktop {
+    min-width: 650px;
+  }
+}
+.board-b72b1 {
+  width: 100% !important;
+  height: 100% !important;
+  border: unset;
+}
+
+.woodenBoard {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.woodenBoard::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: url('../../assets/img/boardBackground.png') no-repeat;
+  background-size: cover;
+  user-select: none;
+}
+
+.transparent {
+  background-color: transparent;
+}
+//standart colors
+// .black-3c85d {
+//   background-color: #a87f5d;
+// }
+// .white-1e1d7 {
+//   background-color: #e0c9a4;
+// }
+
+.square-55d63 img {
+  cursor: grab;
+  position: relative;
+  z-index: 100;
+}
+
+.square {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    z-index: 1;
+  }
+}
+
+.highlight {
+  &-from {
+    background-color: rgba(209, 165, 45, 0.7);
+    position: relative;
+    z-index: 200;
+  }
+  &-to {
+    position: relative;
+    z-index: 200;
+    background-color: rgba(209, 165, 45, 0.5);
+  }
+}
+
+.userInformations {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 11px;
+  color: $brightWhite;
+  margin: 10px 0;
+  .timer {
+    padding: 10px 10px 10px 50px;
+    opacity: 0.65;
+    font-weight: bold;
+    background-color: #26211b;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: #fff;
+    @include tablet {
+      padding: 10px 10px 10px 60px;
+      font-size: 1.2em;
+    }
+    @include desktop {
+      padding: 12px 12px 12px 70px;
+    }
+  }
+}

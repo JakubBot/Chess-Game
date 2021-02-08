@@ -3,12 +3,13 @@ import Navbar from '../../components/Navbar';
 import Game from '../../components/Game';
 import './index.scss';
 
-const GamePage = () => {
+const GamePage = (props) => {
+  const { token } = props.match.params;
   return (
     <>
       <Navbar />
       <div className="gamePage__wrapper">
-        <Game />
+        <Game token={token} />
       </div>
     </>
   );

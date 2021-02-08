@@ -22,7 +22,7 @@ ReactDOM.render(
             <Route exact path="/" component={HomePage} />
             <Route path="/login" component={LoginPage} />
             <Route path="/register" component={RegisterPage} />
-            <Route path="/:token" component={GamePage} />
+            <Route exact path="/:token" component={GamePage} />
             <Route component={PageNotFound} />
           </Switch>
         </Router>
