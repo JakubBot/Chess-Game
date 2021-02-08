@@ -2,9 +2,10 @@ import types from '../actions/actionTypes';
 import initialState from './initialState';
 
 export default function userReducer(state = initialState.user, action) {
+  const { userName, uid, photo, points, email, password } = action;
+
   switch (action.type) {
     case types.LOG_IN:
-      const { userName, uid, photo, points, email, password } = action;
       return {
         ...state,
         userName,

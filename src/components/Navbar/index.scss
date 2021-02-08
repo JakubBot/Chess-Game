@@ -6,7 +6,7 @@
 }
 
 .menu-btn {
-  position: absolute;
+  position: fixed;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -72,7 +72,7 @@
   flex-direction: column;
   transform: translateX(-100%);
   transition: transform 1s ease;
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   font-size: 18px;
@@ -88,8 +88,8 @@
     }
   }
   &__menu .menu__logo {
+    display: none;
     width: 140px;
-    display: inline-block;
     margin-bottom: 10px;
   }
 
@@ -132,6 +132,7 @@
     position: fixed;
 
     &__menu .menu__logo {
+      display: initial;
       margin: 0 auto;
       width: 130px;
       margin-bottom: 40px;
@@ -168,7 +169,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
- 
   }
 }
 
