@@ -1,4 +1,6 @@
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   box-sizing: border-box;
 }
 
@@ -131,4 +133,9 @@
       padding: 12px 12px 12px 70px;
     }
   }
+}
+
+.z-index {
+  position: relative;
+  z-index: 300;
 }

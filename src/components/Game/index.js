@@ -1,18 +1,19 @@
 /* eslint-disable no-use-before-define */
 import React, { useEffect, useRef, useState } from 'react';
-import Chessboard from '@chrisoakman/chessboardjs/dist/chessboard-1.0.0';
 import Chess from 'chess.js/chess';
+import Chessboard from '@chrisoakman/chessboardjs/dist/chessboard-1.0.0';
+import GameBoard from './GameBoard';
 import { firestore } from '../../firebase-config';
+
 import {
   figurePlayer,
   statusText,
   Turn,
   isMyTurn,
   allowMove,
-  domain,
-} from '../utils/utils';
-
+} from '../utils/gameUtils';
 import '@chrisoakman/chessboardjs/dist/chessboard-1.0.0.css';
+
 import './index.scss';
 
 const $ = window.jQuery;
@@ -27,7 +28,6 @@ function ChessGame(props) {
     token: props.token,
   });
   const songRef = useRef(null);
-  const gameRef = useRef(null);
 
   useEffect(() => {
     ListenForUpdates(state.token, (id, game) => {
@@ -46,7 +46,7 @@ function ChessGame(props) {
       turn: gameEngine.turn(),
     };
 
-    const $board = $('#myBoard');
+    const $board = $('#board');
     const squareClass = 'square-55d63';
 
     if (move.turn === 'w') {
@@ -100,11 +100,9 @@ function ChessGame(props) {
       board.position(engine.fen());
     }
   }
-
   function initBoard(id, game) {
-    const { token } = state;
     const engine = gameEngine;
-    const playerNum = figurePlayer(token, game);
+    const playerNum = figurePlayer(state.token, game);
     const config = {
       pieceTheme: 'img/chesspieces/alpha/{piece}.png',
       draggable: true,
@@ -122,6 +120,14 @@ function ChessGame(props) {
 
     return board;
 
+    function removeDotSquares() {
+      $('#board .square-55d63').removeClass('square');
+    }
+    function dotSquare(square) {
+      const $square = $(`#board .square-${square}`);
+
+      $square.addClass('square');
+    }
     function onMouseoutSquare() {
       removeDotSquares();
     }
@@ -143,16 +149,10 @@ function ChessGame(props) {
         }
       }
     }
-    function removeDotSquares() {
-      $('#myBoard .square-55d63').removeClass('square');
-    }
-    function dotSquare(square) {
-      const $square = $(`#myBoard .square-${square}`);
-
-      $square.addClass('square');
-    }
 
     function onDragStart(source, piece) {
+      const img = $(`img[src$="${piece}.png"]`);
+      img.addClass('z-index');
       return (
         !engine.game_over() &&
         isMyTurn(playerNum, engine.turn()) &&
@@ -160,7 +160,9 @@ function ChessGame(props) {
       );
     }
 
-    function onDrop(source, target) {
+    function onDrop(source, target, piece) {
+      const img = $(`img[data-piece="${piece}"]`);
+      img.removeClass('z-index');
       removeDotSquares();
       const move = gameEngine.move({
         from: source,
@@ -170,12 +172,6 @@ function ChessGame(props) {
 
       if (move === null) return 'snapback';
 
-      // game = {
-      //   ...game,
-      //   fen: engine.fen(),
-      //   moveFrom: source,
-      //   moveTo: target,
-      // };
       const chessRef = firestore.collection('games').doc(id);
       chessRef.update({
         fen: engine.fen(),
@@ -188,7 +184,6 @@ function ChessGame(props) {
       return board.position(engine.fen());
     }
   }
-
   function ListenForUpdates(token, cb) {
     ['p1_token', 'p2_token'].forEach((name) => {
       const chessRef = firestore.collection('games').where(name, '==', token);
@@ -205,85 +200,14 @@ function ChessGame(props) {
       });
     });
   }
-  function changeBoard(type) {
-    const board = $('.chessboard-63f37');
-    if (type === 'wooden') {
-      board.addClass('woodenBoard');
-    }
-    if (type === 'standard') {
-      board.removeClass('woodenBoard');
-    }
-  }
 
   return (
     <>
-      <div className="game">
-        <div className="userInformations">
-          <div className="userWrapper">
-            <span className="playerName">Guest 123</span>
-            <span className="points">(500)</span>
-          </div>
-          <div className="timer">3: 00</div>
-        </div>
-        <div id="board" className="board" ref={gameRef} />
-        <div className="userInformations">
-          <div className="userWrapper">
-            <span className="playerName">Guest 123</span>
-            <span className="points">(500)</span>
-          </div>
-          <div className="timer">3: 00</div>
-        </div>
-      </div>
-      {/* <div id="informations">
-          {state.statusText === '' ? (
-            <h1>{state.turn}</h1>
-          ) : (
-            <h1>{state.statusText}</h1>
-          )}
-          <h3>Chessbard Color</h3>
-          <button type="button" onClick={() => changeBoard('standard')}>
-            Standard
-          </button>
-          <button type="button" onClick={() => changeBoard('wooden')}>
-            Wooden
-          </button>
-          <br />
-        </div> */}
-
-      {/* <div id="links">
-        <h3>
-          First player Link
-          <a href={`${domain()}/${state.p1_token}`}>
-            {' '}
-            {`${domain()}/${state.p1_token}`}
-          </a>
-        </h3>
-        <h3>
-          Second player Link
-          <a href={`${domain()}/${state.p2_token}`}>
-            {' '}
-            {`${domain()}/${state.p2_token}`}
-          </a>
-        </h3>
-      </div> */}
-      <audio id="myAudio" ref={songRef}>
-        <source
-          src="https://images.chesscomfiles.com/chess-themes/sounds/_WEBM_/default/game-start.webm"
-          type="audio/webm"
-        />
-        <source
-          src="https://images.chesscomfiles.com/chess-themes/sounds/_OGG_/default/game-start.ogg"
-          type="audio/ogg"
-        />
-        <source
-          src="https://images.chesscomfiles.com/chess-themes/sounds/_MP3_/default/game-start.mp3"
-          type="audio/mpeg"
-        />
-        <source
-          src="https://images.chesscomfiles.com/chess-themes/sounds/_WAV_/default/game-start.wav"
-          type="audio/wav"
-        />
-      </audio>
+      <GameBoard
+        songRef={songRef}
+        p1_token={state.p1_token}
+        p2_token={state.p2_token}
+      />
     </>
   );
 }
