@@ -1,28 +1,31 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Chess from 'chess.js/chess';
 import Chessboard from '@chrisoakman/chessboardjs/dist/chessboard-1.0.0';
+import { connect } from 'react-redux';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { minimaxRoot } from '../utils/computerGameUtils';
-
+import GameBoard from '../OnlineGame/GameBoard';
+import { auth } from '../../firebase-config';
+import * as userActions from '../../redux/actions/userActions';
+import './index.scss';
 import '@chrisoakman/chessboardjs/dist/chessboard-1.0.0.css';
 
+const $ = window.jQuery;
 let board = null;
 const game = new Chess();
 const maxDepth = 2;
-const ComputerGame = () => {
+const ComputerGame = ({ boardType, piece, loginUser }) => {
+  const [userInfo] = useAuthState(auth);
+
+  const songRef = useRef(null);
+
   useEffect(() => {
-    // is greater than the least value so far (beta).
-
-    // evaluates the board for the minimax function
-
-    // returns piece value
-
-    /*
-    ================================================================================================================
-    Game Mechanics, State Handling, Integration
-    ================================================================================================================
-    */
-
-    // makes engine move
+    if (userInfo) {
+      loginUser(userInfo);
+    }
+    //
+  }, [userInfo]);
+  useEffect(() => {
     function makeEngineMove() {
       const bestMove = minimaxRoot(game, maxDepth, true);
       game.move(bestMove);
@@ -30,22 +33,18 @@ const ComputerGame = () => {
       updateStatus();
     }
 
-    // fires when a piece is picked up
     function onDragStart() {
-      // only pick up pieces while the game isn't over
       if (game.game_over()) {
         return false;
       }
       return true;
     }
 
-    // fires when a piece is dropped
     function onDrop(source, target) {
-      // checks if the move is legal
       const move = game.move({
         from: source,
         to: target,
-        promotion: 'q', // NOTE: auto promote queen
+        promotion: 'q',
       });
       if (move === null) {
         return 'snapback';
@@ -54,29 +53,23 @@ const ComputerGame = () => {
       window.setTimeout(makeEngineMove, 250);
     }
 
-    // update the board position after the piece snap
-    // for castling, en passant, pawn promotion
     function onSnapEnd() {
+      songRef.current.play();
+
       board.position(game.fen());
     }
 
-    // manages the status
     function updateStatus() {
       let status = '';
       let moveColor = 'White';
       if (game.turn() === 'b') {
         moveColor = 'Black';
       }
-      // checkmate?
       if (game.in_checkmate()) {
         status = `Game over, ${moveColor} is in checkmate.`;
-      }
-      // draw?
-      else if (game.in_draw()) {
+      } else if (game.in_draw()) {
         status = 'Game over, drawn position';
-      }
-      // game still on
-      else {
+      } else {
         status = `${moveColor} to move`;
         // check?
         if (game.in_check()) {
@@ -85,10 +78,8 @@ const ComputerGame = () => {
       }
     }
 
-    // configuration for chessboard.js
     const config = {
-      pieceTheme: `${process.env.PUBLIC_URL}/img/chesspieces/neo_wood/{piece}.png`,
-
+      pieceTheme: `${process.env.PUBLIC_URL}/img/chesspieces/${piece}/{piece}.png`,
       draggable: true,
       position: 'start',
       onDragStart,
@@ -96,15 +87,40 @@ const ComputerGame = () => {
       onSnapEnd,
     };
 
-    // setting up board with config
-    board = Chessboard('myBoard', config);
+    board = Chessboard('board', config);
+
+    const $board = $('.chessboard-63f37');
+    const squares = $('.square-55d63');
+
+    if (boardType === 'wooden') {
+      $board.addClass('woodenBoard');
+      squares.addClass('transparent');
+    } else if (board === 'classic') {
+      $board.removeClass('woodenBoard');
+      squares.removeClass('transparent');
+    }
     updateStatus();
   });
   return (
     <>
-      <div id="myBoard" className="myBoard" style={{ width: 400 }} />
+      <GameBoard songRef={songRef} links={false} />
     </>
   );
 };
 
-export default ComputerGame;
+function mapStateToProps(state) {
+  const { piece, board } = state.boardInfo;
+  const user = {
+    userName: auth,
+  };
+  return {
+    piece,
+    boardType: board,
+    user,
+  };
+}
+
+const mapDispatchToProps = {
+  loginUser: userActions.loginUser,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(ComputerGame);

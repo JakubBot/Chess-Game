@@ -12,14 +12,13 @@ import * as userActions from '../../redux/actions/userActions';
 import './index.scss';
 
 let unsbscribe;
-const Login = ({ logIn, logOut }) => {
+const Login = ({ logOut, loginUser }) => {
   const [form, setForm] = useState({
     email: '',
     password: '',
   });
   const [user] = useAuthState(auth);
   const [erros, setErrors] = useState({});
-
   useEffect(() => {
     if (!user) return;
 
@@ -27,17 +26,7 @@ const Login = ({ logIn, logOut }) => {
 
     unsbscribe = userRef.onSnapshot((docs) => {
       if (!docs.empty) {
-        docs.docs.forEach((doc) => {
-          const { uid, points, userName, photo } = doc.data();
-          // eslint-disable-next-line no-underscore-dangle
-          const _user = {
-            uid,
-            points,
-            userName,
-            photo,
-          };
-          logIn(_user);
-        });
+        loginUser(docs);
       } else {
         register(user.uid);
       }
@@ -84,19 +73,24 @@ const Login = ({ logIn, logOut }) => {
       .where('password', '==', form.password);
     userRef.onSnapshot((docs) => {
       if (!docs.empty) {
-        docs.docs.forEach((doc) => {
-          const { uid, points, userName, photo } = doc.data();
-          // eslint-disable-next-line no-underscore-dangle
-          const _user = {
-            uid,
-            points,
-            userName,
-            photo,
-          };
-          logIn(_user);
-        });
+        loginUser(docs);
+        // docs.docs.forEach((doc) => {
+        //   const { uid, points, userName, photo } = doc.data();
+        //   // eslint-disable-next-line no-underscore-dangle
+        //   const _user = {
+        //     uid,
+        //     points,
+        //     userName,
+        //     photo,
+        //   };
+        //   logIn(_user);
+        // });
       } else {
         setErrors({});
+        setForm({
+          email: '',
+          password: '',
+        });
       }
     });
   };
@@ -117,7 +111,7 @@ const Login = ({ logIn, logOut }) => {
 };
 
 const mapDispatchToProps = {
-  logIn: userActions.logIn,
-  logOut: userActions.logOut,
+  logOutUser: userActions.logOutUser,
+  loginUser: userActions.loginUser,
 };
 export default connect(null, mapDispatchToProps)(Login);

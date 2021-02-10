@@ -2,7 +2,7 @@
 import React from 'react';
 import { domain } from '../utils/onlineGameUtils';
 
-const GameBoard = ({ songRef, p1_token, p2_token }) => {
+const GameBoard = ({ songRef, p1_token, p2_token, links, user }) => {
   const adress = {
     firstPlayer: `${domain()}/${p1_token}`,
     secondPlayer: `${domain()}/${p2_token}`,
@@ -41,17 +41,19 @@ const GameBoard = ({ songRef, p1_token, p2_token }) => {
           </button>
           <br />
         </div> */}
+      {links === true && (
+        <div id="links">
+          <h3>
+            First player Link
+            <a href={adress.firstPlayer}>{adress.firstPlayer}</a>
+          </h3>
+          <h3>
+            Second player Link
+            <a href={adress.secondPlayer}>{adress.secondPlayer}</a>
+          </h3>
+        </div>
+      )}
 
-      <div id="links">
-        <h3>
-          First player Link
-          <a href={adress.firstPlayer}>{adress.firstPlayer}</a>
-        </h3>
-        <h3>
-          Second player Link
-          <a href={adress.secondPlayer}>{adress.secondPlayer}</a>
-        </h3>
-      </div>
       <audio id="myAudio" ref={songRef}>
         <source
           src="https://images.chesscomfiles.com/chess-themes/sounds/_WEBM_/default/game-start.webm"

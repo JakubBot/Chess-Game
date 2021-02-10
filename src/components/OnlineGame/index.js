@@ -23,7 +23,7 @@ const INITIAL_FEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR';
 let unsubscribe = null;
 let board = null;
 
-function ChessGame({ boardType, piece, ...props }) {
+function ChessGame({ boardType, piece, user, ...props }) {
   const [gameEngine] = useState(new Chess());
   const [state, setState] = useState({
     token: props.token,
@@ -221,6 +221,7 @@ function ChessGame({ boardType, piece, ...props }) {
         songRef={songRef}
         p1_token={state.p1_token}
         p2_token={state.p2_token}
+        user={user}
       />
     </>
   );
@@ -230,6 +231,7 @@ function mapStateToProps(state) {
   return {
     piece,
     boardType: board,
+    user: state.user ?? null,
   };
 }
 

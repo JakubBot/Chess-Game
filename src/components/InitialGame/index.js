@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import Chessboard from '@chrisoakman/chessboardjs/dist/chessboard-1.0.0';
-
-// import Chess from 'chess.js/chess';
 import { connect } from 'react-redux';
+
 import * as boardActions from '../../redux/actions/boardActions';
 import '@chrisoakman/chessboardjs/dist/chessboard-1.0.0.css';
 import './index.scss';

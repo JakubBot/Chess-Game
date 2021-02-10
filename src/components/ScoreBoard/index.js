@@ -131,7 +131,7 @@ const ScoreBoard = ({ board, piece, mode, history, ...props }) => {
                   onClick={changeMode}
                   type="button"
                   className="scoreBoard__options__btn--big mode__btn"
-                  name="friend"
+                  name="online"
                 >
                   with friend
                 </button>
