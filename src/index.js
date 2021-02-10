@@ -3,11 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import { Provider as ReduxProvider } from 'react-redux';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
-import GamePage from './containers/GamePage';
+import OnlineGamePage from './containers/OnlineGamePage';
 import HomePage from './containers/HomePage';
 import LoginPage from './containers/LoginPage';
 import RegisterPage from './containers/RegisterPage';
 import PageNotFound from './containers/PageNotFound';
+import ComputerGamePage from './containers/ComputerGamePage';
 import configureStore from './redux/store';
 
 const store = configureStore();
@@ -21,7 +22,8 @@ ReactDOM.render(
             <Route exact path="/" component={HomePage} />
             <Route path="/login" component={LoginPage} />
             <Route path="/register" component={RegisterPage} />
-            <Route exact path="/play/:token" component={GamePage} />
+            <Route exact path="/play/computer" component={ComputerGamePage} />
+            <Route exact path="/play/:token" component={OnlineGamePage} />
             <Route component={PageNotFound} />
           </Switch>
         </Router>

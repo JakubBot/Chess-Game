@@ -5,23 +5,17 @@ import OnlineGame from '../../components/OnlineGame';
 import ComputerGame from '../../components/ComputerGame';
 import './index.scss';
 
-const GamePage = ({ mode, ...props }) => {
+const GamePage = (props) => {
   const { token } = props.match.params;
 
   return (
     <>
       <Navbar />
       <div className="gamePage__wrapper">
-        {mode === 'computer' ? <ComputerGame /> : <OnlineGame token={token} />}
+        <OnlineGame token={token} />
       </div>
     </>
   );
 };
 
-function mapStateToProps(state) {
-  return {
-    mode: state.mode,
-  };
-}
-
-export default connect(mapStateToProps, null)(GamePage);
+export default GamePage;

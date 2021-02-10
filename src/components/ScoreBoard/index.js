@@ -43,7 +43,10 @@ const ScoreBoard = ({ board, piece, mode, history, ...props }) => {
     const gamesRef = firestore.collection('games');
     gamesRef
       .add(newGame)
-      .then(() => history.push(`./play/${newGame.p1_token}`))
+      .then(() => {
+        if (mode == 'online') history.push(`./play/${newGame.p1_token}`);
+        else if (mode === 'computer') history.push(`./play/computer`);
+      })
       .catch((err) => {
         throw err;
       });
