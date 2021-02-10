@@ -12,7 +12,7 @@ import {
   Turn,
   isMyTurn,
   allowMove,
-} from '../utils/gameUtils';
+} from '../utils/onlineGameUtils';
 import '@chrisoakman/chessboardjs/dist/chessboard-1.0.0.css';
 
 import './index.scss';

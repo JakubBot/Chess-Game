@@ -44,7 +44,7 @@ const ScoreBoard = ({ board, piece, mode, history, ...props }) => {
     gamesRef
       .add(newGame)
       .then(() => {
-        if (mode == 'online') history.push(`./play/${newGame.p1_token}`);
+        if (mode === 'online') history.push(`./play/${newGame.p1_token}`);
         else if (mode === 'computer') history.push(`./play/computer`);
       })
       .catch((err) => {
