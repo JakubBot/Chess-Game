@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Chess from 'chess.js/chess';
 import Chessboard from '@chrisoakman/chessboardjs/dist/chessboard-1.0.0';
+import { connect } from 'react-redux';
 import GameBoard from './GameBoard';
 import { firestore } from '../../firebase-config';
 
@@ -22,7 +23,7 @@ const INITIAL_FEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR';
 let unsubscribe = null;
 let board = null;
 
-function ChessGame(props) {
+function ChessGame({ boardType, piece, ...props }) {
   const [gameEngine] = useState(new Chess());
   const [state, setState] = useState({
     token: props.token,
@@ -104,7 +105,7 @@ function ChessGame(props) {
     const engine = gameEngine;
     const playerNum = figurePlayer(state.token, game);
     const config = {
-      pieceTheme: 'img/chesspieces/alpha/{piece}.png',
+      pieceTheme: `${process.env.PUBLIC_URL}/img/chesspieces/${piece}/{piece}.png`,
       draggable: true,
       position: 'start',
       onDragStart,
@@ -117,6 +118,19 @@ function ChessGame(props) {
     if (playerNum === 2) {
       board.orientation('black');
     }
+
+    const $board = $('.chessboard-63f37');
+    const squares = $('.square-55d63');
+
+    if (boardType === 'wooden') {
+      $board.addClass('woodenBoard');
+      squares.addClass('transparent');
+    } else if (board === 'classic') {
+      $board.removeClass('woodenBoard');
+      squares.removeClass('transparent');
+    }
+
+    $(window).resize(board.resize);
 
     return board;
 
@@ -211,5 +225,12 @@ function ChessGame(props) {
     </>
   );
 }
+function mapStateToProps(state) {
+  const { piece, board } = state.boardInfo;
+  return {
+    piece,
+    boardType: board,
+  };
+}
 
-export default ChessGame;
+export default connect(mapStateToProps, null)(ChessGame);

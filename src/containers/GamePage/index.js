@@ -1,18 +1,27 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Navbar from '../../components/Navbar';
-import Game from '../../components/Game';
+import OnlineGame from '../../components/OnlineGame';
+import ComputerGame from '../../components/ComputerGame';
 import './index.scss';
 
-const GamePage = (props) => {
+const GamePage = ({ mode, ...props }) => {
   const { token } = props.match.params;
+
   return (
     <>
       <Navbar />
       <div className="gamePage__wrapper">
-        <Game token={token} />
+        {mode === 'computer' ? <ComputerGame /> : <OnlineGame token={token} />}
       </div>
     </>
   );
 };
 
-export default GamePage;
+function mapStateToProps(state) {
+  return {
+    mode: state.mode,
+  };
+}
+
+export default connect(mapStateToProps, null)(GamePage);

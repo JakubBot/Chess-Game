@@ -8,7 +8,6 @@ import HomePage from './containers/HomePage';
 import LoginPage from './containers/LoginPage';
 import RegisterPage from './containers/RegisterPage';
 import PageNotFound from './containers/PageNotFound';
-
 import configureStore from './redux/store';
 
 const store = configureStore();
@@ -22,7 +21,7 @@ ReactDOM.render(
             <Route exact path="/" component={HomePage} />
             <Route path="/login" component={LoginPage} />
             <Route path="/register" component={RegisterPage} />
-            <Route exact path="/:token" component={GamePage} />
+            <Route exact path="/play/:token" component={GamePage} />
             <Route component={PageNotFound} />
           </Switch>
         </Router>

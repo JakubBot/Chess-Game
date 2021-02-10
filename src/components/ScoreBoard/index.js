@@ -43,7 +43,7 @@ const ScoreBoard = ({ board, piece, mode, history, ...props }) => {
     const gamesRef = firestore.collection('games');
     gamesRef
       .add(newGame)
-      .then(() => history.push(`./${newGame.p1_token}`))
+      .then(() => history.push(`./play/${newGame.p1_token}`))
       .catch((err) => {
         throw err;
       });
