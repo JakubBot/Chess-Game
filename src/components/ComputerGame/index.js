@@ -3,13 +3,14 @@ import Chess from 'chess.js/chess';
 import Chessboard from '@chrisoakman/chessboardjs/dist/chessboard-1.0.0';
 import { connect } from 'react-redux';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import GameBoard from '../OnlineGame/GameBoard';
+import GameBoard from '../GameBoard';
 import { auth, firestore } from '../../firebase-config';
 import { minimaxRoot } from '../utils/gameUtils/computerGameUtils';
 import {
   removeDotSquares,
   dotSquare,
   onMouseoutSquare,
+  allowMove,
 } from '../utils/gameUtils/commonGameUtils';
 import * as userActions from '../../redux/actions/userActions';
 import * as boardActions from '../../redux/actions/boardActions';
@@ -52,16 +53,19 @@ const ComputerGame = ({ boardType, user, piece, loginUser, updateMoves }) => {
     }
 
     function onDragStart(source, piece) {
-      const img = $(`img[src$="${piece}.png"]`);
+      const img = $(`img[data-piece="${piece}"]`);
       img.addClass('z-index');
-      if (game.game_over()) {
-        return false;
-      }
-      return true;
+
+      return (
+        !game.game_over() &&
+        game.turn() === 'w' &&
+        allowMove(game.turn(), piece)
+      );
     }
 
     function onDrop(source, target, piece) {
       const img = $(`img[data-piece="${piece}"]`);
+
       img.removeClass('z-index');
       const move = game.move({
         from: source,

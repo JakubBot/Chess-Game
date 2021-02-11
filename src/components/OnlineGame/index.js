@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import Chess from 'chess.js/chess';
 import Chessboard from '@chrisoakman/chessboardjs/dist/chessboard-1.0.0';
 import { connect } from 'react-redux';
-import GameBoard from './GameBoard';
+import GameBoard from '../GameBoard';
 import { firestore } from '../../firebase-config';
 
 import {
@@ -11,12 +11,12 @@ import {
   statusText,
   Turn,
   isMyTurn,
-  allowMove,
 } from '../utils/gameUtils/onlineGameUtils';
 import {
   removeDotSquares,
   dotSquare,
   onMouseoutSquare,
+  allowMove,
 } from '../utils/gameUtils/commonGameUtils';
 
 import '@chrisoakman/chessboardjs/dist/chessboard-1.0.0.css';
@@ -160,7 +160,8 @@ function ChessGame({ boardType, piece, user, ...props }) {
     }
 
     function onDragStart(source, piece) {
-      const img = $(`img[src$="${piece}.png"]`);
+      const img = $(`img[data-piece="${piece}"]`);
+
       img.addClass('z-index');
       return (
         !engine.game_over() &&

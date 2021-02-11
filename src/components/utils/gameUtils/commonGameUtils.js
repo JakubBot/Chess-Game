@@ -13,3 +13,10 @@ export function dotSquare(square) {
 export function onMouseoutSquare() {
   removeDotSquares();
 }
+
+export function allowMove(turn, piece) {
+  return (
+    !(turn === 'w' && piece.search(/^b/) !== -1) ||
+    (turn === 'b' && piece.search(/^w/) !== -1)
+  );
+}

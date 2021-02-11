@@ -51,12 +51,6 @@ export function Turn(playerNum, isMyTurn) {
 export function isMyTurn(playerNum, turn) {
   return (playerNum === 1 && turn === 'w') || (playerNum === 2 && turn === 'b');
 }
-export function allowMove(turn, piece) {
-  return (
-    !(turn === 'w' && piece.search(/^b/) !== -1) ||
-    (turn === 'b' && piece.search(/^w/) !== -1)
-  );
-}
 
 export const domain = () => {
   if (window.location) {
