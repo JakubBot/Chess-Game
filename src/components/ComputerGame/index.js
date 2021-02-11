@@ -3,9 +3,14 @@ import Chess from 'chess.js/chess';
 import Chessboard from '@chrisoakman/chessboardjs/dist/chessboard-1.0.0';
 import { connect } from 'react-redux';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { minimaxRoot } from '../utils/computerGameUtils';
 import GameBoard from '../OnlineGame/GameBoard';
 import { auth } from '../../firebase-config';
+import { minimaxRoot } from '../utils/gameUtils/computerGameUtils';
+import {
+  removeDotSquares,
+  dotSquare,
+  onMouseoutSquare,
+} from '../utils/gameUtils/commonGameUtils';
 import * as userActions from '../../redux/actions/userActions';
 import * as boardActions from '../../redux/actions/boardActions';
 import './index.scss';
@@ -57,7 +62,7 @@ const ComputerGame = ({ boardType, piece, loginUser, updateMoves }) => {
       });
     }
 
-    function onSnapEnd(from, to) {
+    function onSnapEnd() {
       songRef.current.play();
 
       board.position(game.fen());
@@ -82,6 +87,20 @@ const ComputerGame = ({ boardType, piece, loginUser, updateMoves }) => {
       }
     }
 
+    function onMouseoverSquare(square) {
+      if (game.turn() === 'w') {
+        const moves = game.moves({
+          square,
+          verbose: true,
+        });
+        if (moves.length === 0) return;
+
+        for (let i = 0; i < moves.length; i += 1) {
+          dotSquare(moves[i].to);
+        }
+      }
+    }
+
     const config = {
       pieceTheme: `${process.env.PUBLIC_URL}/img/chesspieces/${piece}/{piece}.png`,
       draggable: true,
@@ -89,6 +108,8 @@ const ComputerGame = ({ boardType, piece, loginUser, updateMoves }) => {
       onDragStart,
       onDrop,
       onSnapEnd,
+      onMouseoutSquare,
+      onMouseoverSquare,
     };
 
     board = Chessboard('board', config);

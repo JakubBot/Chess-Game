@@ -12,7 +12,13 @@ import {
   Turn,
   isMyTurn,
   allowMove,
-} from '../utils/onlineGameUtils';
+} from '../utils/gameUtils/onlineGameUtils';
+import {
+  removeDotSquares,
+  dotSquare,
+  onMouseoutSquare,
+} from '../utils/gameUtils/commonGameUtils';
+
 import '@chrisoakman/chessboardjs/dist/chessboard-1.0.0.css';
 
 import './index.scss';
@@ -134,17 +140,6 @@ function ChessGame({ boardType, piece, user, ...props }) {
 
     return board;
 
-    function removeDotSquares() {
-      $('#board .square-55d63').removeClass('square');
-    }
-    function dotSquare(square) {
-      const $square = $(`#board .square-${square}`);
-
-      $square.addClass('square');
-    }
-    function onMouseoutSquare() {
-      removeDotSquares();
-    }
     function onMouseoverSquare(square) {
       const canIMove = isMyTurn(playerNum, engine.turn());
 

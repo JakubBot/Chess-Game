@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 import React from 'react';
-import { domain } from '../utils/onlineGameUtils';
+import { domain } from '../utils/gameUtils/onlineGameUtils';
 
 const GameBoard = ({ songRef, p1_token, p2_token, links, user }) => {
   const adress = {
