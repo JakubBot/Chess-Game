@@ -9,7 +9,7 @@ const GamePage = (props) => {
   return (
     <>
       <Navbar />
-      <div className="gamePage__wrapper">
+      <div className="homePage__wrapper">
         <OnlineGame token={token} />
       </div>
     </>

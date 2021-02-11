@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from '../../components/Navbar';
 import InitialGame from '../../components/InitialGame';
-import ScoreBoard from '../../components/ScoreBoard';
+import ConfigBoard from '../../components/ConfigBoard';
 import './index.scss';
 
 const HomePage = () => {
@@ -11,7 +11,7 @@ const HomePage = () => {
       <div className="homePage__wrapper">
         <InitialGame />
 
-        <ScoreBoard />
+        <ConfigBoard />
       </div>
     </>
   );

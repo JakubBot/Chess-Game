@@ -1,0 +1,84 @@
+@import '../../assets/styles/style.scss';
+
+.configBoard {
+  @extend %sidebar__user__board;
+
+  &__wrapper {
+    width: 100%;
+    height: 100%;
+    padding: 30px 20px;
+  }
+
+  &__header {
+    font-size: 2em;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+  }
+
+  &__options {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+    flex-wrap: wrap;
+    margin: 0px 0 5px;
+    @include rwd(360) {
+      justify-content: flex-start;
+    }
+  }
+
+  @include phone {
+    & {
+      max-width: 360px;
+      margin: 0 10px;
+    }
+  }
+  @include desktop {
+    margin-left: 50px;
+  }
+}
+.config__header {
+  font-size: 1.3em;
+  font-weight: bold;
+  color: $brightWhite;
+}
+
+.findGame {
+  margin-top: 15px;
+  &__button {
+    
+    cursor: pointer;
+    font-size: 1.2em;
+    letter-spacing: 1px;
+    color: white;
+    width: 80%;
+    outline: none;
+    border: none;
+    padding: 20px 0;
+    background: url('../../assets/img/btn-background-blue.png') center center/contain
+      no-repeat;
+  }
+}
+.configBoard__options__btn {
+  @extend %configBoard__options__btn;
+}
+.configBoard__options__btn--small {
+  @extend %configBoard__options__btn;
+  font-size: 0.8em;
+}
+.configBoard__options__btn--big {
+  @extend %configBoard__options__btn;
+  height: 50px;
+  font-size: 0.9em;
+
+  @include rwd(360) {
+    width: 110px;
+    font-size: 0.75em;
+    padding: 2px 4px;
+    height: 50px;
+  }
+}
+.configBoard__options__btn--active {
+  border: 3px solid rgba(255, 255, 255, 1);
+  color: rgb(255, 255, 255);
+}
+

@@ -1,4 +1,4 @@
-%scoreBoard__options__btn {
+%configBoard__options__btn {
   width: calc(70% - 10px);
   height: 40px;
   background: none;
@@ -109,4 +109,15 @@
       display: none;
     }
   }
+}
+
+%sidebar__user__board {
+  width: calc(100% - 60px);
+  margin: 0 30px 30px;
+  background: #00000030;
+  color: white;
+
+  border-radius: 10px;
+  font-weight: bold;
+  max-width: 360px;
 }

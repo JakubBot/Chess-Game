@@ -1,14 +1,17 @@
 import React from 'react';
 import Navbar from '../../components/Navbar';
 import ComputerGame from '../../components/ComputerGame';
+import ScoreBoard from '../../components/ScoreBoard';
+import ConfigBoard from '../../components/ConfigBoard';
 import './index.scss';
 
 const ComputerGamePage = () => {
   return (
     <>
       <Navbar />
-      <div className="gamePage__wrapper">
+      <div className="homePage__wrapper">
         <ComputerGame />
+        <ScoreBoard />
       </div>
     </>
   );

@@ -1,15 +1,7 @@
 @import '../../assets/styles/style.scss';
 
 .scoreBoard {
-  width: calc(100% - 60px);
-  margin: 0 30px 30px;
-  background: #00000030;
-  color: white;
-
-  border-radius: 10px;
-  font-weight: bold;
-  max-width: 360px;
-
+  @extend %sidebar__user__board;
   &__wrapper {
     width: 100%;
     height: 100%;
@@ -22,14 +14,20 @@
     letter-spacing: 1px;
   }
 
-  &__options {
-    display: flex;
-    justify-content: center;
-    padding: 20px 0;
-    flex-wrap: wrap;
-    margin: 0px 0 5px;
-    @include rwd(360) {
-      justify-content: flex-start;
+  &__info {
+    &__moves {
+      padding: 10px;
+    }
+    &__options {
+      display: flex;
+      justify-content: center;
+      padding: 20px 0;
+      flex-wrap: wrap;
+      margin: 0px 0 5px;
+      color: $darkWhite;
+      @include rwd(360) {
+        justify-content: flex-start;
+      }
     }
   }
 
@@ -43,49 +41,9 @@
     margin-left: 50px;
   }
 }
-.config__header {
+
+.scoreBoard__info__header {
   font-size: 1.3em;
   font-weight: bold;
-  color: $brightWhite;
+  color: rgba(255, 255, 255, 0.85);
 }
-
-.findGame {
-  margin-top: 15px;
-  &__button {
-    
-    cursor: pointer;
-    font-size: 1.2em;
-    letter-spacing: 1px;
-    color: white;
-    width: 80%;
-    outline: none;
-    border: none;
-    padding: 20px 0;
-    background: url('../../assets/img/btn-background-blue.png') center center/contain
-      no-repeat;
-  }
-}
-.scoreBoard__options__btn {
-  @extend %scoreBoard__options__btn;
-}
-.scoreBoard__options__btn--small {
-  @extend %scoreBoard__options__btn;
-  font-size: 0.8em;
-}
-.scoreBoard__options__btn--big {
-  @extend %scoreBoard__options__btn;
-  height: 50px;
-  font-size: 0.9em;
-
-  @include rwd(360) {
-    width: 110px;
-    font-size: 0.75em;
-    padding: 2px 4px;
-    height: 50px;
-  }
-}
-.scoreBoard__options__btn--active {
-  border: 3px solid rgba(255, 255, 255, 1);
-  color: rgb(255, 255, 255);
-}
-
