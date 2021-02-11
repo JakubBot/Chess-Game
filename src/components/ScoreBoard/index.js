@@ -5,6 +5,7 @@ import * as boardActions from '../../redux/actions/boardActions';
 import './index.scss';
 
 const ScoreBoard = ({ moves, updateMoves }) => {
+  console.log();
   return (
     <>
       <div className="scoreBoard">
@@ -14,7 +15,15 @@ const ScoreBoard = ({ moves, updateMoves }) => {
             <div className="scoreBoard__info__moves">
               <div className="scoreBoard__info__header">Moves</div>
               <div className="scoreBoard__info__options">
-                <BoardMoves moves={moves} />
+                {moves.length === 0 ? (
+                  <div className="dots">
+                    <span className="dot">.</span>
+                    <span className="dot">.</span>
+                    <span className="dot">.</span>
+                  </div>
+                ) : (
+                  <BoardMoves moves={moves} />
+                )}
               </div>
             </div>
             <div className="scoreBoard__info__chat">

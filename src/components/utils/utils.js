@@ -7,12 +7,12 @@ export const convertTime = (_seconds) => {
   return `${minutes}: 0${seconds}`;
 };
 
-export const generateID = () => {
+export const generateID = (number = 28) => {
   let text = '';
   const possible =
     'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
-  for (let i = 0; i < 28; i += 1) {
+  for (let i = 0; i < number; i += 1) {
     text += possible.charAt(Math.floor(Math.random() * possible.length));
   }
 

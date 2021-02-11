@@ -4,7 +4,7 @@ import Chessboard from '@chrisoakman/chessboardjs/dist/chessboard-1.0.0';
 import { connect } from 'react-redux';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import GameBoard from '../OnlineGame/GameBoard';
-import { auth } from '../../firebase-config';
+import { auth, firestore } from '../../firebase-config';
 import { minimaxRoot } from '../utils/gameUtils/computerGameUtils';
 import {
   removeDotSquares,
@@ -20,16 +20,29 @@ const $ = window.jQuery;
 let board = null;
 const game = new Chess();
 const maxDepth = 2;
-const ComputerGame = ({ boardType, piece, loginUser, updateMoves }) => {
+let unsbscribe;
+const ComputerGame = ({ boardType, user, piece, loginUser, updateMoves }) => {
   const [userInfo] = useAuthState(auth);
 
   const songRef = useRef(null);
 
   useEffect(() => {
-    if (userInfo) {
-      loginUser(userInfo);
-    }
+    if (!userInfo) return;
+
+    const userRef = firestore
+      .collection('users')
+      .where('uid', '==', userInfo.uid);
+
+    unsbscribe = userRef.onSnapshot((docs) => {
+      if (!docs.empty) {
+        loginUser(docs);
+      }
+    });
+
+    // eslint-disable-next-line consistent-return
+    return () => unsbscribe && unsbscribe();
   }, [userInfo]);
+
   useEffect(() => {
     function makeEngineMove() {
       const bestMove = minimaxRoot(game, maxDepth, true);
@@ -38,14 +51,18 @@ const ComputerGame = ({ boardType, piece, loginUser, updateMoves }) => {
       updateStatus();
     }
 
-    function onDragStart() {
+    function onDragStart(source, piece) {
+      const img = $(`img[src$="${piece}.png"]`);
+      img.addClass('z-index');
       if (game.game_over()) {
         return false;
       }
       return true;
     }
 
-    function onDrop(source, target) {
+    function onDrop(source, target, piece) {
+      const img = $(`img[data-piece="${piece}"]`);
+      img.removeClass('z-index');
       const move = game.move({
         from: source,
         to: target,
@@ -54,6 +71,7 @@ const ComputerGame = ({ boardType, piece, loginUser, updateMoves }) => {
       if (move === null) {
         return 'snapback';
       }
+      removeDotSquares();
       updateStatus();
       window.setTimeout(makeEngineMove, 1000);
       updateMoves({
@@ -135,9 +153,7 @@ const ComputerGame = ({ boardType, piece, loginUser, updateMoves }) => {
 
 function mapStateToProps(state) {
   const { piece, board } = state.boardInfo;
-  const user = {
-    userName: auth,
-  };
+  const { user } = state;
   return {
     piece,
     boardType: board,
