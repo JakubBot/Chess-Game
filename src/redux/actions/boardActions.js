@@ -9,6 +9,11 @@ export function changePiece(piece) {
 export function changeMode(mode) {
   return { type: actionTypes.CHANGE_MODE, mode };
 }
+
+export function updateMoves(move) {
+  return { type: actionTypes.UPDATE_MOVES, move };
+}
+
 // setState({
 //   ...state,
 //   board: target.name,

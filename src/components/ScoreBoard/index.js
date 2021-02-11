@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import BoardMoves from './BoardMoves';
+import * as boardActions from '../../redux/actions/boardActions';
 import './index.scss';
 
-const ScoreBoard = () => {
+const ScoreBoard = ({ moves, updateMoves }) => {
   return (
     <>
       <div className="scoreBoard">
@@ -12,7 +14,7 @@ const ScoreBoard = () => {
             <div className="scoreBoard__info__moves">
               <div className="scoreBoard__info__header">Moves</div>
               <div className="scoreBoard__info__options">
-                <BoardMoves />
+                <BoardMoves moves={moves} />
               </div>
             </div>
             <div className="scoreBoard__info__chat">
@@ -28,4 +30,11 @@ const ScoreBoard = () => {
   );
 };
 
-export default ScoreBoard;
+function mapStateToProps(state) {
+  const { moves } = state.boardInfo;
+  return {
+    moves,
+  };
+}
+
+export default connect(mapStateToProps, null)(ScoreBoard);

@@ -3,6 +3,7 @@ export default {
     board: 'wooden',
     piece: 'neo_wood',
     mode: 'computer',
+    moves: [],
   },
   user: {},
 };

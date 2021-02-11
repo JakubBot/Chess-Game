@@ -1,9 +1,21 @@
 import React from 'react';
 
+import './BoardMoves.scss';
+
 const BoardMoves = ({ moves }) => {
   return (
     <>
-      <span>sa</span>
+      <ul className="moves">
+        {moves.map((move, index) => {
+          return (
+            <li className="moves__item" key={move}>
+              <span>{index + 1}</span>
+              <span>{move.from}</span>
+              <span>{move.to}</span>
+            </li>
+          );
+        })}
+      </ul>
     </>
   );
 };

@@ -1,0 +1,17 @@
+@import '../../assets/styles/style.scss';
+
+
+.moves {
+  padding: 0;
+  margin: 8px 0;
+  list-style-type: none;
+
+  &__item {
+    margin: 8px 0;
+    gap: 10px;
+
+    & span {
+      margin: 0 5px;
+    }
+  }
+}

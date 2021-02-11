@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from '../../components/Navbar';
 import ComputerGame from '../../components/ComputerGame';
 import ScoreBoard from '../../components/ScoreBoard';
@@ -6,6 +6,7 @@ import ConfigBoard from '../../components/ConfigBoard';
 import './index.scss';
 
 const ComputerGamePage = () => {
+
   return (
     <>
       <Navbar />

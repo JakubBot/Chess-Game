@@ -7,6 +7,7 @@ import { minimaxRoot } from '../utils/computerGameUtils';
 import GameBoard from '../OnlineGame/GameBoard';
 import { auth } from '../../firebase-config';
 import * as userActions from '../../redux/actions/userActions';
+import * as boardActions from '../../redux/actions/boardActions';
 import './index.scss';
 import '@chrisoakman/chessboardjs/dist/chessboard-1.0.0.css';
 
@@ -14,7 +15,7 @@ const $ = window.jQuery;
 let board = null;
 const game = new Chess();
 const maxDepth = 2;
-const ComputerGame = ({ boardType, piece, loginUser }) => {
+const ComputerGame = ({ boardType, piece, loginUser, updateMoves }) => {
   const [userInfo] = useAuthState(auth);
 
   const songRef = useRef(null);
@@ -23,7 +24,6 @@ const ComputerGame = ({ boardType, piece, loginUser }) => {
     if (userInfo) {
       loginUser(userInfo);
     }
-    //
   }, [userInfo]);
   useEffect(() => {
     function makeEngineMove() {
@@ -50,10 +50,14 @@ const ComputerGame = ({ boardType, piece, loginUser }) => {
         return 'snapback';
       }
       updateStatus();
-      window.setTimeout(makeEngineMove, 250);
+      window.setTimeout(makeEngineMove, 1000);
+      updateMoves({
+        from: source,
+        to: target,
+      });
     }
 
-    function onSnapEnd() {
+    function onSnapEnd(from, to) {
       songRef.current.play();
 
       board.position(game.fen());
@@ -100,7 +104,7 @@ const ComputerGame = ({ boardType, piece, loginUser }) => {
       squares.removeClass('transparent');
     }
     updateStatus();
-  });
+  }, []);
   return (
     <>
       <GameBoard songRef={songRef} links={false} />
@@ -122,5 +126,7 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = {
   loginUser: userActions.loginUser,
+  updateMoves: boardActions.updateMoves,
 };
+
 export default connect(mapStateToProps, mapDispatchToProps)(ComputerGame);
