@@ -8,10 +8,10 @@ import './index.scss';
 
 const $ = window.jQuery;
 
-const InitialGame = ({ board, piece, mode }) => {
+const InitialGame = ({ board, piece }) => {
   useEffect(() => {
     updateConfig();
-  }, [board, piece, mode]);
+  }, [board, piece]);
 
   const updateConfig = () => {
     const config = {
@@ -47,7 +47,6 @@ function mapStateToProps(state) {
   return {
     board: boardInfo.board,
     piece: boardInfo.piece,
-    mode: boardInfo.mode,
   };
 }
 const mapDispatchToProps = {

@@ -131,6 +131,8 @@ const ComputerGame = ({ boardType, user, piece, loginUser, updateMoves }) => {
 
     board = Chessboard('board', config);
 
+    $(window).resize(board.resize);
+
     const $board = $('.chessboard-63f37');
     const squares = $('.square-55d63');
 

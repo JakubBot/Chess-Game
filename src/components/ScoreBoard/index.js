@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import BoardMoves from './BoardMoves';
-import * as boardActions from '../../redux/actions/boardActions';
 import LocalChat from '../LocalChat';
 import './index.scss';
 
-const ScoreBoard = ({ moves, updateMoves }) => {
+const ScoreBoard = ({ moves }) => {
   return (
     <>
       <div className="scoreBoard">

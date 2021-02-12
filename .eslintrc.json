@@ -28,7 +28,8 @@
     "no-use-before-define": ["error", { "variables": false, "functions": false }],
     "no-underscore-dangle":"off",
     "camelcase": ["error", { "properties": "never", "ignoreDestructuring": true }],
-    "jsx-a11y/media-has-caption": [0]
+    "jsx-a11y/media-has-caption": [0],
+    "consistent-return":"off"
     },
     "parser": "babel-eslint",
     "env": {
