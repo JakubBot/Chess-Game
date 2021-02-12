@@ -8,9 +8,8 @@ import { auth, firestore } from '../../firebase-config';
 import { minimaxRoot } from '../utils/gameUtils/computerGameUtils';
 import {
   removeDotSquares,
-  dotSquare,
-  onMouseoutSquare,
   allowMove,
+  makeDots,
 } from '../utils/gameUtils/commonGameUtils';
 import * as userActions from '../../redux/actions/userActions';
 import * as boardActions from '../../redux/actions/boardActions';
@@ -53,7 +52,9 @@ const ComputerGame = ({ boardType, user, piece, loginUser, updateMoves }) => {
       updateStatus();
     }
 
-    function onDragStart(source, piece) {
+    function onDragStart(square, piece) {
+      makeDots(game, square);
+
       return (
         !game.game_over() &&
         game.turn() === 'w' &&
@@ -62,6 +63,9 @@ const ComputerGame = ({ boardType, user, piece, loginUser, updateMoves }) => {
     }
 
     function onDrop(source, target) {
+      removeDotSquares();
+      updateStatus();
+
       const move = game.move({
         from: source,
         to: target,
@@ -70,9 +74,8 @@ const ComputerGame = ({ boardType, user, piece, loginUser, updateMoves }) => {
       if (move === null) {
         return 'snapback';
       }
-      removeDotSquares();
-      updateStatus();
-      window.setTimeout(makeEngineMove, 1000);
+
+      window.setTimeout(makeEngineMove, 800);
       updateMoves({
         from: source,
         to: target,
@@ -105,17 +108,7 @@ const ComputerGame = ({ boardType, user, piece, loginUser, updateMoves }) => {
     }
 
     function onMouseoverSquare(square) {
-      if (game.turn() === 'w') {
-        const moves = game.moves({
-          square,
-          verbose: true,
-        });
-        if (moves.length === 0) return;
-
-        for (let i = 0; i < moves.length; i += 1) {
-          dotSquare(moves[i].to);
-        }
-      }
+      makeDots(game, square);
     }
 
     const config = {
@@ -125,7 +118,7 @@ const ComputerGame = ({ boardType, user, piece, loginUser, updateMoves }) => {
       onDragStart,
       onDrop,
       onSnapEnd,
-      onMouseoutSquare,
+      onMouseoutSquare: removeDotSquares,
       onMouseoverSquare,
     };
 
