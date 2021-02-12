@@ -5,8 +5,8 @@ import './index.scss';
 
 const GameBoard = ({ songRef, p1_token, p2_token, links, user }) => {
   const adress = {
-    firstPlayer: `${domain()}/${p1_token}`,
-    secondPlayer: `${domain()}/${p2_token}`,
+    firstPlayer: `${domain()}/play/${p1_token}`,
+    secondPlayer: `${domain()}/play/${p2_token}`,
   };
   return (
     <>

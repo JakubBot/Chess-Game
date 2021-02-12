@@ -5,7 +5,7 @@ import Chessboard from '@chrisoakman/chessboardjs/dist/chessboard-1.0.0';
 import { connect } from 'react-redux';
 import GameBoard from '../GameBoard';
 import { firestore } from '../../firebase-config';
-
+import * as boardActions from '../../redux/actions/boardActions';
 import {
   figurePlayer,
   statusText,
@@ -29,7 +29,7 @@ const INITIAL_FEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR';
 let unsubscribe = null;
 let board = null;
 
-function ChessGame({ boardType, piece, user, ...props }) {
+function ChessGame({ boardType, piece, user, updateMoves, ...props }) {
   const [gameEngine] = useState(new Chess());
   const [state, setState] = useState({
     token: props.token,
@@ -188,6 +188,10 @@ function ChessGame({ boardType, piece, user, ...props }) {
         moveFrom: source,
         moveTo: target,
       });
+      updateMoves({
+        from: source,
+        to: target,
+      });
     }
     function onSnapEnd() {
       songRef.current.play();
@@ -214,6 +218,7 @@ function ChessGame({ boardType, piece, user, ...props }) {
   return (
     <>
       <GameBoard
+        links
         songRef={songRef}
         p1_token={state.p1_token}
         p2_token={state.p2_token}
@@ -231,4 +236,8 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, null)(ChessGame);
+const mapDispatchToProps = {
+  updateMoves: boardActions.updateMoves,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ChessGame);

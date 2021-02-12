@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import BoardMoves from './BoardMoves';
 import * as boardActions from '../../redux/actions/boardActions';
+import LocalChat from '../LocalChat';
 import './index.scss';
 
 const ScoreBoard = ({ moves, updateMoves }) => {
-  console.log();
   return (
     <>
       <div className="scoreBoard">
@@ -29,7 +29,7 @@ const ScoreBoard = ({ moves, updateMoves }) => {
             <div className="scoreBoard__info__chat">
               <div className="scoreBoard__info__header">Chat</div>
               <div className="scoreBoard__info__options">
-                <span>Czat</span>
+                <LocalChat />
               </div>
             </div>
           </div>
