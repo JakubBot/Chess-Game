@@ -13,7 +13,7 @@ const ScoreBoard = ({ moves, updateMoves }) => {
           <div className="scoreBoard__header flex-c">Your turn</div>
           <div className="scoreBoard__info">
             <div className="scoreBoard__info__moves">
-              <div className="scoreBoard__info__header">Moves</div>
+              <div className="scoreBoard__info__header">Last Moves</div>
               <div className="scoreBoard__info__options">
                 {moves.length === 0 ? (
                   <div className="dots">

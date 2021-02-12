@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import Chess from 'chess.js/chess';
 import Chessboard from '@chrisoakman/chessboardjs/dist/chessboard-1.0.0';
 import { connect } from 'react-redux';
-import GameBoard from '../GameBoard';
+import GameBoard from '../common/GameBoard';
 import { firestore } from '../../firebase-config';
 import * as boardActions from '../../redux/actions/boardActions';
 import {
@@ -46,32 +46,6 @@ function ChessGame({ boardType, piece, user, updateMoves, ...props }) {
       unsubscribe();
     };
   }, []);
-  useEffect(() => {
-    const move = {
-      from: state.moveFrom,
-      to: state.moveTo,
-      turn: gameEngine.turn(),
-    };
-
-    const $board = $('#board');
-    const squareClass = 'square-55d63';
-
-    if (move.turn === 'w') {
-      removeHighlights('from');
-      removeHighlights('to');
-      $board.find(`.square-${move.from}`).addClass('highlight-from');
-      $board.find(`.square-${move.to}`).addClass('highlight-to');
-    } else {
-      removeHighlights('from');
-      removeHighlights('to');
-      $board.find(`.square-${move.from}`).addClass('highlight-from');
-      $board.find(`.square-${move.to}`).addClass('highlight-to');
-    }
-
-    function removeHighlights(color) {
-      $board.find(`.${squareClass}`).removeClass(`highlight-${color}`);
-    }
-  }, [gameEngine, state]);
 
   // eslint-disable-next-line camelcase
   function updateState({ p1_token, p2_token, moveFrom, moveTo }) {
@@ -161,7 +135,6 @@ function ChessGame({ boardType, piece, user, updateMoves, ...props }) {
 
     function onDragStart(source, piece) {
       const img = $(`img[data-piece="${piece}"]`);
-
       img.addClass('z-index');
       return (
         !engine.game_over() &&

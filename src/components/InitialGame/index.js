@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Chessboard from '@chrisoakman/chessboardjs/dist/chessboard-1.0.0';
 import { connect } from 'react-redux';
-
+import GameBoard from '../common/GameBoard';
 import * as boardActions from '../../redux/actions/boardActions';
 import '@chrisoakman/chessboardjs/dist/chessboard-1.0.0.css';
 import './index.scss';
@@ -37,23 +37,7 @@ const InitialGame = ({ board, piece, mode }) => {
 
   return (
     <>
-      <div className="game">
-        <div className="userInformations">
-          <div className="userWrapper">
-            <span className="playerName">Guest 123</span>
-            <span className="points">(500)</span>
-          </div>
-          <div className="timer">3: 00</div>
-        </div>
-        <div id="board" className="board" />
-        <div className="userInformations">
-          <div className="userWrapper">
-            <span className="playerName">Guest 123</span>
-            <span className="points">(500)</span>
-          </div>
-          <div className="timer">3: 00</div>
-        </div>
-      </div>
+      <GameBoard />
     </>
   );
 };

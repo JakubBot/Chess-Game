@@ -3,7 +3,7 @@ import Chess from 'chess.js/chess';
 import Chessboard from '@chrisoakman/chessboardjs/dist/chessboard-1.0.0';
 import { connect } from 'react-redux';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import GameBoard from '../GameBoard';
+import GameBoard from '../common/GameBoard';
 import { auth, firestore } from '../../firebase-config';
 import { minimaxRoot } from '../utils/gameUtils/computerGameUtils';
 import {
@@ -14,6 +14,7 @@ import {
 } from '../utils/gameUtils/commonGameUtils';
 import * as userActions from '../../redux/actions/userActions';
 import * as boardActions from '../../redux/actions/boardActions';
+
 import './index.scss';
 import '@chrisoakman/chessboardjs/dist/chessboard-1.0.0.css';
 
@@ -53,9 +54,6 @@ const ComputerGame = ({ boardType, user, piece, loginUser, updateMoves }) => {
     }
 
     function onDragStart(source, piece) {
-      const img = $(`img[data-piece="${piece}"]`);
-      img.addClass('z-index');
-
       return (
         !game.game_over() &&
         game.turn() === 'w' &&
@@ -63,10 +61,7 @@ const ComputerGame = ({ boardType, user, piece, loginUser, updateMoves }) => {
       );
     }
 
-    function onDrop(source, target, piece) {
-      const img = $(`img[data-piece="${piece}"]`);
-
-      img.removeClass('z-index');
+    function onDrop(source, target) {
       const move = game.move({
         from: source,
         to: target,

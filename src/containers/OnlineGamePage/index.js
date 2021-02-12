@@ -4,7 +4,7 @@ import OnlineGame from '../../components/OnlineGame';
 import ScoreBoard from '../../components/ScoreBoard';
 import './index.scss';
 
-const GamePage = (props) => {
+const OnlineGamePage = (props) => {
   const { token } = props.match.params;
 
   return (
@@ -18,4 +18,4 @@ const GamePage = (props) => {
   );
 };
 
-export default GamePage;
+export default OnlineGamePage;
