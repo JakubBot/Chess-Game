@@ -22,7 +22,14 @@ let board = null;
 const game = new Chess();
 const maxDepth = 2;
 let unsbscribe;
-const ComputerGame = ({ boardType, user, piece, loginUser, updateMoves }) => {
+const ComputerGame = ({
+  boardType,
+  user,
+  piece,
+  loginUser,
+  updateMoves,
+  updateStatusText,
+}) => {
   const [userInfo] = useAuthState(auth);
 
   const songRef = useRef(null);
@@ -45,11 +52,13 @@ const ComputerGame = ({ boardType, user, piece, loginUser, updateMoves }) => {
   }, [userInfo]);
 
   useEffect(() => {
+    songRef.current.play();
+
     function makeEngineMove() {
       const bestMove = minimaxRoot(game, maxDepth, true);
       game.move(bestMove);
       board.position(game.fen());
-      updateStatus();
+      updateStatus('w');
     }
 
     function onDragStart(square, piece) {
@@ -64,7 +73,6 @@ const ComputerGame = ({ boardType, user, piece, loginUser, updateMoves }) => {
 
     function onDrop(source, target) {
       removeDotSquares();
-      updateStatus();
 
       const move = game.move({
         from: source,
@@ -86,25 +94,38 @@ const ComputerGame = ({ boardType, user, piece, loginUser, updateMoves }) => {
       songRef.current.play();
 
       board.position(game.fen());
+      updateStatus('b');
     }
 
-    function updateStatus() {
+    function updateStatus(turn = 'w') {
       let status = '';
-      let moveColor = 'White';
-      if (game.turn() === 'b') {
-        moveColor = 'Black';
+      const moveColor = turn === 'w' ? 'White' : 'Black';
+
+      if (turn === 'w') {
+        status = 'Your Turn';
+      }
+      if (turn === 'b') {
+        status = "Opponents' Turn";
+      }
+      if (game.in_stalemate()) {
+        status = 'draw by stalemate';
+      }
+      if (game.in_threefold_repetition()) {
+        status = `draw by repetition`;
+      }
+      if (game.insufficient_material()) {
+        status = 'draw by insufficient material';
+      }
+      if (game.in_draw()) {
+        status = `draw position`;
       }
       if (game.in_checkmate()) {
-        status = `Game over, ${moveColor} is in checkmate.`;
-      } else if (game.in_draw()) {
-        status = 'Game over, drawn position';
-      } else {
-        status = `${moveColor} to move`;
-        // check?
-        if (game.in_check()) {
-          status += `, ${moveColor} is in check`;
-        }
+        status = `${moveColor} in checkmate, gameover`;
       }
+      if (game.in_check()) {
+        status = `${moveColor} in check`;
+      }
+      updateStatusText(status);
     }
 
     function onMouseoverSquare(square) {
@@ -138,6 +159,7 @@ const ComputerGame = ({ boardType, user, piece, loginUser, updateMoves }) => {
     }
     updateStatus();
   }, []);
+
   return (
     <>
       <GameBoard songRef={songRef} links={false} />
@@ -158,6 +180,7 @@ function mapStateToProps(state) {
 const mapDispatchToProps = {
   loginUser: userActions.loginUser,
   updateMoves: boardActions.updateMoves,
+  updateStatusText: boardActions.updateStatusText,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ComputerGame);

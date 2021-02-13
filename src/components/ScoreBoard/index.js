@@ -5,11 +5,14 @@ import LocalChat from '../LocalChat';
 import './index.scss';
 
 const ScoreBoard = ({ moves, statusText }) => {
+  
   return (
     <>
       <div className="scoreBoard">
         <div className="scoreBoard__wrapper">
-          <div className="scoreBoard__header flex-c">{statusText}</div>
+          <div className="scoreBoard__header flex-c">
+            {statusText === '' ? 'Your turn' : statusText}
+          </div>
           <div className="scoreBoard__info">
             <div className="scoreBoard__info__moves">
               <div className="scoreBoard__info__header">Last Moves</div>

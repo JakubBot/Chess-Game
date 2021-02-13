@@ -28,7 +28,14 @@ const INITIAL_FEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR';
 let unsubscribe = null;
 let board = null;
 
-function ChessGame({ boardType, piece, user, updateMoves, updateStatusText, ...props }) {
+function ChessGame({
+  boardType,
+  piece,
+  user,
+  updateMoves,
+  updateStatusText,
+  ...props
+}) {
   const [gameEngine] = useState(new Chess());
   const [state, setState] = useState({
     token: props.token,
@@ -47,7 +54,7 @@ function ChessGame({ boardType, piece, user, updateMoves, updateStatusText, ...p
   }, []);
   useEffect(() => {
     updateStatusText(state.statusText);
-  }, [state.statusText])
+  }, [state.statusText]);
   // eslint-disable-next-line camelcase
   function updateState({ p1_token, p2_token, moveFrom, moveTo }) {
     const playerNum = figurePlayer(state.token, { p1_token, p2_token });
@@ -160,7 +167,6 @@ function ChessGame({ boardType, piece, user, updateMoves, updateStatusText, ...p
         from: source,
         to: target,
       });
-      
     }
     function onSnapEnd() {
       songRef.current.play();
