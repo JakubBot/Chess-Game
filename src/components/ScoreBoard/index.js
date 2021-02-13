@@ -5,7 +5,6 @@ import LocalChat from '../LocalChat';
 import './index.scss';
 
 const ScoreBoard = ({ moves, statusText }) => {
-  
   return (
     <>
       <div className="scoreBoard">

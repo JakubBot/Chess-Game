@@ -6,7 +6,7 @@ const BoardMoves = ({ moves }) => {
   return (
     <>
       <ul className="moves">
-        {moves.reverse().map((move) => {
+        {[...moves].reverse().map((move) => {
           return (
             <li className="moves__item" key={generateID(10)}>
               <span>{move.from}</span>
