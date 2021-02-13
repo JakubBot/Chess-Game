@@ -1,0 +1,19 @@
+@import '../../../assets/styles/style.scss';
+
+.form__button {
+  background-color: unset;
+  @extend %rectangle__button;
+  border: 2px solid #1f1f1f;
+  color: #202020;
+  margin: 30px 0 10px;
+  align-self: center;
+  &::before {
+    background: white;
+  }
+  &::after {
+    background: white;
+  }
+  & span {
+    color: #1f1f1f;
+  }
+}

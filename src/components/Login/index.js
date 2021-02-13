@@ -98,7 +98,7 @@ const Login = ({ logOut, loginUser }) => {
   return (
     <>
       <LoginForm
-        forms={form}
+        form={form}
         onChange={handleChange}
         onSubmit={handleSubmit}
         user={user}

@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import TextInput from '../common/TextInput';
+import SubmitButton from '../common/SubmitButton';
 import './RegisterForm.scss';
 
 const RegisterForm = ({ form, onChange, onSubmit }) => {
@@ -12,39 +14,25 @@ const RegisterForm = ({ form, onChange, onSubmit }) => {
           <span className="italic">Free & Easy!</span>
         </header>
         <form className="register__form" onSubmit={onSubmit}>
-          <div className="register__form__item">
-            <div className="register__form__header">username :</div>
-            <input
-              type="text"
-              name="userName"
-              value={form.userName}
-              onChange={onChange}
-              className="register__form__input"
-            />
-          </div>
-          <div className="register__form__item">
-            <div className="register__form__header">e-mail :</div>
-            <input
-              type="text"
-              name="email"
-              value={form.email}
-              onChange={onChange}
-              className="register__form__input"
-            />
-          </div>
-          <div className="register__form__item">
-            <div className="register__form__header">password :</div>
-            <input
-              type="text"
-              name="password"
-              value={form.password}
-              onChange={onChange}
-              className="register__form__input"
-            />
-          </div>
-          <button type="submit" className="register__form__button">
-            <span>Register</span>
-          </button>
+          <TextInput
+            value={form.userName}
+            name="userName"
+            onChange={onChange}
+            labelText="username :"
+          />
+          <TextInput
+            value={form.email}
+            name="email"
+            onChange={onChange}
+            labelText="email :"
+          />
+          <TextInput
+            value={form.password}
+            name="password"
+            onChange={onChange}
+            labelText="password :"
+          />
+          <SubmitButton text="Register" />
         </form>
       </div>
       <footer className="login__footer">

@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import TextInput from '../common/TextInput';
+import SubmitButton from '../common/SubmitButton';
 import './LoginForm.scss';
 
 const LoginForm = ({
@@ -8,43 +10,26 @@ const LoginForm = ({
   signOut,
   loginFacebook,
   onChange,
-  forms,
+  form,
   onSubmit,
 }) => {
   return (
     <>
       <div className="login">
         <form className="login__form" onSubmit={onSubmit}>
-          <div className="login__form__item">
-            <label htmlFor="email" className="login__form__header">
-              e-mail :
-            </label>
-            <input
-              type="text"
-              id="email"
-              value={forms.email}
-              onChange={onChange}
-              name="email"
-              className="login__form__input"
-            />
-          </div>
-          <div className="login__form__item">
-            <label htmlFor="password" className="login__form__header">
-              password :
-            </label>
-            <input
-              type="password"
-              id="password"
-              value={forms.password}
-              onChange={onChange}
-              name="password"
-              autoComplete="on"
-              className="login__form__input"
-            />
-          </div>
-          <button type="submit" className="login__form__button">
-            <span> Log in</span>
-          </button>
+          <TextInput
+            labelText="email :"
+            value={form.email}
+            onChange={onChange}
+            name="email"
+          />
+          <TextInput
+            labelText="password :"
+            value={form.password}
+            onChange={onChange}
+            name="password"
+          />
+          <SubmitButton text="Log in" />
         </form>
         <div className="login__buttons">
           <div className="login__buttons__header ">

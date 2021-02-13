@@ -1,0 +1,24 @@
+@import '../../../assets/styles/style.scss';
+
+.form__item {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.form__item__input {
+  border: unset;
+  border-bottom: 2px solid #202020;
+  background: transparent;
+  outline: none;
+  width: 90%;
+
+  @include phone {
+    width: 80%;
+  }
+}
+
+.form__item__header {
+  color: black;
+  font-size: 1.2em;
+}
