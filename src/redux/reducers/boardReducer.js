@@ -11,6 +11,8 @@ export default function boardReducer(state = initialState.boardInfo, action) {
       return { ...state, mode: action.mode };
     case types.UPDATE_MOVES:
       return { ...state, moves: [...state.moves, action.move] };
+    case types.STATUS_TEXT:
+      return { ...state, statusText: action.statusText };
     default:
       return state;
   }

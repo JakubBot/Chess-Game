@@ -3,10 +3,14 @@ import React from 'react';
 import { domain } from '../../utils/gameUtils/onlineGameUtils';
 import './index.scss';
 
+const $ = window.jQuery;
 const GameBoard = ({ songRef, p1_token, p2_token, links, user }) => {
   const adress = {
     firstPlayer: `${domain()}/play/${p1_token}`,
     secondPlayer: `${domain()}/play/${p2_token}`,
+  };
+  const removeLink = () => {
+    $('.links').css('display', 'none');
   };
   return (
     <>
@@ -26,7 +30,21 @@ const GameBoard = ({ songRef, p1_token, p2_token, links, user }) => {
           </div>
           <div className="timer">3: 00</div>
         </div>
+        {links === true && (
+          <div className="links">
+            <h3 className="links__header">Second player Link</h3>
+            <div className="links__link">
+              <a target="_blank" rel="noreferrer" href={adress.secondPlayer}>
+                {adress.secondPlayer}
+              </a>
+            </div>
+            <div className="closeButton" onClick={removeLink}>
+              X
+            </div>
+          </div>
+        )}
       </div>
+
       {/* <div id="informations">
           {state.statusText === '' ? (
             <h1>{state.turn}</h1>
@@ -42,18 +60,6 @@ const GameBoard = ({ songRef, p1_token, p2_token, links, user }) => {
           </button>
           <br />
         </div> */}
-      {links === true && (
-        <div id="links">
-          <h3>
-            First player Link
-            <a href={adress.firstPlayer}>{adress.firstPlayer}</a>
-          </h3>
-          <h3>
-            Second player Link
-            <a href={adress.secondPlayer}>{adress.secondPlayer}</a>
-          </h3>
-        </div>
-      )}
 
       <audio id="myAudio" ref={songRef}>
         <source

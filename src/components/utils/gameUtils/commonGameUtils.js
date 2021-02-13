@@ -1,7 +1,6 @@
 const $ = window.jQuery;
 
 export function removeDotSquares() {
-  console.log('s');
   $('#board .square-55d63').removeClass('square');
 }
 
@@ -23,15 +22,14 @@ export function allowMove(turn, piece) {
 }
 
 export function makeDots(game, square) {
-  if (game.turn() === 'w') {
-    const moves = game.moves({
-      square,
-      verbose: true,
-    });
-    if (moves.length === 0) return;
+  const moves = game.moves({
+    square,
+    verbose: true,
+  });
 
-    for (let i = 0; i < moves.length; i += 1) {
-      dotSquare(moves[i].to);
-    }
+  if (moves.length === 0) return;
+
+  for (let i = 0; i < moves.length; i += 1) {
+    dotSquare(moves[i].to);
   }
 }

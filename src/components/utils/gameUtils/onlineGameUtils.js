@@ -9,15 +9,17 @@ export function figurePlayer(token, { p1_token, p2_token }) {
   return 0;
 }
 export function statusText(
+  turn,
+  playerNum,
+  isMyTurn,
   draw,
   check,
   checkmate,
-  turn,
   repetition,
   insufficientMaterial,
   stalemate
 ) {
-  const Move = turn === 'b' ? 'Black' : 'White';
+  const move = turn === 'b' ? 'Black' : 'White';
   if (stalemate) {
     return 'draw by stalemate';
   }
@@ -31,12 +33,18 @@ export function statusText(
     return `draw position`;
   }
   if (checkmate) {
-    return `${Move} in checkmate, gameover`;
+    return `${move} in checkmate, gameover`;
   }
   if (check) {
-    return `${Move} in check`;
+    return `${move} in check`;
   }
-  return '';
+  if (playerNum > 0) {
+    if (isMyTurn) {
+      return 'Your Turn';
+    }
+    return "Opponent's move...";
+  }
+  return 'View Only';
 }
 export function Turn(playerNum, isMyTurn) {
   if (playerNum > 0) {

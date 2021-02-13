@@ -13,6 +13,9 @@ export function changeMode(mode) {
 export function updateMoves(move) {
   return { type: actionTypes.UPDATE_MOVES, move };
 }
+export function updateStatusText(statusText) {
+  return { type: actionTypes.STATUS_TEXT, statusText };
+}
 
 // setState({
 //   ...state,

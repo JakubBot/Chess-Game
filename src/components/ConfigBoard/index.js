@@ -39,8 +39,8 @@ const ConfigBoard = ({ board, piece, mode, history, ...props }) => {
 
   const createGame = () => {
     const newGame = {
-      p1_token: generateID(),
-      p2_token: generateID(),
+      p1_token: generateID(8),
+      p2_token: generateID(8),
     };
     const gamesRef = firestore.collection('games');
     gamesRef

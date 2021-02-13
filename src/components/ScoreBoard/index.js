@@ -4,12 +4,12 @@ import BoardMoves from './BoardMoves';
 import LocalChat from '../LocalChat';
 import './index.scss';
 
-const ScoreBoard = ({ moves }) => {
+const ScoreBoard = ({ moves, statusText }) => {
   return (
     <>
       <div className="scoreBoard">
         <div className="scoreBoard__wrapper">
-          <div className="scoreBoard__header flex-c">Your turn</div>
+          <div className="scoreBoard__header flex-c">{statusText}</div>
           <div className="scoreBoard__info">
             <div className="scoreBoard__info__moves">
               <div className="scoreBoard__info__header">Last Moves</div>
@@ -39,9 +39,10 @@ const ScoreBoard = ({ moves }) => {
 };
 
 function mapStateToProps(state) {
-  const { moves } = state.boardInfo;
+  const { moves, statusText } = state.boardInfo;
   return {
     moves,
+    statusText,
   };
 }
 

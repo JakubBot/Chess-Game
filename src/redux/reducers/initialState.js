@@ -4,6 +4,7 @@ export default {
     piece: 'neo_wood',
     mode: 'computer',
     moves: [],
+    statusText: '',
   },
   user: {},
 };

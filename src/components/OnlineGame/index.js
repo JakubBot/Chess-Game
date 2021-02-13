@@ -14,9 +14,8 @@ import {
 } from '../utils/gameUtils/onlineGameUtils';
 import {
   removeDotSquares,
-  dotSquare,
-  onMouseoutSquare,
   allowMove,
+  makeDots,
 } from '../utils/gameUtils/commonGameUtils';
 
 import '@chrisoakman/chessboardjs/dist/chessboard-1.0.0.css';
@@ -29,7 +28,7 @@ const INITIAL_FEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR';
 let unsubscribe = null;
 let board = null;
 
-function ChessGame({ boardType, piece, user, updateMoves, ...props }) {
+function ChessGame({ boardType, piece, user, updateMoves, updateStatusText, ...props }) {
   const [gameEngine] = useState(new Chess());
   const [state, setState] = useState({
     token: props.token,
@@ -46,7 +45,9 @@ function ChessGame({ boardType, piece, user, updateMoves, ...props }) {
       unsubscribe();
     };
   }, []);
-
+  useEffect(() => {
+    updateStatusText(state.statusText);
+  }, [state.statusText])
   // eslint-disable-next-line camelcase
   function updateState({ p1_token, p2_token, moveFrom, moveTo }) {
     const playerNum = figurePlayer(state.token, { p1_token, p2_token });
@@ -58,10 +59,12 @@ function ChessGame({ boardType, piece, user, updateMoves, ...props }) {
       moveTo,
       turn: Turn(playerNum, isMyTurn(playerNum, gameEngine.turn())),
       statusText: statusText(
+        gameEngine.turn(),
+        playerNum,
+        isMyTurn(playerNum, gameEngine.turn()),
         gameEngine.in_draw(),
         gameEngine.in_check(),
         gameEngine.in_checkmate(),
-        gameEngine.turn(),
         gameEngine.in_threefold_repetition(),
         gameEngine.insufficient_material(),
         gameEngine.in_stalemate()
@@ -91,7 +94,7 @@ function ChessGame({ boardType, piece, user, updateMoves, ...props }) {
       onDragStart,
       onDrop,
       onSnapEnd,
-      onMouseoutSquare,
+      onMouseoutSquare: removeDotSquares,
       onMouseoverSquare,
     };
     board = Chessboard('board', config);
@@ -118,22 +121,14 @@ function ChessGame({ boardType, piece, user, updateMoves, ...props }) {
       const canIMove = isMyTurn(playerNum, engine.turn());
 
       // get list of possible moves for this square
-      if (canIMove) {
-        const moves = gameEngine.moves({
-          square,
-          verbose: true,
-        });
-        // exit if there are no moves available for this square
-        if (moves.length === 0) return;
 
-        // highlight the possible squares for this piece
-        for (let i = 0; i < moves.length; i += 1) {
-          dotSquare(moves[i].to);
-        }
+      if (canIMove) {
+        makeDots(gameEngine, square);
       }
     }
 
-    function onDragStart(source, piece) {
+    function onDragStart(square, piece) {
+      makeDots(gameEngine, square);
       const img = $(`img[data-piece="${piece}"]`);
       img.addClass('z-index');
       return (
@@ -165,6 +160,7 @@ function ChessGame({ boardType, piece, user, updateMoves, ...props }) {
         from: source,
         to: target,
       });
+      
     }
     function onSnapEnd() {
       songRef.current.play();
@@ -211,6 +207,7 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = {
   updateMoves: boardActions.updateMoves,
+  updateStatusText: boardActions.updateStatusText,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChessGame);
