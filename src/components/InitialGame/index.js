@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import Chessboard from '@chrisoakman/chessboardjs/dist/chessboard-1.0.0';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import GameBoard from '../common/GameBoard';
 import * as boardActions from '../../redux/actions/boardActions';
 import '@chrisoakman/chessboardjs/dist/chessboard-1.0.0.css';
@@ -40,6 +41,11 @@ const InitialGame = ({ board, piece }) => {
       <GameBoard />
     </>
   );
+};
+
+InitialGame.propTypes = {
+  board: PropTypes.string.isRequired,
+  piece: PropTypes.string.isRequired,
 };
 
 function mapStateToProps(state) {

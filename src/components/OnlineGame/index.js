@@ -58,8 +58,8 @@ function ChessGame({
   // eslint-disable-next-line camelcase
   function updateState({ p1_token, p2_token, moveFrom, moveTo }) {
     const playerNum = figurePlayer(state.token, { p1_token, p2_token });
-    setState({
-      ...state,
+    setState((prevState) => ({
+      ...prevState,
       p1_token,
       p2_token,
       moveFrom,
@@ -76,7 +76,7 @@ function ChessGame({
         gameEngine.insufficient_material(),
         gameEngine.in_stalemate()
       ),
-    });
+    }));
   }
 
   function updateBoard(id, game) {

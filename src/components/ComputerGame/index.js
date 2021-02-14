@@ -24,7 +24,6 @@ const maxDepth = 2;
 let unsbscribe;
 const ComputerGame = ({
   boardType,
-  user,
   piece,
   loginUser,
   updateMoves,

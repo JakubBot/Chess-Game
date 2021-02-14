@@ -1,10 +1,11 @@
 /* eslint-disable camelcase */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { domain } from '../../utils/gameUtils/onlineGameUtils';
 import './index.scss';
 
 const $ = window.jQuery;
-const GameBoard = ({ songRef, p1_token, p2_token, links, user }) => {
+const GameBoard = ({ songRef, p1_token, p2_token, links }) => {
   const adress = {
     firstPlayer: `${domain()}/play/${p1_token}`,
     secondPlayer: `${domain()}/play/${p2_token}`,
@@ -38,7 +39,12 @@ const GameBoard = ({ songRef, p1_token, p2_token, links, user }) => {
                 {adress.secondPlayer}
               </a>
             </div>
-            <div className="closeButton" onClick={removeLink}>
+            <div
+              className="closeButton"
+              role="button"
+              tabIndex={0}
+              onClick={removeLink}
+            >
               X
             </div>
           </div>
@@ -83,4 +89,17 @@ const GameBoard = ({ songRef, p1_token, p2_token, links, user }) => {
   );
 };
 
+GameBoard.propType = {
+  songRef: PropTypes.object.isRequired,
+  p1_token: PropTypes.number.isRequired,
+  p2_token: PropTypes.number.isRequired,
+  links: PropTypes.bool.isRequired,
+  user: PropTypes.shape({
+    points: PropTypes.number,
+    userName: PropTypes.string,
+    photo: PropTypes.string,
+  }),
+};
+
+// songRef, p1_token, p2_token, links, user
 export default GameBoard;

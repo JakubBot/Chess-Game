@@ -1,14 +1,12 @@
 {
-    "extends": [
-        "airbnb",
-        "plugin:react/recommended",
-        "plugin:prettier/recommended"
-    ],
-    "plugins": [
-        "react"
-    ],
-    "rules": {
-    "prettier/prettier": ["error", {"singleQuote": true, "parser": "flow"}],
+  "extends": [
+    "airbnb",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": ["react"],
+  "rules": {
+    "prettier/prettier": ["error", { "singleQuote": true, "parser": "flow" }],
     "no-console": "warn",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "comma-dangle": "off",
@@ -24,24 +22,30 @@
     "jsx-a11y/click-events-have-key-events": [0],
     "jsx-a11y/label-has-associated-control": [0],
     "import/no-cycle": "off",
-    "no-restricted-syntax": [0,"ForInStatement"],
-    "no-use-before-define": ["error", { "variables": false, "functions": false }],
-    "no-underscore-dangle":"off",
-    "camelcase": ["error", { "properties": "never", "ignoreDestructuring": true }],
+    "no-restricted-syntax": [0, "ForInStatement"],
+    "no-use-before-define": [
+      "error",
+      { "variables": false, "functions": false }
+    ],
+    "no-underscore-dangle": "off",
+    "camelcase": [
+      "error",
+      { "properties": "never", "ignoreDestructuring": true }
+    ],
     "jsx-a11y/media-has-caption": [0],
-    "consistent-return":"off"
+    "consistent-return": "off"
+  },
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
     },
-    "parser": "babel-eslint",
-    "env": {
-        "browser": true,
-        "es6": true,
-        "node": true
-    },
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": 2018,
-        "sourceType": "module"
-    }
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  }
 }
