@@ -26,8 +26,8 @@
         width: 80%;
       }
     }
-    @include tablet {
-      padding: 50px 30px 30px;
+    @include sDesktop {
+      padding: 40px 30px 30px;
     }
   }
   &__buttons {
@@ -56,6 +56,12 @@
     }
   }
 }
+
+.formError {
+  color: #db4437;
+  margin-bottom: 10px;
+}
+
 .footer {
   width: 90%;
   max-width: 350px;

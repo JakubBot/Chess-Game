@@ -6,6 +6,7 @@ import './LoginForm.scss';
 
 const LoginForm = ({
   user,
+  errors,
   loginGoogle,
   signOut,
   loginFacebook,
@@ -17,6 +18,9 @@ const LoginForm = ({
     <>
       <div className="login">
         <form className="login__form" onSubmit={onSubmit}>
+          <span className="formError">
+            {errors.formError && errors.formError}
+          </span>
           <TextInput
             labelText="email :"
             value={form.email}

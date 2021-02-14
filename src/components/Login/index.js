@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import {
   firestore,
   auth,
@@ -12,13 +13,13 @@ import * as userActions from '../../redux/actions/userActions';
 import './index.scss';
 
 let unsbscribe;
-const Login = ({ logOut, loginUser }) => {
+const Login = ({ history, logOut, loginUser }) => {
   const [form, setForm] = useState({
     email: '',
     password: '',
   });
   const [user] = useAuthState(auth);
-  const [erros, setErrors] = useState({});
+  const [errors, setErrors] = useState({});
   useEffect(() => {
     if (!user) return;
 
@@ -64,16 +65,19 @@ const Login = ({ logOut, loginUser }) => {
       [name]: value,
     }));
   };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-
     const userRef = firestore
       .collection('users')
       .where('email', '==', form.email)
       .where('password', '==', form.password);
+
     userRef.onSnapshot((docs) => {
       if (!docs.empty) {
-        loginUser(docs);
+        loginUser(docs).then(() => {
+          history.push('/');
+        });
         // docs.docs.forEach((doc) => {
         //   const { uid, points, userName, photo } = doc.data();
         //   // eslint-disable-next-line no-underscore-dangle
@@ -86,10 +90,9 @@ const Login = ({ logOut, loginUser }) => {
         //   logIn(_user);
         // });
       } else {
-        setErrors({});
-        setForm({
-          email: '',
-          password: '',
+        setErrors({
+          formError:
+            'We cannot find an account with that email address and password',
         });
       }
     });
@@ -105,6 +108,7 @@ const Login = ({ logOut, loginUser }) => {
         loginGoogle={loginGoogle}
         signOut={signOut}
         loginFacebook={loginFacebook}
+        errors={errors}
       />
     </>
   );
@@ -114,4 +118,4 @@ const mapDispatchToProps = {
   logOutUser: userActions.logOutUser,
   loginUser: userActions.loginUser,
 };
-export default connect(null, mapDispatchToProps)(Login);
+export default withRouter(connect(null, mapDispatchToProps)(Login));

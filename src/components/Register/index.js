@@ -25,28 +25,28 @@ const Register = ({ logIn, history }) => {
   };
 
   const formIsValid = () => {
-    const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const { userName, email, password } = form;
     const _error = {};
 
-    if (form.userName.length === 0) {
+    if (userName.length === 0) {
       _error.userName = 'User name is required';
-    } else if (form.userName.length < 3) {
+    } else if (userName.length < 3) {
       _error.userName = 'User name has to be longer than 3 characters';
-    } else if (form.userName.length > 10) {
+    } else if (userName.length > 10) {
       _error.userName = 'User name has to be shorter than 10 characters';
     }
 
-    if (form.email.length === 0) {
+    if (email.length === 0) {
       _error.email = 'Email is required';
-    } else if (!emailPattern.test(form.email)) {
+    } else if (!re.test(email.toLocaleLowerCase())) {
       _error.email = 'Please enter a valid email address.';
     }
-
-    if (form.password.length === 0) {
+    if (password.length === 0) {
       _error.password = 'Password is required';
-    } else if (form.password.length < 3) {
+    } else if (password.length < 3) {
       _error.password = 'Password has to be longer than 3 characters';
-    } else if (form.password.length > 10) {
+    } else if (password.length > 10) {
       _error.password = 'Password has to be shorter than 10 characters';
     }
 
