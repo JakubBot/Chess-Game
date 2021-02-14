@@ -86,9 +86,9 @@ const LoginForm = ({
         </div>
       </div>
 
-      <footer className="login__footer">
+      <footer className="footer">
         New?
-        <Link to="register" className="login__footer__link">
+        <Link to="register" className="footer__link">
           Sign up for FREE!
         </Link>
       </footer>

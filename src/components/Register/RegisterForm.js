@@ -4,7 +4,7 @@ import TextInput from '../common/TextInput';
 import SubmitButton from '../common/SubmitButton';
 import './RegisterForm.scss';
 
-const RegisterForm = ({ form, onChange, onSubmit }) => {
+const RegisterForm = ({ form, onChange, errors, onSubmit }) => {
   return (
     <>
       <div className="register">
@@ -19,25 +19,28 @@ const RegisterForm = ({ form, onChange, onSubmit }) => {
             name="userName"
             onChange={onChange}
             labelText="username :"
+            errors={errors.userName}
           />
           <TextInput
             value={form.email}
             name="email"
             onChange={onChange}
             labelText="email :"
+            errors={errors.email}
           />
           <TextInput
             value={form.password}
             name="password"
             onChange={onChange}
             labelText="password :"
+            errors={errors.password}
           />
           <SubmitButton text="Register" />
         </form>
       </div>
-      <footer className="login__footer">
+      <footer className="footer">
         Have an account?
-        <Link to="login" className="login__footer__link">
+        <Link to="login" className="footer__link">
           log in here
         </Link>
       </footer>

@@ -1,7 +1,7 @@
 import React from 'react';
 import './index.scss';
 
-const TextInput = ({ value, onChange, name, labelText }) => {
+const TextInput = ({ value, errors, name, labelText, onChange }) => {
   return (
     <div className="form__item">
       <label className="form__item__header" htmlFor={name}>
@@ -15,6 +15,7 @@ const TextInput = ({ value, onChange, name, labelText }) => {
         name={name}
         className="form__item__input"
       />
+      {errors && <span className="form__item__error">{errors}</span>}
     </div>
   );
 };
