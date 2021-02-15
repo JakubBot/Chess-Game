@@ -28,10 +28,15 @@ const ComputerGame = ({
   loginUser,
   updateMoves,
   updateStatusText,
+  defaultBoardConfig,
 }) => {
   const [userInfo] = useAuthState(auth);
 
   const songRef = useRef(null);
+
+  useEffect(() => {
+    return defaultBoardConfig;
+  }, []);
 
   useEffect(() => {
     if (!userInfo) return;
@@ -46,8 +51,9 @@ const ComputerGame = ({
       }
     });
 
-    // eslint-disable-next-line consistent-return
-    return () => unsbscribe && unsbscribe();
+    return () => {
+      unsbscribe();
+    };
   }, [userInfo]);
 
   useEffect(() => {
@@ -180,6 +186,7 @@ const mapDispatchToProps = {
   loginUser: userActions.loginUser,
   updateMoves: boardActions.updateMoves,
   updateStatusText: boardActions.updateStatusText,
+  defaultBoardConfig: boardActions.defaultBoardConfig,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ComputerGame);

@@ -1,20 +1,23 @@
-import actionTypes from './actionTypes';
+import types from './actionTypes';
 
 export function changeBoard(board) {
-  return { type: actionTypes.CHANGE_BOARD, board };
+  return { type: types.CHANGE_BOARD, board };
 }
 export function changePiece(piece) {
-  return { type: actionTypes.CHANGE_PIECE, piece };
+  return { type: types.CHANGE_PIECE, piece };
 }
 export function changeMode(mode) {
-  return { type: actionTypes.CHANGE_MODE, mode };
+  return { type: types.CHANGE_MODE, mode };
 }
 
 export function updateMoves(move) {
-  return { type: actionTypes.UPDATE_MOVES, move };
+  return { type: types.UPDATE_MOVES, move };
 }
 export function updateStatusText(statusText) {
-  return { type: actionTypes.STATUS_TEXT, statusText };
+  return { type: types.STATUS_TEXT, statusText };
+}
+export function defaultBoardConfig() {
+  return { type: types.DEFAULT_BOARD_CONFIG };
 }
 
 // setState({

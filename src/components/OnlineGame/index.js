@@ -34,6 +34,7 @@ function ChessGame({
   user,
   updateMoves,
   updateStatusText,
+  defaultBoardConfig,
   ...props
 }) {
   const [gameEngine] = useState(new Chess());
@@ -50,6 +51,7 @@ function ChessGame({
 
     return () => {
       unsubscribe();
+      defaultBoardConfig();
     };
   }, []);
   useEffect(() => {
@@ -214,6 +216,7 @@ function mapStateToProps(state) {
 const mapDispatchToProps = {
   updateMoves: boardActions.updateMoves,
   updateStatusText: boardActions.updateStatusText,
+  defaultBoardConfig: boardActions.defaultBoardConfig,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChessGame);

@@ -19,7 +19,6 @@
     width: 10px;
     height: 4px;
     background: #27292c;
-    // background: #353b48;
     transform: skewX(50deg);
     transition: 0.4s linear;
   }
@@ -52,9 +51,9 @@
   font-weight: bold;
   width: 150px;
   border-radius: 2px;
-  transition: 0.5s ease;
+  transition: 0.4s color ease-in-out, 0.4s border ease-in-out;
   cursor: pointer;
-  
+
   &::before {
     content: '';
     position: absolute;

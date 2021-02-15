@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import BoardMoves from './BoardMoves';
-import LocalChat from '../common/LocalChat';
+import LocalChat from './LocalChat';
 
 import './index.scss';
 
@@ -27,12 +27,7 @@ const ScoreBoard = ({ moves, statusText }) => {
                   <BoardMoves moves={moves} />
                 )}
               </div>
-            </div>
-            <div className="scoreBoard__info__chat">
-              <div className="scoreBoard__info__header">Chat</div>
-              <div className="scoreBoard__info__options">
-                <LocalChat />
-              </div>
+              <LocalChat />
             </div>
           </div>
         </div>

@@ -2,7 +2,7 @@
 
 .configBoard {
   @extend %sidebar__user__board;
-
+  font-weight: bold;
   &__wrapper {
     width: 100%;
     height: 100%;
