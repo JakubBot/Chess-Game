@@ -18,4 +18,4 @@ const auth = firebase.auth();
 const googleProvider = new firebase.auth.GoogleAuthProvider();
 const facebookProvider = new firebase.auth.FacebookAuthProvider();
 
-export { firestore, auth, googleProvider, facebookProvider };
+export { firestore, auth, googleProvider, facebookProvider, firebase };

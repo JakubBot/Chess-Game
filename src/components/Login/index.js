@@ -12,8 +12,8 @@ import LoginForm from './LoginForm';
 import * as userActions from '../../redux/actions/userActions';
 import './index.scss';
 
-let unsbscribe;
-const Login = ({ history, logOut, loginUser }) => {
+let unsubscribe;
+const Login = ({ history, logOutUser, loginUser }) => {
   const [form, setForm] = useState({
     email: '',
     password: '',
@@ -25,7 +25,7 @@ const Login = ({ history, logOut, loginUser }) => {
 
     const userRef = firestore.collection('users').where('uid', '==', user.uid);
 
-    unsbscribe = userRef.onSnapshot((docs) => {
+    unsubscribe = userRef.onSnapshot((docs) => {
       if (!docs.empty) {
         loginUser(docs);
       } else {
@@ -34,7 +34,7 @@ const Login = ({ history, logOut, loginUser }) => {
     });
 
     // eslint-disable-next-line consistent-return
-    return () => unsbscribe && unsbscribe();
+    return () => unsubscribe && unsubscribe();
   }, [user]);
 
   const register = (uid) => {
@@ -50,12 +50,13 @@ const Login = ({ history, logOut, loginUser }) => {
   const loginGoogle = () => {
     auth.signInWithPopup(googleProvider);
   };
-  const signOut = () => {
-    auth.signOut();
-    logOut();
-  };
+
   const loginFacebook = () => {
     auth.signInWithPopup(facebookProvider);
+  };
+  const signOut = () => {
+    auth.signOut();
+    logOutUser();
   };
   const handleChange = ({ target }) => {
     const { name, value } = target;

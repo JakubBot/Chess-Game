@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import BoardMoves from './BoardMoves';
-import LocalChat from '../LocalChat';
+import LocalChat from '../common/LocalChat';
+
 import './index.scss';
 
 const ScoreBoard = ({ moves, statusText }) => {

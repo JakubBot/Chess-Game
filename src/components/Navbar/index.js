@@ -62,14 +62,14 @@ const Navbar = () => {
 
         <div className="buttons">
           <div className="buttons__sign">
-            <Link to="login">
+            <Link to="/login">
               <button type="button" className="buttons__item flex-c-c">
                 <span>Sign In</span>
               </button>
             </Link>
           </div>
           <div className="buttons__sign">
-            <Link to="register">
+            <Link to="/register">
               <button type="button" className="buttons__item flex-c-c">
                 <span>Sign Up</span>
               </button>
