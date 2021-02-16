@@ -5,7 +5,7 @@ import LocalChat from './LocalChat';
 
 import './index.scss';
 
-const ScoreBoard = ({ moves, statusText }) => {
+const ScoreBoard = ({ moves, statusText, isOnline }) => {
   return (
     <>
       <div className="scoreBoard">
@@ -27,7 +27,7 @@ const ScoreBoard = ({ moves, statusText }) => {
                   <BoardMoves moves={moves} />
                 )}
               </div>
-              <LocalChat />
+              {isOnline && <LocalChat />}
             </div>
           </div>
         </div>

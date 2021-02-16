@@ -4,15 +4,13 @@ import OnlineGame from '../../components/OnlineGame';
 import ScoreBoard from '../../components/ScoreBoard';
 import './index.scss';
 
-const OnlineGamePage = (props) => {
-  const { token } = props.match.params;
-
+const OnlineGamePage = () => {
   return (
     <>
       <Navbar />
       <div className="homePage__wrapper">
-        <OnlineGame token={token} />
-        <ScoreBoard />
+        <OnlineGame />
+        <ScoreBoard isOnline />
       </div>
     </>
   );

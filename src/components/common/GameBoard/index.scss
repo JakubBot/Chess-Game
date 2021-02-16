@@ -56,13 +56,6 @@
   .transparent {
     background-color: transparent;
   }
-  //standart colors
-  // .black-3c85d {
-  //   background-color: #a87f5d;
-  // }
-  // .white-1e1d7 {
-  //   background-color: #e0c9a4;
-  // }
 
   .square-55d63 img {
     cursor: grab;
@@ -85,7 +78,7 @@
       height: 10px;
       background-color: rgba(0, 0, 0, 0.3);
       border-radius: 50%;
-      z-index: 1;
+      z-index: 900;
     }
   }
 

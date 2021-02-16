@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import Chess from 'chess.js/chess';
 import Chessboard from '@chrisoakman/chessboardjs/dist/chessboard-1.0.0';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import GameBoard from '../common/GameBoard';
 import { firestore } from '../../firebase-config';
 import * as boardActions from '../../redux/actions/boardActions';
@@ -39,7 +40,7 @@ function ChessGame({
 }) {
   const [gameEngine] = useState(new Chess());
   const [state, setState] = useState({
-    token: props.token,
+    token: props.match.params.token,
   });
   const songRef = useRef(null);
 
@@ -51,7 +52,7 @@ function ChessGame({
 
     return () => {
       unsubscribe();
-      defaultBoardConfig();
+      // defaultBoardConfig();
     };
   }, []);
   useEffect(() => {
@@ -158,7 +159,6 @@ function ChessGame({
       });
 
       if (move === null) return 'snapback';
-
       const chessRef = firestore.collection('games').doc(id);
       chessRef.update({
         fen: engine.fen(),
@@ -219,4 +219,6 @@ const mapDispatchToProps = {
   defaultBoardConfig: boardActions.defaultBoardConfig,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ChessGame);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(ChessGame)
+);

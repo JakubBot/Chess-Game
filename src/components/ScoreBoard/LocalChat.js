@@ -1,26 +1,24 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useCollection } from 'react-firebase-hooks/firestore';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import {
   firestore,
   auth,
-  firebase,
   googleProvider,
   facebookProvider,
 } from '../../firebase-config';
 import * as userActions from '../../redux/actions/userActions';
+import { generateID } from '../utils/utils';
 import './LocalChat.scss';
 
 let unsubscribe = null;
-const LocalChat = ({ mode, loginUser }) => {
+const LocalChat = ({ mode, loginUser, uid, ...props }) => {
   const [formValue, setFormValue] = useState('');
   const [user] = useAuthState(auth);
   const ref = useRef(null);
-  const messageRef = firestore.collection('messages');
-  const query = messageRef.orderBy('createdAt', 'desc');
-  const [messages] = useCollection(query, { idField: 'id' });
-
+  const [docId, setDocId] = useState('');
+  const [messages, setMessages] = useState([]);
   useEffect(() => {
     if (!user) return;
     const userRef = firestore.collection('users').where('uid', '==', user.uid);
@@ -35,22 +33,61 @@ const LocalChat = ({ mode, loginUser }) => {
     return () => unsubscribe && unsubscribe();
   }, [user]);
 
+  useEffect(() => {
+    ListenForUpdates(props.match.params.token);
+  }, []);
+
+  function ListenForUpdates(token) {
+    ['p1_token', 'p2_token'].forEach((name) => {
+      const chessRef = firestore.collection('games').where(name, '==', token);
+      unsubscribe = chessRef.onSnapshot((querySnapshot) => {
+        if (querySnapshot.size) {
+          const [data] = querySnapshot.docs.map((doc) => {
+            return {
+              data: doc.data(),
+              id: doc.id,
+            };
+          });
+          const { messages } = data.data;
+          const { id } = data;
+          // its for keep only 20 messages in chat
+          if (messages && messages.length > 20) deleteFirstItem(id, messages);
+          setMessages(messages ?? []);
+          setDocId(id);
+        }
+      });
+    });
+  }
+
+  function deleteFirstItem(docId, messages) {
+    const chessRef = firestore.collection('games').doc(docId);
+    const [, ...rest] = messages;
+    chessRef.update({
+      messages: rest,
+    });
+  }
   const sendMessage = async (e) => {
     e.preventDefault();
     if (formValue === '' || !user) return;
     const { uid, photoURL } = user;
-    await messageRef
-      .add({
-        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-        message: formValue,
-        uid,
-        photoURL,
+    const chessRef = firestore.collection('games').doc(docId);
+    chessRef
+      .update({
+        messages: [
+          ...messages,
+          {
+            message: formValue,
+            uid,
+            photoURL,
+            id: generateID(6),
+          },
+        ],
       })
       .then(() => {
-        ref.current.scrollIntoView({ behavior: 'smooth' });
+        setFormValue('');
+        if (window.innerWidth < 800)
+          ref.current.scrollIntoView({ behavior: 'smooth' });
       });
-    setFormValue('');
-    // ref.current.scrollIntoView({ behavior: 'smooth' });
   };
 
   const handleChange = (e) => {
@@ -66,83 +103,86 @@ const LocalChat = ({ mode, loginUser }) => {
 
   return (
     <>
-      {mode === 'online' && (
-        <>
-          <div className="scoreBoard__info__chat">
-            <div className="scoreBoard__info__header">Chat</div>
-            <div className="scoreBoard__info__options">
-              <div className="chat">
-                <div className="windowChat">
-                  {messages &&
-                    user &&
-                    messages.docs
-                      .reverse()
-                      .map((msg) => (
-                        <ChatMessage key={msg.id} user={user} message={msg} />
-                      ))}
-
-                  <span ref={ref} />
-                </div>
-                <div className="chatMessage">
-                  <form onSubmit={sendMessage}>
-                    <input
-                      type="text"
-                      value={formValue}
-                      onChange={handleChange}
-                      placeholder="Aa"
+      <div className="scoreBoard__info__chat">
+        <div className="scoreBoard__info__header">Chat</div>
+        <div className="scoreBoard__info__options">
+          <div className="chat">
+            <div className="windowChat">
+              {messages !== undefined &&
+                messages.map((msg) => {
+                  return (
+                    <ChatMessage
+                      key={msg.id}
+                      user={user}
+                      message={msg}
+                      uid={msg.uid}
                     />
-                    <button type="submit">
-                      <span role="img" aria-label="icon">
-                        🕊️
-                      </span>
-                    </button>
-                  </form>
-                </div>
-                {!user && (
-                  <div className="emptyChat">
-                    <h4>Login to use this chat</h4>
-                    <div className="emptyChat__icons  flex-c">
-                      <span className="icon-google google " />
-                      <div
-                        className="login__buttons__button google"
-                        role="button"
-                        tabIndex="0"
-                        onClick={loginGoogle}
-                      >
-                        Google
-                      </div>
-                    </div>
-                    <div className="emptyChat__icons flex-c">
-                      <span className="icon-facebook-squared facebook " />
-                      <div
-                        className="login__buttons__button facebook"
-                        role="button"
-                        tabIndex="0"
-                        onClick={loginFacebook}
-                      >
-                        Facebook
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
+                  );
+                })}
+
+              <span ref={ref} />
             </div>
+            <div className="chatMessage">
+              <form onSubmit={sendMessage}>
+                <input
+                  type="text"
+                  value={formValue}
+                  onChange={handleChange}
+                  placeholder="Aa"
+                />
+                <button type="submit">
+                  <span role="img" aria-label="icon">
+                    🕊️
+                  </span>
+                </button>
+              </form>
+            </div>
+            {!user && (
+              <div className="emptyChat">
+                <h4>Login to use this chat</h4>
+                <div className="emptyChat__icons  flex-c">
+                  <span className="icon-google google " />
+                  <div
+                    className="login__buttons__button google"
+                    role="button"
+                    tabIndex="0"
+                    onClick={loginGoogle}
+                  >
+                    Google
+                  </div>
+                </div>
+                <div className="emptyChat__icons flex-c">
+                  <span className="icon-facebook-squared facebook " />
+                  <div
+                    className="login__buttons__button facebook"
+                    role="button"
+                    tabIndex="0"
+                    onClick={loginFacebook}
+                  >
+                    Facebook
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
-        </>
-      )}
+        </div>
+      </div>
     </>
   );
 };
 
 function ChatMessage(props) {
-  const { uid, photoURL, message } = props.message.data();
+  const { uid, message, photoURL } = props.message;
+  const userUID = props.user.uid;
 
-  const messageClass = uid === props.user.uid ? 'sent' : 'received';
+  const messageClass = uid === userUID ? 'sent' : 'received';
   return (
     <>
-      <div className={`message ${messageClass}`}>
-        <div className={`userMessage ${messageClass}`}>{message}</div>
-        <img src={photoURL} alt="userPhoto" />
+      <div className="message">
+        <div className={`message ${messageClass}`}>
+          <div className={`userMessage ${messageClass}`}>{message}</div>
+          <img src={photoURL} alt="userPhoto" />
+        </div>
       </div>
     </>
   );
@@ -150,12 +190,16 @@ function ChatMessage(props) {
 
 function mapStateToProps(state) {
   const { mode } = state.boardInfo;
+  const { uid } = state.user;
   return {
     mode,
+    uid,
   };
 }
 
 const mapDisptachToProps = {
   loginUser: userActions.loginUser,
 };
-export default connect(mapStateToProps, mapDisptachToProps)(LocalChat);
+export default withRouter(
+  connect(mapStateToProps, mapDisptachToProps)(LocalChat)
+);

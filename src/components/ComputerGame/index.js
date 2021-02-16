@@ -35,7 +35,7 @@ const ComputerGame = ({
   const songRef = useRef(null);
 
   useEffect(() => {
-    return defaultBoardConfig;
+    // return defaultBoardConfig;
   }, []);
 
   useEffect(() => {
