@@ -13,7 +13,7 @@ import { generateID } from '../utils/utils';
 import './LocalChat.scss';
 
 let unsubscribe = null;
-const LocalChat = ({ mode, loginUser, uid, ...props }) => {
+const LocalChat = ({ loginUser, uid, ...props }) => {
   const [formValue, setFormValue] = useState('');
   const [user] = useAuthState(auth);
   const ref = useRef(null);
@@ -189,10 +189,8 @@ function ChatMessage(props) {
 }
 
 function mapStateToProps(state) {
-  const { mode } = state.boardInfo;
   const { uid } = state.user;
   return {
-    mode,
     uid,
   };
 }
