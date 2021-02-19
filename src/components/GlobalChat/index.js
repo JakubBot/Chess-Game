@@ -17,7 +17,21 @@ let unsubscribe = null;
 const GlobalChat = ({ uid, loginUser }) => {
   const [formMessage, setFormMessage] = useState('');
   const [user] = useAuthState(auth);
-  const [messages, setMessages] = useState();
+  const [messages, setMessages] = useState([]);
+
+  useEffect(() => {
+    if (!user) return;
+    const userRef = firestore.collection('users').where('uid', '==', user.uid);
+
+    unsubscribe = userRef.onSnapshot((docs) => {
+      if (!docs.empty) {
+        loginUser(docs);
+      }
+    });
+
+    // eslint-disable-next-line consistent-return
+    return () => unsubscribe && unsubscribe();
+  }, [user]);
   useEffect(() => {
     ListenForUpdates();
 
@@ -29,8 +43,12 @@ const GlobalChat = ({ uid, loginUser }) => {
     unsubscribe = messageRef.onSnapshot((querySnapshot) => {
       if (querySnapshot.size) {
         const data = querySnapshot.docs.map((doc) => {
+          const { message, uid, photoURL, id } = doc.data();
           return {
-            data: doc.data(),
+            message,
+            uid,
+            photoURL,
+            id,
           };
         });
         setMessages(data);
@@ -41,7 +59,6 @@ const GlobalChat = ({ uid, loginUser }) => {
       }
     });
   }
-  console.log(messages);
 
   const handleClick = (e) => {
     const onIconClick = $(e.target).attr('name');
@@ -54,13 +71,18 @@ const GlobalChat = ({ uid, loginUser }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (formMessage === '') return;
     const messageRef = firestore.collection('globalMessages');
 
     messageRef.add({
       message: formMessage,
+      uid: user.uid,
+      photoURL: user.photoURL,
+      id: generateID(6),
     });
     setFormMessage('');
   };
+
   return (
     <>
       <FloatedButton
@@ -68,6 +90,8 @@ const GlobalChat = ({ uid, loginUser }) => {
         onChange={handleChange}
         formMessage={formMessage}
         onSubmit={handleSubmit}
+        messages={messages}
+        currentUID={uid}
       />
     </>
   );

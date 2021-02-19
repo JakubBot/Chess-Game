@@ -3,7 +3,14 @@ import TextInput from '../common/TextInput';
 
 import './FloatedButton.scss';
 
-const FloatedButton = ({ formMessage, onClick, onChange, onSubmit }) => {
+const FloatedButton = ({
+  messages,
+  currentUID,
+  formMessage,
+  onClick,
+  onChange,
+  onSubmit,
+}) => {
   return (
     <>
       <div className="floated">
@@ -14,9 +21,20 @@ const FloatedButton = ({ formMessage, onClick, onChange, onSubmit }) => {
         </button>
 
         <ul className="floated__list">
-          <h3 className="floated__list__header">Global Chat</h3>
+          <h3 className="floated__list__header">Say Hello!</h3>
 
-          <li className="floated__list__item">
+          {currentUID &&
+            messages.map(({ message, uid, photoURL, id }) => (
+              <ChatMessage
+                message={message}
+                uid={uid}
+                key={id}
+                photoURL={photoURL}
+                currentUID={currentUID}
+              />
+            ))}
+
+          {/* <li className="floated__list__item">
             <a
               target="_blank"
               href="https://twitter.com/explore"
@@ -37,7 +55,7 @@ const FloatedButton = ({ formMessage, onClick, onChange, onSubmit }) => {
               <span className="icon-facebook-squared" />
               Share on facebook
             </a>
-          </li>
+          </li> */}
           <form className="floated__form" onSubmit={onSubmit}>
             {/* <input
               type="text"
@@ -45,7 +63,11 @@ const FloatedButton = ({ formMessage, onClick, onChange, onSubmit }) => {
               onChange={onChange}
               value={messages}
             /> */}
-            <TextInput onChange={onChange} value={formMessage} />
+            <TextInput
+              onChange={onChange}
+              value={formMessage}
+              placeHolder="Aa"
+            />
             <button type="submit" className="floated__form__button">
               <span role="img" aria-label="icon">
                 🕊️
@@ -57,5 +79,40 @@ const FloatedButton = ({ formMessage, onClick, onChange, onSubmit }) => {
     </>
   );
 };
+
+function ChatMessage({ message, uid, photoURL, currentUID }) {
+  // console.log(message);
+  // console.log(uid);
+  // console.log(currentUID);
+  const messageClass = uid !== currentUID ? 'sent' : 'received';
+  console.log(messageClass);
+  return (
+    <>
+      <div className={`floated__list__item ${messageClass}`}>
+        <div className={`floated__list__message ${messageClass}`}>
+          <span className="floated__list__userMessage">{message}</span>
+          <img src={photoURL} alt="userPhoto" />
+        </div>
+      </div>
+    </>
+  );
+}
+
+// function ChatMessage(props) {
+//   // const { uid, message, photoURL } = props.message;
+//   const userUID = props.user.uid;
+
+//   const messageClass = uid === userUID ? 'sent' : 'received';
+//   return (
+//     <>
+//       <div className="message">
+//         <div className={`message ${messageClass}`}>
+//           <div className={`userMessage ${messageClass}`}>{message}</div>
+//           <img src={photoURL} alt="userPhoto" />
+//         </div>
+//       </div>
+//     </>
+//   );
+// }
 
 export default FloatedButton;
