@@ -65,19 +65,5 @@ const ConfigBoard = ({ board, piece, mode, history, ...props }) => {
     </>
   );
 };
-function mapStateToProps(state) {
-  const { boardInfo } = state;
-  return {
-    board: boardInfo.board,
-    piece: boardInfo.piece,
-    mode: boardInfo.mode,
-  };
-}
-const mapDispatchToProps = {
-  changeBoard: boardActions.changeBoard,
-  changePiece: boardActions.changePiece,
-  changeMode: boardActions.changeMode,
-};
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(ConfigBoard)
-);
+
+export default withRouter(ConfigBoard);

@@ -8,30 +8,16 @@ import {
   googleProvider,
   facebookProvider,
 } from '../../firebase-config';
-import * as userActions from '../../redux/actions/userActions';
 import { generateID } from '../utils/utils';
 
 const $ = window.jQuery;
 
 let unsubscribe = null;
-const GlobalChat = ({ uid, loginUser }) => {
+const GlobalChat = ({ uid }) => {
   const [formMessage, setFormMessage] = useState('');
   const [user] = useAuthState(auth);
   const [messages, setMessages] = useState([]);
 
-  useEffect(() => {
-    if (!user) return;
-    const userRef = firestore.collection('users').where('uid', '==', user.uid);
-
-    unsubscribe = userRef.onSnapshot((docs) => {
-      if (!docs.empty) {
-        loginUser(docs);
-      }
-    });
-
-    // eslint-disable-next-line consistent-return
-    return () => unsubscribe && unsubscribe();
-  }, [user]);
   useEffect(() => {
     ListenForUpdates();
 
@@ -104,8 +90,4 @@ function mapStateToProps(state) {
   };
 }
 
-const mapDisptachToProps = {
-  loginUser: userActions.loginUser,
-};
-
-export default connect(mapStateToProps, mapDisptachToProps)(GlobalChat);
+export default connect(mapStateToProps, null)(GlobalChat);
