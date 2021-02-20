@@ -33,3 +33,46 @@ export function makeDots(game, square) {
     dotSquare(moves[i].to);
   }
 }
+
+export function statusText(
+  turn,
+  playerNum,
+  isMyTurn,
+  draw,
+  check,
+  checkmate,
+  repetition,
+  insufficientMaterial,
+  stalemate
+) {
+  const move = turn === 'b' ? 'Black' : 'White';
+  if (stalemate) {
+    return 'draw by stalemate';
+  }
+  if (repetition) {
+    return `draw by repetition`;
+  }
+  if (insufficientMaterial) {
+    return 'draw by insufficient material';
+  }
+  if (draw) {
+    return `draw position`;
+  }
+  if (checkmate) {
+    return `${move} in checkmate, gameover`;
+  }
+  if (check) {
+    return `${move} in check`;
+  }
+  if (playerNum > 0) {
+    if (isMyTurn) {
+      return 'Your Turn';
+    }
+    return "Opponent's move...";
+  }
+  return 'View Only';
+}
+
+export function isMyTurn(playerNum, turn) {
+  return (playerNum === 1 && turn === 'w') || (playerNum === 2 && turn === 'b');
+}

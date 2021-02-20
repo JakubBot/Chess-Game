@@ -10,7 +10,7 @@ import {
   loginFacebook,
   signOutUser,
 } from '../../firebase-config';
-import LoginForm from '../../components/Login/LoginForm';
+import LoginForm from '../../components/LoginForm/LoginForm';
 import * as userActions from '../../redux/actions/userActions';
 import './index.scss';
 

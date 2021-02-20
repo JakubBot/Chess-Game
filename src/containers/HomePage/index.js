@@ -8,7 +8,6 @@ import * as boardActions from '../../redux/actions/boardActions';
 import { firestore, auth } from '../../firebase-config';
 import GameBoard from '../../components/common/GameBoard';
 import * as userActions from '../../redux/actions/userActions';
-import '@chrisoakman/chessboardjs/dist/chessboard-1.0.0.css';
 import './index.scss';
 
 const $ = window.jQuery;

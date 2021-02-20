@@ -7,19 +7,14 @@ import { withRouter } from 'react-router-dom';
 import GameBoard from '../common/GameBoard';
 import { firestore } from '../../firebase-config';
 import * as boardActions from '../../redux/actions/boardActions';
-import {
-  figurePlayer,
-  statusText,
-  Turn,
-  isMyTurn,
-} from '../utils/gameUtils/onlineGameUtils';
+import { figurePlayer, Turn } from '../utils/gameUtils/onlineGameUtils';
 import {
   removeDotSquares,
   allowMove,
   makeDots,
+  statusText,
+  isMyTurn,
 } from '../utils/gameUtils/commonGameUtils';
-
-import '@chrisoakman/chessboardjs/dist/chessboard-1.0.0.css';
 
 import './index.scss';
 
@@ -52,7 +47,6 @@ function ChessGame({
 
     return () => {
       unsubscribe();
-      // defaultBoardConfig();
     };
   }, []);
   useEffect(() => {

@@ -1,8 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import BoardMoves from './BoardMoves';
 import LocalChat from './LocalChat';
-
 import './index.scss';
 
 const ScoreBoard = ({ moves, statusText, isOnline }) => {
@@ -36,12 +34,4 @@ const ScoreBoard = ({ moves, statusText, isOnline }) => {
   );
 };
 
-function mapStateToProps(state) {
-  const { moves, statusText } = state.boardInfo;
-  return {
-    moves,
-    statusText,
-  };
-}
-
-export default connect(mapStateToProps, null)(ScoreBoard);
+export default ScoreBoard;

@@ -81,11 +81,7 @@ const FloatedButton = ({
 };
 
 function ChatMessage({ message, uid, photoURL, currentUID }) {
-  // console.log(message);
-  // console.log(uid);
-  // console.log(currentUID);
   const messageClass = uid !== currentUID ? 'sent' : 'received';
-  console.log(messageClass);
   return (
     <>
       <div className={`floated__list__item ${messageClass}`}>

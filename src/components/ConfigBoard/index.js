@@ -1,7 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import * as boardActions from '../../redux/actions/boardActions';
 import { generateID } from '../utils/utils';
 import { firestore } from '../../firebase-config';
 import ConfigForm from './ConfigForm';
