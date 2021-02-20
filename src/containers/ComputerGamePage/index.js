@@ -17,7 +17,6 @@ import {
 } from '../../components/utils/gameUtils/commonGameUtils';
 import * as userActions from '../../redux/actions/userActions';
 import * as boardActions from '../../redux/actions/boardActions';
-import './index.scss';
 
 const $ = window.jQuery;
 let board = null;
@@ -149,7 +148,7 @@ const ComputerGamePage = ({
   return (
     <>
       <Navbar />
-      <div className="homePage__wrapper">
+      <div className="page__wrapper">
         <GameBoard songRef={songRef} links={false} />
         <ScoreBoard moves={moves} statusText={currentStatusText} />
       </div>

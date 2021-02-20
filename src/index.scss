@@ -1,5 +1,6 @@
 @import './assets/fontello/css/fontello.css';
 @import './assets/styles/style.scss';
+@import './containers/index.scss';
 @import '~@chrisoakman/chessboardjs/dist/chessboard-1.0.0.css';
 
 *,
@@ -23,6 +24,9 @@ body {
   overflow: auto;
   position: relative;
 }
+
+
+
 
 a {
   color: $brightWhite;

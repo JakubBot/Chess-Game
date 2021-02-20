@@ -2,21 +2,20 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Chess from 'chess.js/chess';
 import Chessboard from '@chrisoakman/chessboardjs/dist/chessboard-1.0.0';
-import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import GameBoard from '../common/GameBoard';
+import GameBoard from '../../components/common/GameBoard';
 import { firestore } from '../../firebase-config';
-import * as boardActions from '../../redux/actions/boardActions';
-import { figurePlayer, Turn } from '../utils/gameUtils/onlineGameUtils';
+import {
+  figurePlayer,
+  Turn,
+} from '../../components/utils/gameUtils/onlineGameUtils';
 import {
   removeDotSquares,
   allowMove,
   makeDots,
   statusText,
   isMyTurn,
-} from '../utils/gameUtils/commonGameUtils';
-
-import './index.scss';
+} from '../../components/utils/gameUtils/commonGameUtils';
 
 const $ = window.jQuery;
 
@@ -30,7 +29,6 @@ function ChessGame({
   user,
   updateMoves,
   updateStatusText,
-  defaultBoardConfig,
   ...props
 }) {
   const [gameEngine] = useState(new Chess());
@@ -198,21 +196,5 @@ function ChessGame({
     </>
   );
 }
-function mapStateToProps(state) {
-  const { piece, board } = state.boardInfo;
-  return {
-    piece,
-    boardType: board,
-    user: state.user ?? null,
-  };
-}
 
-const mapDispatchToProps = {
-  updateMoves: boardActions.updateMoves,
-  updateStatusText: boardActions.updateStatusText,
-  defaultBoardConfig: boardActions.defaultBoardConfig,
-};
-
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(ChessGame)
-);
+export default withRouter(ChessGame);

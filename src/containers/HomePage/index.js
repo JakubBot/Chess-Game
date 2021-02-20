@@ -8,7 +8,6 @@ import * as boardActions from '../../redux/actions/boardActions';
 import { firestore, auth } from '../../firebase-config';
 import GameBoard from '../../components/common/GameBoard';
 import * as userActions from '../../redux/actions/userActions';
-import './index.scss';
 
 const $ = window.jQuery;
 let unsubscribe = null;
@@ -65,7 +64,7 @@ const HomePage = ({
   return (
     <>
       <Navbar />
-      <div className="homePage__wrapper">
+      <div className="page__wrapper">
         <GameBoard />
         <ConfigBoard
           board={board}

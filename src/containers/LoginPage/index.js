@@ -12,7 +12,6 @@ import {
 } from '../../firebase-config';
 import LoginForm from '../../components/LoginForm/LoginForm';
 import * as userActions from '../../redux/actions/userActions';
-import './index.scss';
 
 let unsubscribe = null;
 const LoginPage = ({ history, loginUser, logOutUser }) => {

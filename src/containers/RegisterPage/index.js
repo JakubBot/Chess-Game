@@ -1,7 +1,6 @@
 import React from 'react';
 import NavBar from '../../components/Navbar';
 import Register from '../../components/Register';
-import './index.scss';
 
 const RegisterPage = () => {
   return (

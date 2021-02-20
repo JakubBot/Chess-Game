@@ -1,0 +1,20 @@
+@import '../assets/styles/style.scss';
+
+
+
+.page__wrapper {
+  @extend %wrapper;
+}
+
+.loginPage__wrapper,
+.registerPage__wrapper {
+  @extend %wrapper;
+
+  padding: 100px 0 70px;
+  flex-direction: column;
+}
+
+.board-b72b1 {
+  border: unset;
+}
+

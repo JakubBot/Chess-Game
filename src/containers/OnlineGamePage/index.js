@@ -1,27 +1,47 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Navbar from '../../components/Navbar';
-import OnlineGame from '../../components/OnlineGame';
+import OnlineGame from '../OnlineGame';
 import ScoreBoard from '../../components/ScoreBoard';
-import './index.scss';
+import * as boardActions from '../../redux/actions/boardActions';
 
-const OnlineGamePage = ({ moves, statusText }) => {
+const OnlineGamePage = ({
+  moves,
+  statusText,
+  piece,
+  board,
+  updateMoves,
+  updateStatusText,
+}) => {
   return (
     <>
       <Navbar />
-      <div className="homePage__wrapper">
-        <OnlineGame />
+      <div className="page__wrapper">
+        <OnlineGame
+          piece={piece}
+          boardType={board}
+          updateMoves={updateMoves}
+          updateStatusText={updateStatusText}
+        />
         <ScoreBoard isOnline moves={moves} statusText={statusText} />
       </div>
     </>
   );
 };
 function mapStateToProps(state) {
-  const { moves, statusText } = state.boardInfo;
+  const { moves, statusText, piece, board } = state.boardInfo;
   return {
     moves,
     statusText,
+    piece,
+    board,
+    user: state.user ?? null,
   };
 }
 
-export default connect(mapStateToProps, null)(OnlineGamePage);
+const mapDispatchToProps = {
+  updateMoves: boardActions.updateMoves,
+  updateStatusText: boardActions.updateStatusText,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(OnlineGamePage);

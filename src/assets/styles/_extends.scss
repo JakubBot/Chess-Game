@@ -110,11 +110,15 @@
   }
 }
 
-%sidebar__user__board {
-  width: calc(100% - 60px);
-  margin: 0 30px 30px;
-  background: #00000030;
-  color: white;
-  border-radius: 10px;
-  max-width: 360px;
+%wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  overflow-x: hidden;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin-bottom: 40px;
+  @include phone {
+    padding-left: 160px;
+  }
 }
