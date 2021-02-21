@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Navbar from '../../components/Navbar';
 import OnlineGame from '../OnlineGame';
-import ScoreBoard from '../../components/ScoreBoard';
+import ScoreBoard from '../ScoreBoard';
 import * as boardActions from '../../redux/actions/boardActions';
 
 const OnlineGamePage = ({
@@ -12,12 +12,14 @@ const OnlineGamePage = ({
   board,
   updateMoves,
   updateStatusText,
+  user,
 }) => {
   return (
     <>
       <Navbar />
       <div className="page__wrapper">
         <OnlineGame
+          user={user}
           piece={piece}
           boardType={board}
           updateMoves={updateMoves}

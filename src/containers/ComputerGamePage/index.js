@@ -4,17 +4,18 @@ import Chessboard from '@chrisoakman/chessboardjs/dist/chessboard-1.0.0';
 import { connect } from 'react-redux';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import Navbar from '../../components/Navbar';
-import ScoreBoard from '../../components/ScoreBoard';
-import GameBoard from '../../components/common/GameBoard';
+import ScoreBoard from '../ScoreBoard';
+import Game from '../Game';
 import { auth, firestore } from '../../firebase-config';
-import { minimaxRoot } from '../../components/utils/gameUtils/computerGameUtils';
+import { minimaxRoot } from '../utils/gameUtils/computerGameUtils';
 import {
   removeDotSquares,
   allowMove,
   makeDots,
   statusText,
   isMyTurn,
-} from '../../components/utils/gameUtils/commonGameUtils';
+} from '../utils/gameUtils/commonGameUtils';
+import { generateID } from '../utils/utils';
 import * as userActions from '../../redux/actions/userActions';
 import * as boardActions from '../../redux/actions/boardActions';
 
@@ -103,6 +104,7 @@ const ComputerGamePage = ({
       updateMoves({
         from: source,
         to: target,
+        id: generateID(5),
       });
     }
 
@@ -149,7 +151,7 @@ const ComputerGamePage = ({
     <>
       <Navbar />
       <div className="page__wrapper">
-        <GameBoard songRef={songRef} links={false} />
+        <Game songRef={songRef} links={false} />
         <ScoreBoard moves={moves} statusText={currentStatusText} />
       </div>
     </>

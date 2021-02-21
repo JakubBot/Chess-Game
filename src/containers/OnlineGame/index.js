@@ -3,19 +3,17 @@ import React, { useEffect, useRef, useState } from 'react';
 import Chess from 'chess.js/chess';
 import Chessboard from '@chrisoakman/chessboardjs/dist/chessboard-1.0.0';
 import { withRouter } from 'react-router-dom';
-import GameBoard from '../../components/common/GameBoard';
+import Game from '../Game';
 import { firestore } from '../../firebase-config';
-import {
-  figurePlayer,
-  Turn,
-} from '../../components/utils/gameUtils/onlineGameUtils';
+import { figurePlayer, Turn } from '../utils/gameUtils/onlineGameUtils';
 import {
   removeDotSquares,
   allowMove,
   makeDots,
   statusText,
   isMyTurn,
-} from '../../components/utils/gameUtils/commonGameUtils';
+} from '../utils/gameUtils/commonGameUtils';
+import { generateID } from '../utils/utils';
 
 const $ = window.jQuery;
 
@@ -31,6 +29,7 @@ function ChessGame({
   updateStatusText,
   ...props
 }) {
+ 
   const [gameEngine] = useState(new Chess());
   const [state, setState] = useState({
     token: props.match.params.token,
@@ -160,6 +159,7 @@ function ChessGame({
       updateMoves({
         from: source,
         to: target,
+        id: generateID(5),
       });
     }
     function onSnapEnd() {
@@ -186,7 +186,7 @@ function ChessGame({
 
   return (
     <>
-      <GameBoard
+      <Game
         links
         songRef={songRef}
         p1_token={state.p1_token}

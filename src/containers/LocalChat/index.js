@@ -10,7 +10,7 @@ import {
 } from '../../firebase-config';
 import * as userActions from '../../redux/actions/userActions';
 import { generateID } from '../utils/utils';
-import './LocalChat.scss';
+import './index.scss';
 
 let unsubscribe = null;
 const LocalChat = ({ loginUser, uid, ...props }) => {

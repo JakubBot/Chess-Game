@@ -1,24 +1,27 @@
 /* eslint-disable camelcase */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { domain } from '../../../containers/utils/gameUtils/onlineGameUtils';
+
 import './index.scss';
 
 const $ = window.jQuery;
-const GameBoard = ({ songRef, p1_token, p2_token, links }) => {
-  const adress = {
-    firstPlayer: `${domain()}/play/${p1_token}`,
-    secondPlayer: `${domain()}/play/${p2_token}`,
-  };
-  const removeLink = () => {
-    $('.links').css('display', 'none');
-  };
+const GameBoard = ({
+  p1_token,
+  p2_token,
+  songRef,
+  links,
+  adress,
+  removeLink,
+  user,
+}) => {
   return (
     <>
       <div className="game">
         <div className="userInformations">
           <div className="userWrapper">
-            <span className="playerName">Guest 123</span>
+            <span className="playerName">
+              {user.userName ? user.userName : 'Guest 123'}
+            </span>
             <span className="points">(500)</span>
           </div>
           <div className="timer">3: 00</div>

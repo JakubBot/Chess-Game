@@ -1,6 +1,5 @@
 import React from 'react';
-import { generateID } from '../utils/utils';
-import './BoardMoves.scss';
+import './index.scss';
 
 const BoardMoves = ({ moves }) => {
   return (
@@ -8,7 +7,7 @@ const BoardMoves = ({ moves }) => {
       <ul className="moves">
         {[...moves].reverse().map((move) => {
           return (
-            <li className="moves__item" key={generateID(10)}>
+            <li className="moves__item" key={move.id}>
               <span>{move.from}</span>
               <span>{move.to}</span>
             </li>
@@ -18,5 +17,4 @@ const BoardMoves = ({ moves }) => {
     </>
   );
 };
-
 export default BoardMoves;

@@ -9,7 +9,7 @@ import LoginPage from './containers/LoginPage';
 import RegisterPage from './containers/RegisterPage';
 import PageNotFound from './containers/PageNotFound';
 import ComputerGamePage from './containers/ComputerGamePage';
-import GlobalChat from './components/GlobalChat';
+import GlobalChat from './containers/GlobalChat';
 import configureStore from './redux/store';
 
 const store = configureStore();

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { connect } from 'react-redux';
-import FloatedButton from './FloatedButton';
+import FloatedButton from '../../components/FloatedButton/FloatedButton';
 import {
   firestore,
   auth,

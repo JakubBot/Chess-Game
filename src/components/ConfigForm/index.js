@@ -1,4 +1,5 @@
 import React from 'react';
+import './index.scss';
 
 const ConfigForm = ({ changeBoard, changePiece, changeMode, createGame }) => {
   return (

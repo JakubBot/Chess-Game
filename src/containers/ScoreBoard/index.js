@@ -1,6 +1,6 @@
 import React from 'react';
-import BoardMoves from './BoardMoves';
-import LocalChat from './LocalChat';
+import BoardMoves from '../../components/BoardMoves';
+import LocalChat from '../LocalChat';
 import './index.scss';
 
 const ScoreBoard = ({ moves, statusText, isOnline }) => {

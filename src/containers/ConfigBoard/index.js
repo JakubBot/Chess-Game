@@ -2,9 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { generateID } from '../utils/utils';
 import { firestore } from '../../firebase-config';
-import ConfigForm from './ConfigForm';
-
-import './ConfigForm.scss';
+import ConfigForm from '../../components/ConfigForm';
 
 const $ = window.jQuery;
 

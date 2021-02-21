@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Chessboard from '@chrisoakman/chessboardjs/dist/chessboard-1.0.0';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import Navbar from '../../components/Navbar';
-import ConfigBoard from '../../components/ConfigBoard';
+import ConfigBoard from '../ConfigBoard';
 import * as boardActions from '../../redux/actions/boardActions';
 import { firestore, auth } from '../../firebase-config';
 import GameBoard from '../../components/common/GameBoard';

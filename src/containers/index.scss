@@ -1,7 +1,5 @@
 @import '../assets/styles/style.scss';
 
-
-
 .page__wrapper {
   @extend %wrapper;
 }
@@ -10,11 +8,14 @@
 .registerPage__wrapper {
   @extend %wrapper;
 
-  padding: 100px 0 70px;
+  padding: 100px 0 70px 0px;
   flex-direction: column;
+
+  @include phone {
+    padding: 100px 0 70px 160px;
+  }
 }
 
 .board-b72b1 {
   border: unset;
 }
-
