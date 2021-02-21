@@ -29,7 +29,6 @@ function ChessGame({
   updateStatusText,
   ...props
 }) {
- 
   const [gameEngine] = useState(new Chess());
   const [state, setState] = useState({
     token: props.match.params.token,

@@ -2,12 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { connect } from 'react-redux';
 import FloatedButton from '../../components/FloatedButton/FloatedButton';
-import {
-  firestore,
-  auth,
-  googleProvider,
-  facebookProvider,
-} from '../../firebase-config';
+import { firestore, auth } from '../../firebase-config';
 import { generateID } from '../utils/utils';
 
 const $ = window.jQuery;

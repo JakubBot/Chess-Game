@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import NavBar from '../../components/Navbar';
+import NavBar from '../../components/Navigation';
 
 import RegisterForm from '../../components/RegisterForm/RegisterForm';
 import { firestore } from '../../firebase-config';

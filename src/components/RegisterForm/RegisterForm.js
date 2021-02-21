@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import TextInput from '../common/TextInput';
-import SubmitButton from '../common/SubmitButton';
+import TextInput from '../TextInput';
+import SubmitButton from '../SubmitButton';
 import './RegisterForm.scss';
 
 const RegisterForm = ({ form, onChange, errors, onSubmit }) => {

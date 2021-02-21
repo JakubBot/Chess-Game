@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { withRouter } from 'react-router-dom';
-import Navbar from '../../components/Navbar';
+import Navbar from '../../components/Navigation';
 import {
   firestore,
   auth,

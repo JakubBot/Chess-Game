@@ -2,11 +2,11 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Chessboard from '@chrisoakman/chessboardjs/dist/chessboard-1.0.0';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import Navbar from '../../components/Navbar';
+import Navbar from '../../components/Navigation';
 import ConfigBoard from '../ConfigBoard';
 import * as boardActions from '../../redux/actions/boardActions';
 import { firestore, auth } from '../../firebase-config';
-import GameBoard from '../../components/common/GameBoard';
+import GameBoard from '../../components/GameBoard';
 import * as userActions from '../../redux/actions/userActions';
 
 const $ = window.jQuery;

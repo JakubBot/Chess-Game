@@ -4,29 +4,10 @@ import logo from '../../assets/img/logo.png';
 
 import './index.scss';
 
-const $ = window.jQuery;
-const Navbar = () => {
-  const handleMenuClick = () => {
-    if ($(window).width() > 576) return;
-    const menuButton = $('.menu-btn');
-
-    const navbar = $('.navbar');
-    if (!menuButton.hasClass('open')) {
-      navbar.addClass('showNavbar');
-    } else {
-      navbar.removeClass('showNavbar');
-    }
-    menuButton.toggleClass('open');
-  };
-
+const Navbar = ({ onClick }) => {
   return (
     <>
-      <div
-        className="menu-btn"
-        role="button"
-        tabIndex="0"
-        onClick={handleMenuClick}
-      >
+      <div className="menu-btn" role="button" tabIndex="0" onClick={onClick}>
         <div className="menu-btn__burger" />
       </div>
       <div className="menu__socials">
