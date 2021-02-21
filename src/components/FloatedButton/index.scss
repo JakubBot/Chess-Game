@@ -32,7 +32,7 @@
       height: 100%;
     }
   }
-  &__list {
+  &__chat {
     position: absolute;
     bottom: 55px;
     left: -220px;
@@ -41,12 +41,25 @@
     min-width: 250px;
     border-radius: 10px;
     max-height: 350px;
-    overflow: auto;
+    overflow-y: auto;
     opacity: 0;
     visibility: hidden;
     transition: 0.3s;
+    &__list {
+      min-height: 25px;
+    }
     &__header {
-      margin: 0 0 30px;
+      position: relative;
+      margin: 0 0 30px 0;
+    }
+    &__header::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 85px;
+      height: 2px;
+      background: rgba($color: #000000, $alpha: 0.3);
     }
     &__item {
       display: flex;
@@ -54,7 +67,8 @@
       min-height: 20px;
       margin: 10px 0;
       & img {
-        width: 25px;
+        margin: 0 5px;
+        width: 32px;
         border-radius: 50%;
       }
     }
@@ -62,13 +76,11 @@
       height: 100%;
       display: inline-flex;
       align-items: center;
-      border-radius: 30px;
-      padding: 7px 10px 7px;
-      min-width: 120px;
+      border-radius: 18px;
+      padding: 8px 14px;
     }
     &__userMessage {
       font-size: 1em;
-      margin: 0 15px;
       letter-spacing: 0.3px;
     }
 
@@ -91,6 +103,7 @@
     bottom: 40px;
   }
 }
+
 .floated__list__message.sent {
   background-color: rgb(0, 132, 255);
   color: white;
@@ -108,6 +121,7 @@
 }
 
 .floated__form {
+  position: relative;
   margin: 20px 0 0;
   display: flex;
 
@@ -123,7 +137,7 @@
   transform: rotate(45deg);
 }
 
-.floated.active .floated__list {
+.floated.active .floated__chat {
   bottom: 60px;
   opacity: 1;
   visibility: visible;
@@ -140,4 +154,19 @@
 .icon-instagram:before {
   color: #111;
   transform: scale(1.4);
+}
+
+.floated__chat .emptyChat {
+  font-size: 1em;
+  flex-direction: row;
+  justify-content: space-around;
+  color: #fff;
+  background-color: rgba($color: #222, $alpha: 0.25);
+  height: 100%;
+}
+.floated__chat .emptyChat h4 {
+  display: none;
+}
+.floated__chat .emptyChat__icons {
+  margin: 0;
 }

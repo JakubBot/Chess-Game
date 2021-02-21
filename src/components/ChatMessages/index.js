@@ -1,5 +1,6 @@
 import React, { forwardRef } from 'react';
 import ChatMessage from './ChatMessage';
+import EmptyChat from '../EmptyChat';
 import './index.scss';
 
 const ChatMessages = forwardRef(
@@ -22,17 +23,16 @@ const ChatMessages = forwardRef(
           <div className="scoreBoard__info__options">
             <div className="chat">
               <div className="windowChat">
-                {messages !== undefined &&
-                  messages.map((msg) => {
-                    return (
-                      <ChatMessage
-                        key={msg.id}
-                        user={user}
-                        message={msg}
-                        uid={msg.uid}
-                      />
-                    );
-                  })}
+                {messages.map((msg) => {
+                  return (
+                    <ChatMessage
+                      key={msg.id}
+                      user={user}
+                      message={msg}
+                      uid={msg.uid}
+                    />
+                  );
+                })}
 
                 <span ref={lastMessageRef} />
               </div>
@@ -52,31 +52,10 @@ const ChatMessages = forwardRef(
                 </form>
               </div>
               {!user && (
-                <div className="emptyChat">
-                  <h4>Login to use this chat</h4>
-                  <div className="emptyChat__icons  flex-c">
-                    <span className="icon-google google " />
-                    <div
-                      className="login__buttons__button google"
-                      role="button"
-                      tabIndex="0"
-                      onClick={loginGoogle}
-                    >
-                      Google
-                    </div>
-                  </div>
-                  <div className="emptyChat__icons flex-c">
-                    <span className="icon-facebook-squared facebook " />
-                    <div
-                      className="login__buttons__button facebook"
-                      role="button"
-                      tabIndex="0"
-                      onClick={loginFacebook}
-                    >
-                      Facebook
-                    </div>
-                  </div>
-                </div>
+                <EmptyChat
+                  loginGoogle={loginGoogle}
+                  loginFacebook={loginFacebook}
+                />
               )}
             </div>
           </div>

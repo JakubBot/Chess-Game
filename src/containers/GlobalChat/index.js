@@ -1,16 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { connect } from 'react-redux';
-import FloatedButton from '../../components/FloatedButton/FloatedButton';
-import { firestore, auth, firebase } from '../../firebase-config';
+import FloatedButton from '../../components/FloatedButton';
+import {
+  firestore,
+  auth,
+  firebase,
+  loginGoogle,
+  loginFacebook,
+} from '../../firebase-config';
 
 const $ = window.jQuery;
 
 let unsubscribe = null;
-const GlobalChat = ({ uid }) => {
+const GlobalChat = () => {
   const [formMessage, setFormMessage] = useState('');
   const [user] = useAuthState(auth);
   const [messages, setMessages] = useState([]);
+  const lastMessageRef = useRef(null);
 
   useEffect(() => {
     ListenForUpdates();
@@ -34,7 +40,7 @@ const GlobalChat = ({ uid }) => {
               docId,
             };
           });
-          const firstMessage = [...data].shift();
+          const firstMessage = data[0];
           if (data.length > 12) {
             deleteFirstMessage(firstMessage.docId);
             return;
@@ -48,6 +54,8 @@ const GlobalChat = ({ uid }) => {
     messageRef.delete();
   };
   const handleClick = (e) => {
+    lastMessageRef.current.scrollIntoView({ behavior: 'smooth' });
+
     const onIconClick = $(e.target).attr('name');
     if (onIconClick === 'floatedButton__icon')
       $('.floated').toggleClass('active');
@@ -58,7 +66,7 @@ const GlobalChat = ({ uid }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (formMessage === '') return;
+    if (formMessage === '' || !user) return;
     const messageRef = firestore.collection('globalMessages');
 
     messageRef.add({
@@ -68,6 +76,7 @@ const GlobalChat = ({ uid }) => {
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
     setFormMessage('');
+    lastMessageRef.current.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -78,17 +87,13 @@ const GlobalChat = ({ uid }) => {
         formMessage={formMessage}
         onSubmit={handleSubmit}
         messages={messages}
-        currentUID={uid}
+        user={user}
+        ref={lastMessageRef}
+        loginGoogle={loginGoogle}
+        loginFacebook={loginFacebook}
       />
     </>
   );
 };
 
-function mapStateToProps(state) {
-  const { uid } = state.user;
-  return {
-    uid,
-  };
-}
-
-export default connect(mapStateToProps, null)(GlobalChat);
+export default GlobalChat;

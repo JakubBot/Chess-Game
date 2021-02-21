@@ -5,36 +5,38 @@ import { withRouter } from 'react-router-dom';
 import {
   firestore,
   auth,
-  googleProvider,
-  facebookProvider,
+  loginGoogle,
+  loginFacebook,
 } from '../../firebase-config';
 import * as userActions from '../../redux/actions/userActions';
 import { generateID } from '../utils/utils';
 import ChatMessages from '../../components/ChatMessages';
 
 let unsubscribe = null;
-const LocalChat = ({ loginUser, uid, ...props }) => {
+const LocalChat = ({ loginUser, ...props }) => {
   const [formValue, setFormValue] = useState('');
   const [user] = useAuthState(auth);
   const lastMessageRef = useRef(null);
   const [docId, setDocId] = useState('');
   const [messages, setMessages] = useState([]);
-  useEffect(() => {
-    if (!user) return;
-    const userRef = firestore.collection('users').where('uid', '==', user.uid);
+  // useEffect(() => {
+  //   if (!user) return;
+  //   const userRef = firestore.collection('users').where('uid', '==', user.uid);
 
-    unsubscribe = userRef.onSnapshot((docs) => {
-      if (!docs.empty) {
-        loginUser(docs);
-      }
-    });
+  //   unsubscribe = userRef.onSnapshot((docs) => {
+  //     if (!docs.empty) {
+  //       loginUser(docs);
+  //     }
+  //   });
 
-    // eslint-disable-next-line consistent-return
-    return () => unsubscribe && unsubscribe();
-  }, [user]);
+  //   // eslint-disable-next-line consistent-return
+  //   return () => unsubscribe && unsubscribe();
+  // }, [user]);
 
   useEffect(() => {
     ListenForUpdates(props.match.params.token);
+
+    return () => unsubscribe && unsubscribe();
   }, []);
 
   function ListenForUpdates(token) {
@@ -85,20 +87,13 @@ const LocalChat = ({ loginUser, uid, ...props }) => {
       })
       .then(() => {
         setFormValue('');
-        if (window.innerWidth < 800)
+        if (window.innerWidth < 1000)
           lastMessageRef.current.scrollIntoView({ behavior: 'smooth' });
       });
   };
 
   const handleChange = (e) => {
     setFormValue(e.target.value);
-  };
-  const loginGoogle = () => {
-    auth.signInWithPopup(googleProvider);
-  };
-
-  const loginFacebook = () => {
-    auth.signInWithPopup(facebookProvider);
   };
 
   return (
@@ -117,16 +112,7 @@ const LocalChat = ({ loginUser, uid, ...props }) => {
   );
 };
 
-function mapStateToProps(state) {
-  const { uid } = state.user;
-  return {
-    uid,
-  };
-}
-
 const mapDisptachToProps = {
   loginUser: userActions.loginUser,
 };
-export default withRouter(
-  connect(mapStateToProps, mapDisptachToProps)(LocalChat)
-);
+export default withRouter(connect(null, mapDisptachToProps)(LocalChat));
