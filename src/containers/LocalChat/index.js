@@ -11,13 +11,12 @@ import {
 import * as userActions from '../../redux/actions/userActions';
 import { generateID } from '../utils/utils';
 import ChatMessages from '../../components/ChatMessages';
-import './index.scss';
 
 let unsubscribe = null;
 const LocalChat = ({ loginUser, uid, ...props }) => {
   const [formValue, setFormValue] = useState('');
   const [user] = useAuthState(auth);
-  const ref = useRef(null);
+  const lastMessageRef = useRef(null);
   const [docId, setDocId] = useState('');
   const [messages, setMessages] = useState([]);
   useEffect(() => {
@@ -52,7 +51,7 @@ const LocalChat = ({ loginUser, uid, ...props }) => {
           const { messages } = data.data;
           const { id } = data;
           // its for keep only 20 messages in chat
-          if (messages && messages.length > 20) deleteFirstItem(id, messages);
+          if (messages && messages.length > 14) deleteFirstItem(id, messages);
           setMessages(messages ?? []);
           setDocId(id);
         }
@@ -87,7 +86,7 @@ const LocalChat = ({ loginUser, uid, ...props }) => {
       .then(() => {
         setFormValue('');
         if (window.innerWidth < 800)
-          ref.current.scrollIntoView({ behavior: 'smooth' });
+          lastMessageRef.current.scrollIntoView({ behavior: 'smooth' });
       });
   };
 
@@ -106,7 +105,7 @@ const LocalChat = ({ loginUser, uid, ...props }) => {
     <>
       <ChatMessages
         messages={messages}
-        ref={ref}
+        ref={lastMessageRef}
         sendMessage={sendMessage}
         user={user}
         formValue={formValue}

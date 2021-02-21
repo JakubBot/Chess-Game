@@ -24,11 +24,11 @@ const FloatedButton = ({
           <h3 className="floated__list__header">Say Hello!</h3>
 
           {currentUID &&
-            messages.map(({ message, uid, photoURL, id }) => (
+            messages.map(({ message, uid, photoURL, docId }) => (
               <ChatMessage
                 message={message}
                 uid={uid}
-                key={id}
+                key={docId}
                 photoURL={photoURL}
                 currentUID={currentUID}
               />

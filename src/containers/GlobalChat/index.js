@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { connect } from 'react-redux';
 import FloatedButton from '../../components/FloatedButton/FloatedButton';
-import { firestore, auth } from '../../firebase-config';
-import { generateID } from '../utils/utils';
+import { firestore, auth, firebase } from '../../firebase-config';
 
 const $ = window.jQuery;
 
@@ -21,26 +20,33 @@ const GlobalChat = ({ uid }) => {
 
   function ListenForUpdates() {
     const messageRef = firestore.collection('globalMessages');
-    unsubscribe = messageRef.onSnapshot((querySnapshot) => {
-      if (querySnapshot.size) {
-        const data = querySnapshot.docs.map((doc) => {
-          const { message, uid, photoURL, id } = doc.data();
-          return {
-            message,
-            uid,
-            photoURL,
-            id,
-          };
-        });
-        setMessages(data);
-        // const { messages } = data.data;
-        // const { id } = data;
-        // if (messages && messages.length > 20) deleteFirstItem(id, messages);
-        // setMessages(data.messages ?? []);
-      }
-    });
+    unsubscribe = messageRef
+      .orderBy('createdAt', 'asc')
+      .onSnapshot((querySnapshot) => {
+        if (querySnapshot.size) {
+          const data = querySnapshot.docs.map((doc) => {
+            const { message, uid, photoURL } = doc.data();
+            const docId = doc.id;
+            return {
+              message,
+              uid,
+              photoURL,
+              docId,
+            };
+          });
+          const firstMessage = [...data].shift();
+          if (data.length > 12) {
+            deleteFirstMessage(firstMessage.docId);
+            return;
+          }
+          setMessages(data);
+        }
+      });
   }
-
+  const deleteFirstMessage = (id) => {
+    const messageRef = firestore.collection('globalMessages').doc(id);
+    messageRef.delete();
+  };
   const handleClick = (e) => {
     const onIconClick = $(e.target).attr('name');
     if (onIconClick === 'floatedButton__icon')
@@ -59,7 +65,7 @@ const GlobalChat = ({ uid }) => {
       message: formMessage,
       uid: user.uid,
       photoURL: user.photoURL,
-      id: generateID(6),
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
     setFormMessage('');
   };
