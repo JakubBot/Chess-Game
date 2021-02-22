@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Navbar from '../../components/Navigation';
 import OnlineGame from '../OnlineGame';
 import ScoreBoard from '../ScoreBoard';
 import * as boardActions from '../../redux/actions/boardActions';
@@ -16,7 +15,6 @@ const OnlineGamePage = ({
 }) => {
   return (
     <>
-      <Navbar />
       <div className="page__wrapper">
         <OnlineGame
           user={user}

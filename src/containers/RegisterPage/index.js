@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import NavBar from '../../components/Navigation';
 
 import RegisterForm from '../../components/RegisterForm/RegisterForm';
 import { firestore } from '../../firebase-config';
@@ -92,8 +91,6 @@ const RegisterPage = ({ history, logIn }) => {
 
   return (
     <>
-      <NavBar />
-
       <div className="registerPage__wrapper">
         <RegisterForm
           onChange={handleChange}

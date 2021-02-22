@@ -10,6 +10,7 @@ import RegisterPage from './containers/RegisterPage';
 import PageNotFound from './containers/PageNotFound';
 import ComputerGamePage from './containers/ComputerGamePage';
 import GlobalChat from './containers/GlobalChat';
+import Navbar from './containers/Navbar';
 import configureStore from './redux/store';
 
 const store = configureStore();
@@ -20,6 +21,7 @@ ReactDOM.render(
       <div className="container">
         <Router basename={process.env.PUBLIC_URL}>
           <GlobalChat />
+          <Navbar />
           <Switch>
             <Route exact path="/" component={HomePage} />
             <Route path="/login" component={LoginPage} />

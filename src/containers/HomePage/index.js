@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Chessboard from '@chrisoakman/chessboardjs/dist/chessboard-1.0.0';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import Navbar from '../../components/Navigation';
 import ConfigBoard from '../ConfigBoard';
 import * as boardActions from '../../redux/actions/boardActions';
 import { firestore, auth } from '../../firebase-config';
@@ -63,7 +62,6 @@ const HomePage = ({
   };
   return (
     <>
-      <Navbar />
       <div className="page__wrapper">
         <GameBoard />
         <ConfigBoard
