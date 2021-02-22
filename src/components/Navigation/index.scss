@@ -77,6 +77,17 @@
   top: 0;
   font-size: 18px;
   z-index: 900;
+
+  &__userinfo {
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    font-size: .9em;
+    &__info {
+      text-align: center;
+    }
+  }
+
   &__menu {
     display: flex;
     justify-content: center;
@@ -164,17 +175,20 @@
 
 .buttons {
   margin: 10px;
+  // font-size: 17px;
 
   &__sign {
     display: flex;
     justify-content: center;
     align-items: center;
   }
+  
 }
 
 .buttons__item {
   cursor: pointer;
   background-color: unset;
+  white-space: nowrap;
   font: inherit;
   font-weight: bold;
   @extend %rectangle__button;

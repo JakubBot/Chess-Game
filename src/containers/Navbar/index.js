@@ -1,10 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Navigation from '../../components/Navigation';
+import * as userActions from '../../redux/actions/userActions';
+import { signOutUser } from '../../firebase-config';
 
 const $ = window.jQuery;
-const Navbar = ({ user }) => {
-  console.log(user);
+const Navbar = ({ user, logOutUser }) => {
   const handleMenuClick = () => {
     if ($(window).width() > 576) return;
     const menuButton = $('.menu-btn');
@@ -18,9 +19,13 @@ const Navbar = ({ user }) => {
     menuButton.toggleClass('open');
   };
 
+  const signOut = () => {
+    signOutUser(logOutUser);
+  };
+
   return (
     <>
-      <Navigation onClick={handleMenuClick} />
+      <Navigation user={user} onClick={handleMenuClick} signOut={signOut} />
     </>
   );
 };
@@ -31,4 +36,8 @@ function mapStateToProps({ user }) {
   };
 }
 
-export default connect(mapStateToProps, null)(Navbar);
+const mapDispatchToProps = {
+  logOutUser: userActions.logOutUser,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

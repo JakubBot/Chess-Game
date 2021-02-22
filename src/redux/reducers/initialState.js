@@ -6,5 +6,5 @@ export default {
     moves: [],
     statusText: '',
   },
-  user: {},
+  user: null,
 };

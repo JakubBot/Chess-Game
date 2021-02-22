@@ -16,7 +16,7 @@ export default function userReducer(state = initialState.user, action) {
         points,
       };
     case types.LOG_OUT:
-      return {};
+      return null;
     default:
       return state;
   }

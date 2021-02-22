@@ -11,6 +11,7 @@ import * as userActions from '../../redux/actions/userActions';
 const $ = window.jQuery;
 let unsubscribe = null;
 const HomePage = ({
+  user,
   board,
   piece,
   mode,
@@ -19,21 +20,24 @@ const HomePage = ({
   changeMode,
   loginUser,
 }) => {
-  const [user] = useAuthState(auth);
+  const [User] = useAuthState(auth);
 
   useEffect(() => {
-    if (!user) return;
-    const userRef = firestore.collection('users').where('uid', '==', user.uid);
+    if (User !== null && user === null) {
+      const userRef = firestore
+        .collection('users')
+        .where('uid', '==', User.uid);
 
-    unsubscribe = userRef.onSnapshot((docs) => {
-      if (!docs.empty) {
-        loginUser(docs);
-      }
-    });
+      unsubscribe = userRef.onSnapshot((docs) => {
+        if (!docs.empty) {
+          loginUser(docs);
+        }
+      });
+    }
 
     // eslint-disable-next-line consistent-return
     return () => unsubscribe && unsubscribe();
-  }, [user]);
+  }, [User]);
 
   useEffect(() => {
     updateConfig();
@@ -79,10 +83,13 @@ const HomePage = ({
 
 function mapStateToProps(state) {
   const { boardInfo } = state;
+  const { user } = state;
+
   return {
     board: boardInfo.board,
     piece: boardInfo.piece,
     mode: boardInfo.mode,
+    user,
   };
 }
 

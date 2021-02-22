@@ -4,7 +4,7 @@ import logo from '../../assets/img/logo.png';
 
 import './index.scss';
 
-const Navbar = ({ onClick }) => {
+const Navbar = ({ user, onClick, signOut }) => {
   return (
     <>
       <div className="menu-btn" role="button" tabIndex="0" onClick={onClick}>
@@ -40,23 +40,37 @@ const Navbar = ({ onClick }) => {
             <Link to="/">More</Link>
           </div>
         </div>
+        {!user ? (
+          <div className="buttons">
+            <div className="buttons__sign">
+              <Link to="/login">
+                <button type="button" className="buttons__item flex-c-c">
+                  <span>Sign In</span>
+                </button>
+              </Link>
+            </div>
+            <div className="buttons__sign">
+              <Link to="/register">
+                <button type="button" className="buttons__item flex-c-c">
+                  <span>Sign Up</span>
+                </button>
+              </Link>
+            </div>
+          </div>
+        ) : (
+          <div className="buttons">
+            <div className="buttons__sign">
+              <button
+                type="button"
+                className="buttons__item flex-c-c"
+                onClick={signOut}
+              >
+                <span>Sign Out</span>
+              </button>
+            </div>
+          </div>
+        )}
 
-        <div className="buttons">
-          <div className="buttons__sign">
-            <Link to="/login">
-              <button type="button" className="buttons__item flex-c-c">
-                <span>Sign In</span>
-              </button>
-            </Link>
-          </div>
-          <div className="buttons__sign">
-            <Link to="/register">
-              <button type="button" className="buttons__item flex-c-c">
-                <span>Sign Up</span>
-              </button>
-            </Link>
-          </div>
-        </div>
         <div className="navbar__menu--bottom">
           <div className="navbar__menu__item--small ">
             <span className="icon-resize-horizontal icon" />
