@@ -19,11 +19,6 @@ export function logOutUser() {
 
 export function loginUser({ docs }) {
   return async (dispatch) => {
-    if (!docs) return;
-    if (docs.length !== 1) {
-      alert('unexpected error');
-      return null;
-    }
     const { uid, points, userName, photo } = await docs[0].data();
 
     const _user = {

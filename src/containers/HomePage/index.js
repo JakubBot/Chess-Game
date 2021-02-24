@@ -4,9 +4,10 @@ import Chessboard from '@chrisoakman/chessboardjs/dist/chessboard-1.0.0';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import ConfigBoard from '../ConfigBoard';
 import * as boardActions from '../../redux/actions/boardActions';
-import { firestore, auth } from '../../firebase-config';
+import { auth } from '../../firebase-config';
 import GameBoard from '../../components/GameBoard';
 import * as userActions from '../../redux/actions/userActions';
+import LogIn from '../utils/loginUitls';
 
 const $ = window.jQuery;
 let unsubscribe = null;
@@ -20,24 +21,13 @@ const HomePage = ({
   changeMode,
   loginUser,
 }) => {
-  const [User] = useAuthState(auth);
+  const [authUser] = useAuthState(auth);
 
   useEffect(() => {
-    if (User !== null && user === null) {
-      const userRef = firestore
-        .collection('users')
-        .where('uid', '==', User.uid);
+    unsubscribe = LogIn(authUser, user, loginUser);
 
-      unsubscribe = userRef.onSnapshot((docs) => {
-        if (!docs.empty) {
-          loginUser(docs);
-        }
-      });
-    }
-
-    // eslint-disable-next-line consistent-return
     return () => unsubscribe && unsubscribe();
-  }, [User]);
+  }, [authUser]);
 
   useEffect(() => {
     updateConfig();

@@ -11,40 +11,21 @@ import {
 } from '../../firebase-config';
 import LoginForm from '../../components/LoginForm/LoginForm';
 import * as userActions from '../../redux/actions/userActions';
+import LogIn from '../utils/loginUitls';
 
 let unsubscribe = null;
-const LoginPage = ({ history, loginUser, logOutUser }) => {
+const LoginPage = ({ user, history, loginUser, logOutUser }) => {
   const [form, setForm] = useState({
     email: '',
     password: '',
   });
-  const [user] = useAuthState(auth);
+  const [authUser] = useAuthState(auth);
   const [errors, setErrors] = useState({});
   useEffect(() => {
-    if (!user) return;
-
-    const userRef = firestore.collection('users').where('uid', '==', user.uid);
-
-    unsubscribe = userRef.onSnapshot((docs) => {
-      if (!docs.empty) {
-        loginUser(docs);
-      } else {
-        register(user.uid);
-      }
-    });
+    unsubscribe = LogIn(authUser, user, loginUser);
 
     return () => unsubscribe && unsubscribe();
-  }, [user]);
-
-  const register = (uid) => {
-    const { photoURL, displayName } = user;
-    firestore.collection('users').add({
-      uid,
-      points: 500,
-      userName: displayName,
-      photo: photoURL,
-    });
-  };
+  }, [authUser]);
 
   const signOut = () => {
     signOutUser(logOutUser);
@@ -103,4 +84,13 @@ const mapDispatchToProps = {
   loginUser: userActions.loginUser,
 };
 
-export default withRouter(connect(null, mapDispatchToProps)(LoginPage));
+function mapStateToProps(state) {
+  const { user } = state;
+  return {
+    user,
+  };
+}
+
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(LoginPage)
+);

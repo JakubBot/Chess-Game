@@ -17,6 +17,7 @@ import {
 import { generateID } from '../utils/utils';
 import * as userActions from '../../redux/actions/userActions';
 import * as boardActions from '../../redux/actions/boardActions';
+import LogIn from '../utils/loginUitls';
 
 const $ = window.jQuery;
 let board = null;
@@ -26,6 +27,7 @@ let unsbscribe;
 
 const ComputerGamePage = ({
   boardType,
+  user,
   piece,
   loginUser,
   updateMoves,
@@ -33,25 +35,15 @@ const ComputerGamePage = ({
   moves,
   currentStatusText,
 }) => {
-  const [user] = useAuthState(auth);
+  const [authUser] = useAuthState(auth);
 
   const songRef = useRef(null);
 
   useEffect(() => {
-    if (!user) return;
+    unsbscribe = LogIn(authUser, user, loginUser);
 
-    const userRef = firestore.collection('users').where('uid', '==', user.uid);
-
-    unsbscribe = userRef.onSnapshot((docs) => {
-      if (!docs.empty) {
-        loginUser(docs);
-      }
-    });
-
-    return () => {
-      unsbscribe();
-    };
-  }, [user]);
+    return () => unsbscribe && unsbscribe();
+  }, [authUser]);
 
   function updateStatus() {
     const statusGame = statusText(

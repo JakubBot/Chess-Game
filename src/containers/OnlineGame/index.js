@@ -15,6 +15,7 @@ import {
 } from '../utils/gameUtils/commonGameUtils';
 import { generateID } from '../utils/utils';
 
+
 const $ = window.jQuery;
 
 const INITIAL_FEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR';

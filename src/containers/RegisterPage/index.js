@@ -1,19 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
+import { useAuthState } from 'react-firebase-hooks/auth';
 import RegisterForm from '../../components/RegisterForm/RegisterForm';
-import { firestore } from '../../firebase-config';
+import { firestore, auth } from '../../firebase-config';
 import { generateID } from '../utils/utils';
 import * as userActions from '../../redux/actions/userActions';
+import LogIn from '../utils/loginUitls';
 
-const RegisterPage = ({ history, logIn }) => {
+let unsubscribe;
+const RegisterPage = ({ user, history, loginUser, logIn }) => {
   const [form, setForm] = useState({
     userName: '',
     email: '',
     password: '',
   });
   const [errors, setErrors] = useState({});
+  const [authUser] = useAuthState(auth);
+  useEffect(() => {
+    unsubscribe = LogIn(authUser, user, loginUser);
+
+    return () => unsubscribe && unsubscribe();
+  }, [authUser]);
+
   const handleChange = ({ target }) => {
     const { name, value } = target;
 
@@ -102,8 +112,17 @@ const RegisterPage = ({ history, logIn }) => {
     </>
   );
 };
+function mapStateToProps({ user }) {
+  return {
+    user,
+  };
+}
+
 const mapDispatchToProps = {
+  loginUser: userActions.loginUser,
   logIn: userActions.logIn,
 };
 
-export default withRouter(connect(null, mapDispatchToProps)(RegisterPage));
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(RegisterPage)
+);

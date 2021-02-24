@@ -26,8 +26,7 @@ const loginFacebook = () => {
   auth.signInWithPopup(facebookProvider);
 };
 const signOutUser = (logOutUser) => {
-  auth.signOut();
-  logOutUser();
+  auth.signOut().then(() => logOutUser());
 };
 
 export {

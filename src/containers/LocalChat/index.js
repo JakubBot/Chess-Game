@@ -19,19 +19,6 @@ const LocalChat = ({ loginUser, ...props }) => {
   const lastMessageRef = useRef(null);
   const [docId, setDocId] = useState('');
   const [messages, setMessages] = useState([]);
-  // useEffect(() => {
-  //   if (!user) return;
-  //   const userRef = firestore.collection('users').where('uid', '==', user.uid);
-
-  //   unsubscribe = userRef.onSnapshot((docs) => {
-  //     if (!docs.empty) {
-  //       loginUser(docs);
-  //     }
-  //   });
-
-  //   // eslint-disable-next-line consistent-return
-  //   return () => unsubscribe && unsubscribe();
-  // }, [user]);
 
   useEffect(() => {
     ListenForUpdates(props.match.params.token);
