@@ -19,14 +19,24 @@ export function logOutUser() {
 
 export function loginUser({ docs }) {
   return async (dispatch) => {
-    const { uid, points, userName, photo } = await docs[0].data();
+    const {
+      uid,
+      points,
+      userName,
+      photo,
+      email,
+      password,
+    } = await docs[0].data();
 
     const _user = {
       uid,
       points,
       userName,
       photo,
+      email,
+      password,
     };
     dispatch(logIn(_user));
+    localStorage.setItem('user', JSON.stringify(_user));
   };
 }

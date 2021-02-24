@@ -21,11 +21,18 @@ const HomePage = ({
   changeMode,
   loginUser,
   defaultBoardSettings,
+  logIn,
 }) => {
   const [authUser] = useAuthState(auth);
-
   useEffect(() => {
+    // auto login with socials
     unsubscribe = LogIn(authUser, user, loginUser);
+
+    // auto login with form
+    const _user = JSON.parse(localStorage.getItem('user'));
+
+    logIn(_user);
+
     defaultBoardSettings();
 
     return () => unsubscribe && unsubscribe();
@@ -90,6 +97,7 @@ const mapDispatchToProps = {
   changePiece: boardActions.changePiece,
   changeMode: boardActions.changeMode,
   loginUser: userActions.loginUser,
+  logIn: userActions.logIn,
   defaultBoardSettings: boardActions.defaultBoardSettings,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

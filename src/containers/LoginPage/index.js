@@ -59,6 +59,7 @@ const LoginPage = ({ user, history, loginUser, logOutUser }) => {
         });
       }
     });
+
   };
 
   return (
