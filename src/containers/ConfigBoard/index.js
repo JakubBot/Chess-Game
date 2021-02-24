@@ -38,16 +38,18 @@ const ConfigBoard = ({ board, piece, mode, history, ...props }) => {
       p1_token: generateID(8),
       p2_token: generateID(8),
     };
-    const gamesRef = firestore.collection('games');
-    gamesRef
-      .add(newGame)
-      .then(() => {
-        if (mode === 'online') history.push(`./play/${newGame.p1_token}`);
-        else if (mode === 'computer') history.push(`./play/computer`);
-      })
-      .catch((err) => {
-        throw err;
-      });
+
+    if (mode === 'online') {
+      const gamesRef = firestore.collection('games');
+      gamesRef
+        .add(newGame)
+        .then(() => history.push(`./play/${newGame.p1_token}`))
+        .catch((err) => {
+          throw err;
+        });
+    } else if (mode === 'computer') {
+      history.push(`./play/computer`);
+    }
   };
 
   return (

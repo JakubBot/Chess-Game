@@ -16,8 +16,9 @@ export function updateMoves(move) {
 export function updateStatusText(statusText) {
   return { type: types.STATUS_TEXT, statusText };
 }
-export function defaultBoardConfig() {
-  return { type: types.DEFAULT_BOARD_CONFIG };
+
+export function defaultBoardSettings() {
+  return { type: types.DEFAULT_BOARD_SETTINGS };
 }
 
 // setState({

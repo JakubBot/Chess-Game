@@ -164,7 +164,6 @@ const mapDispatchToProps = {
   loginUser: userActions.loginUser,
   updateMoves: boardActions.updateMoves,
   updateStatusText: boardActions.updateStatusText,
-  defaultBoardConfig: boardActions.defaultBoardConfig,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ComputerGamePage);

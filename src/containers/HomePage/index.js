@@ -20,11 +20,13 @@ const HomePage = ({
   changePiece,
   changeMode,
   loginUser,
+  defaultBoardSettings,
 }) => {
   const [authUser] = useAuthState(auth);
 
   useEffect(() => {
     unsubscribe = LogIn(authUser, user, loginUser);
+    defaultBoardSettings();
 
     return () => unsubscribe && unsubscribe();
   }, [authUser]);
@@ -88,5 +90,6 @@ const mapDispatchToProps = {
   changePiece: boardActions.changePiece,
   changeMode: boardActions.changeMode,
   loginUser: userActions.loginUser,
+  defaultBoardSettings: boardActions.defaultBoardSettings,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
