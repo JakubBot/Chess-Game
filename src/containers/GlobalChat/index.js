@@ -1,9 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
+import { connect } from 'react-redux';
 import FloatedButton from '../../components/FloatedButton';
 import {
   firestore,
-  auth,
   firebase,
   loginGoogle,
   loginFacebook,
@@ -12,9 +11,8 @@ import {
 const $ = window.jQuery;
 
 let unsubscribe = null;
-const GlobalChat = () => {
+const GlobalChat = ({ user }) => {
   const [formMessage, setFormMessage] = useState('');
-  const [user] = useAuthState(auth);
   const [messages, setMessages] = useState([]);
   const lastMessageRef = useRef(null);
 
@@ -72,7 +70,7 @@ const GlobalChat = () => {
     messageRef.add({
       message: formMessage,
       uid: user.uid,
-      photoURL: user.photoURL,
+      photoURL: user.photo,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
     setFormMessage('');
@@ -95,5 +93,11 @@ const GlobalChat = () => {
     </>
   );
 };
+function mapStateToProps(state) {
+  const { user } = state;
+  return {
+    user,
+  };
+}
 
-export default GlobalChat;
+export default connect(mapStateToProps, null)(GlobalChat);
