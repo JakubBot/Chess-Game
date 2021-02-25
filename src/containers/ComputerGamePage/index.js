@@ -67,10 +67,7 @@ const ComputerGamePage = ({
     updateStatusText(statusGame);
   }
   // updateMoves({
-  //   from: source,
-  //   to: target,
-  //   id: generateID(5),
-  // });
+
   useEffect(() => {
     const { whiteSan, blackSan } = gameMove;
     if (whiteSan !== '' && blackSan !== '') {

@@ -109,9 +109,9 @@ export function minimaxRoot(game, depth, isMaxPlayer) {
       bestMove = newMove;
     }
   }
-  let move = _moves.find((move) => move.san == bestMove);
+  const move = _moves.find((move) => move.san === bestMove);
   // console.log(_moves);
-  return {bestMove, move};
+  return { bestMove, move };
 }
 
 function minimax(game, depth, isMaxPlayer, alpha, beta) {
