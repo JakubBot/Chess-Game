@@ -8,8 +8,8 @@ const BoardMoves = ({ moves }) => {
         {[...moves].reverse().map((move) => {
           return (
             <li className="moves__item" key={move.id}>
-              <span>{move.from}</span>
-              <span>{move.to}</span>
+              <span>{move.whiteSan}</span>
+              <span>{move.blackSan}</span>
             </li>
           );
         })}

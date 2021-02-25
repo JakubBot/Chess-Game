@@ -2,6 +2,7 @@ import types from '../actions/actionTypes';
 import initialState from './initialState';
 
 export default function boardReducer(state = initialState.boardInfo, action) {
+ 
   const moves =
     state.moves.length < 3
       ? [...state.moves, action.move]

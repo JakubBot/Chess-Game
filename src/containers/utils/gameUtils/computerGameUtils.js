@@ -94,19 +94,24 @@ export function getPieceValue(piece, i, j) {
 export function minimaxRoot(game, depth, isMaxPlayer) {
   const moves = game.moves();
   let bestMove;
+  const _moves = [];
   const possibilities = moves.length;
   let bestScore = -Infinity;
   for (let k = 0; k < possibilities; k++) {
     const newMove = moves[k];
-    game.move(newMove);
+
+    _moves.push(game.move(newMove));
     const score = minimax(game, depth - 1, !isMaxPlayer, -Infinity, Infinity);
+
     game.undo();
     if (score >= bestScore) {
       bestScore = score;
       bestMove = newMove;
     }
   }
-  return bestMove;
+  let move = _moves.find((move) => move.san == bestMove);
+  // console.log(_moves);
+  return {bestMove, move};
 }
 
 function minimax(game, depth, isMaxPlayer, alpha, beta) {

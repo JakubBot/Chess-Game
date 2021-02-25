@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Chess from 'chess.js/chess';
 import Chessboard from '@chrisoakman/chessboardjs/dist/chessboard-1.0.0';
 import { connect } from 'react-redux';
@@ -37,7 +37,11 @@ const ComputerGamePage = ({
   loginUserWithForm,
 }) => {
   const [authUser] = useAuthState(auth);
-
+  const [gameMove, setGameMove] = useState({
+    whiteSan: '',
+    blackSan: '',
+    id: null,
+  });
   const songRef = useRef(null);
 
   useEffect(() => {
@@ -62,11 +66,42 @@ const ComputerGamePage = ({
     );
     updateStatusText(statusGame);
   }
+  // updateMoves({
+  //   from: source,
+  //   to: target,
+  //   id: generateID(5),
+  // });
+  useEffect(() => {
+    const { whiteSan, blackSan } = gameMove;
+    if (whiteSan !== '' && blackSan !== '') {
+      updateMoves({
+        whiteSan,
+        blackSan,
+        id: generateID(5),
+      });
+      setGameMove({
+        whiteSan: '',
+        blackSan: '',
+        id: null,
+      });
+    }
+  }, [gameMove]);
+
   useEffect(() => {
     songRef.current.play();
 
     function makeEngineMove() {
-      const bestMove = minimaxRoot(game, maxDepth, true);
+      const { bestMove, move } = minimaxRoot(game, maxDepth, true);
+
+      // updateMoves({
+      //   from: move.from,
+      //   to: move.to,
+      //   id: generateID(5),
+      // });
+      setGameMove((prevState) => ({
+        ...prevState,
+        blackSan: move.san,
+      }));
       game.move(bestMove);
       board.position(game.fen());
       updateStatus();
@@ -95,11 +130,16 @@ const ComputerGamePage = ({
       }
 
       window.setTimeout(makeEngineMove, 800);
-      updateMoves({
-        from: source,
-        to: target,
-        id: generateID(5),
-      });
+      // updateMoves({
+      //   from: source,
+      //   to: target,
+      //   id: generateID(5),
+      // });
+
+      setGameMove((prevState) => ({
+        ...prevState,
+        whiteSan: move.san,
+      }));
     }
 
     function onSnapEnd() {
