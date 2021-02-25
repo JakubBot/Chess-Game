@@ -5,7 +5,7 @@ export default function userReducer(state = initialState.user, action) {
   const { userName, uid, photo, points, email, password } = action;
 
   switch (action.type) {
-    case types.LOGIN_USER_SUCCESS:
+    case types.LOGIN_USER:
       return {
         ...state,
         userName,

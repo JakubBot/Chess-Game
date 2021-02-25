@@ -8,7 +8,6 @@ import {
   loginGoogle,
   loginFacebook,
 } from '../../firebase-config';
-import * as userActions from '../../redux/actions/userActions';
 import { generateID } from '../utils/utils';
 import ChatMessages from '../../components/ChatMessages';
 
@@ -39,7 +38,7 @@ const LocalChat = ({ loginUser, ...props }) => {
           });
           const { messages } = data.data;
           const { id } = data;
-          // its for keep only 20 messages in chat
+          // its for keep only 14 messages in chat
           if (messages && messages.length > 14) deleteFirstItem(id, messages);
           setMessages(messages ?? []);
           setDocId(id);
@@ -100,6 +99,6 @@ const LocalChat = ({ loginUser, ...props }) => {
 };
 
 const mapDisptachToProps = {
-  loginUser: userActions.loginUser,
+  // loginUser: userActions.loginUser,
 };
 export default withRouter(connect(null, mapDisptachToProps)(LocalChat));

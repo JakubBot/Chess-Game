@@ -1,6 +1,6 @@
 import { firestore } from '../../firebase-config';
 
-function logIn(authUser, user, loginUser) {
+function canLogInWithSocials(authUser, user, loginUserWithSocials) {
   if (authUser !== null && user === null) {
     const userRef = firestore
       .collection('users')
@@ -8,11 +8,18 @@ function logIn(authUser, user, loginUser) {
 
     return userRef.onSnapshot((docs) => {
       if (docs.size === 1) {
-        loginUser(docs);
+        loginUserWithSocials(docs);
       } else {
         register(authUser);
       }
     });
+  }
+}
+
+function canLoginWithForm(authUser, user, loginUserWithForm) {
+  if (authUser === null && user === null) {
+    const _user = JSON.parse(localStorage.getItem('user'));
+    if (_user) loginUserWithForm(_user);
   }
 }
 
@@ -25,4 +32,4 @@ function register(authUser) {
     photo: photoURL,
   });
 }
-export default logIn;
+export { canLogInWithSocials, canLoginWithForm };

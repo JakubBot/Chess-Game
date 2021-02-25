@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import ScoreBoard from '../ScoreBoard';
 import Game from '../Game';
-import { auth, firestore } from '../../firebase-config';
+import { auth } from '../../firebase-config';
 import { minimaxRoot } from '../utils/gameUtils/computerGameUtils';
 import {
   removeDotSquares,
@@ -17,32 +17,35 @@ import {
 import { generateID } from '../utils/utils';
 import * as userActions from '../../redux/actions/userActions';
 import * as boardActions from '../../redux/actions/boardActions';
-import LogIn from '../utils/loginUitls';
+import { canLogInWithSocials, canLoginWithForm } from '../utils/loginUitls';
 
 const $ = window.jQuery;
 let board = null;
 const game = new Chess();
 const maxDepth = 2;
-let unsbscribe;
+let unsubscribe;
 
 const ComputerGamePage = ({
   boardType,
   user,
   piece,
-  loginUser,
   updateMoves,
   updateStatusText,
   moves,
   currentStatusText,
+  loginUserWithSocials,
+  loginUserWithForm,
 }) => {
   const [authUser] = useAuthState(auth);
 
   const songRef = useRef(null);
 
   useEffect(() => {
-    unsbscribe = LogIn(authUser, user, loginUser);
+    unsubscribe = canLogInWithSocials(authUser, user, loginUserWithSocials);
 
-    return () => unsbscribe && unsbscribe();
+    canLoginWithForm(authUser, user, loginUserWithForm);
+
+    return () => unsubscribe && unsubscribe();
   }, [authUser]);
 
   function updateStatus() {
@@ -161,9 +164,10 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = {
-  loginUser: userActions.loginUser,
   updateMoves: boardActions.updateMoves,
   updateStatusText: boardActions.updateStatusText,
+  loginUserWithSocials: userActions.loginUserWithSocials,
+  loginUserWithForm: userActions.loginUserWithForm,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ComputerGamePage);

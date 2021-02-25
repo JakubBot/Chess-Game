@@ -7,7 +7,7 @@ import * as boardActions from '../../redux/actions/boardActions';
 import { auth } from '../../firebase-config';
 import GameBoard from '../../components/GameBoard';
 import * as userActions from '../../redux/actions/userActions';
-import LogIn from '../utils/loginUitls';
+import { canLogInWithSocials, canLoginWithForm } from '../utils/loginUitls';
 
 const $ = window.jQuery;
 let unsubscribe = null;
@@ -19,21 +19,15 @@ const HomePage = ({
   changeBoard,
   changePiece,
   changeMode,
-  loginUser,
   defaultBoardSettings,
-  logIn,
+  loginUserWithSocials,
+  loginUserWithForm,
 }) => {
   const [authUser] = useAuthState(auth);
   useEffect(() => {
-    // auto login with socials
-    unsubscribe = LogIn(authUser, user, loginUser);
+    unsubscribe = canLogInWithSocials(authUser, user, loginUserWithSocials);
 
-    // auto login with form
-    const _user = JSON.parse(localStorage.getItem('user'));
-
-    logIn(_user);
-
-    defaultBoardSettings();
+    canLoginWithForm(authUser, user, loginUserWithForm);
 
     return () => unsubscribe && unsubscribe();
   }, [authUser]);
@@ -41,7 +35,9 @@ const HomePage = ({
   useEffect(() => {
     updateConfig();
   }, [board, piece]);
-
+  useEffect(() => {
+    defaultBoardSettings();
+  }, []);
   const updateConfig = () => {
     const config = {
       pieceTheme: `${process.env.PUBLIC_URL}/img/chesspieces/${piece}/{piece}.png`,
@@ -96,8 +92,9 @@ const mapDispatchToProps = {
   changeBoard: boardActions.changeBoard,
   changePiece: boardActions.changePiece,
   changeMode: boardActions.changeMode,
-  loginUser: userActions.loginUser,
   logIn: userActions.logIn,
   defaultBoardSettings: boardActions.defaultBoardSettings,
+  loginUserWithSocials: userActions.loginUserWithSocials,
+  loginUserWithForm: userActions.loginUserWithForm,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

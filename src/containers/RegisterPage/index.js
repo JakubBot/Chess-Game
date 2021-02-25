@@ -7,10 +7,16 @@ import RegisterForm from '../../components/RegisterForm/RegisterForm';
 import { firestore, auth } from '../../firebase-config';
 import { generateID } from '../utils/utils';
 import * as userActions from '../../redux/actions/userActions';
-import LogIn from '../utils/loginUitls';
+import { canLogInWithSocials, canLoginWithForm } from '../utils/loginUitls';
 
 let unsubscribe;
-const RegisterPage = ({ user, history, loginUser, logIn }) => {
+const RegisterPage = ({
+  user,
+  history,
+  loginUserWithForm,
+  logIn,
+  loginUserWithSocials,
+}) => {
   const [form, setForm] = useState({
     userName: '',
     email: '',
@@ -19,7 +25,9 @@ const RegisterPage = ({ user, history, loginUser, logIn }) => {
   const [errors, setErrors] = useState({});
   const [authUser] = useAuthState(auth);
   useEffect(() => {
-    unsubscribe = LogIn(authUser, user, loginUser);
+    unsubscribe = canLogInWithSocials(authUser, user, loginUserWithSocials);
+
+    canLoginWithForm(authUser, user, loginUserWithForm);
 
     return () => unsubscribe && unsubscribe();
   }, [authUser]);
@@ -119,8 +127,8 @@ function mapStateToProps({ user }) {
 }
 
 const mapDispatchToProps = {
-  loginUser: userActions.loginUser,
-  logIn: userActions.logIn,
+  loginUserWithSocials: userActions.loginUserWithSocials,
+  loginUserWithForm: userActions.loginUserWithForm,
 };
 
 export default withRouter(

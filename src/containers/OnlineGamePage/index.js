@@ -5,7 +5,7 @@ import OnlineGame from '../OnlineGame';
 import ScoreBoard from '../ScoreBoard';
 import * as boardActions from '../../redux/actions/boardActions';
 import * as userActions from '../../redux/actions/userActions';
-import LogIn from '../utils/loginUitls';
+import { canLogInWithSocials, canLoginWithForm } from '../utils/loginUitls';
 import { auth } from '../../firebase-config';
 
 let unsubscribe;
@@ -17,11 +17,14 @@ const OnlineGamePage = ({
   board,
   updateMoves,
   updateStatusText,
-  loginUser,
+  loginUserWithSocials,
+  loginUserWithForm,
 }) => {
   const [authUser] = useAuthState(auth);
   useEffect(() => {
-    unsubscribe = LogIn(authUser, user, loginUser);
+    unsubscribe = canLogInWithSocials(authUser, user, loginUserWithSocials);
+
+    canLoginWithForm(authUser, user, loginUserWithForm);
 
     return () => unsubscribe && unsubscribe();
   }, [authUser]);
@@ -55,7 +58,9 @@ function mapStateToProps(state) {
 const mapDispatchToProps = {
   updateMoves: boardActions.updateMoves,
   updateStatusText: boardActions.updateStatusText,
-  loginUser: userActions.loginUser,
+  loginUserWithSocials: userActions.loginUserWithSocials,
+  loginUserWithForm: userActions.loginUserWithForm,
+  // loginUser: userActions.loginUser,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(OnlineGamePage);
