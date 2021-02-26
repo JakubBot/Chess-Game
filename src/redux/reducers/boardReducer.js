@@ -2,24 +2,23 @@ import types from '../actions/actionTypes';
 import initialState from './initialState';
 
 export default function boardReducer(state = initialState.boardInfo, action) {
-  // if (action.move?.whiteSan) console.log(action.move.whiteSan);
-  // if (action.move?.whiteSan || action.move?.blackSan) {
-  //   console.log(action.move);
-  //   if (state.moves?.length < 6) {
-  //     if (action.move?.whiteSan !== '' && action.move?.blackSan === '') {
-  //       moves = [...state.moves, action.move];
-  //     }
-  //     if (action.move?.whiteSan !== '' && action.move?.blackSan !== '') {
-  //       moves = [...state.moves.slice(1), action.move];
-  //     }
-  //   } else {
-  //     // moves = [...state.moves.slice(1), action.move];
-  //   }
-  // }
-  const moves =
-    state.moves.length < 4
-      ? [...state.moves, action.move]
-      : [...state.moves.slice(1), action.move];
+  let moves = [];
+  if (action.move?.whiteSan || action.move?.blackSan) {
+    if (state.moves?.length < 4) {
+      if (action.move?.whiteSan !== '') {
+        moves = [...state.moves, action.move];
+      }
+      if (action.move?.blackSan !== '') {
+        moves = [...state.moves.slice(0, -1), action.move];
+      }
+    } else {
+      moves = [...state.moves.slice(1, -1), action.move];
+    }
+  }
+  // const moves =
+  //   state.moves.length < 4
+  //     ? [...state.moves, action.move]
+  //     : [...state.moves.slice(1), action.move];
   switch (action.type) {
     case types.CHANGE_BOARD:
       return { ...state, board: action.board };

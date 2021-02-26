@@ -41,6 +41,7 @@ const ComputerGamePage = ({
     whiteSan: '',
     blackSan: '',
     id: null,
+    index: 0,
   });
   const songRef = useRef(null);
 
@@ -66,35 +67,32 @@ const ComputerGamePage = ({
     );
     updateStatusText(statusGame);
   }
-  // updateMoves({
 
   useEffect(() => {
-    const { whiteSan, blackSan } = gameMove;
-    if (whiteSan !== '' && blackSan !== '') {
+    const { whiteSan, blackSan, index } = gameMove;
+    if (whiteSan !== '' || blackSan !== '') {
       updateMoves({
         whiteSan,
         blackSan,
+        index,
         id: generateID(5),
       });
+    }
+    if (whiteSan !== '' && blackSan !== '') {
       setGameMove({
+        ...gameMove,
         whiteSan: '',
         blackSan: '',
         id: null,
       });
     }
   }, [gameMove]);
-
   useEffect(() => {
     songRef.current.play();
 
     function makeEngineMove() {
       const { bestMove, move } = minimaxRoot(game, maxDepth, true);
 
-      // updateMoves({
-      //   from: move.from,
-      //   to: move.to,
-      //   id: generateID(5),
-      // });
       setGameMove((prevState) => ({
         ...prevState,
         blackSan: move.san,
@@ -127,15 +125,11 @@ const ComputerGamePage = ({
       }
 
       window.setTimeout(makeEngineMove, 800);
-      // updateMoves({
-      //   from: source,
-      //   to: target,
-      //   id: generateID(5),
-      // });
 
       setGameMove((prevState) => ({
         ...prevState,
         whiteSan: move.san,
+        index: prevState.index + 1,
       }));
     }
 

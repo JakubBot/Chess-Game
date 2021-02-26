@@ -68,7 +68,7 @@ export function statusText(
     if (isMyTurn) {
       return 'Your Turn';
     }
-    return "Opponent's move...";
+    return "Opponent's move";
   }
   return 'View Only';
 }

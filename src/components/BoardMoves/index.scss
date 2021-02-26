@@ -9,8 +9,13 @@
   &__item {
     padding: 10px 0;
     width: 100%;
-    & span {
+    & .san {
       margin: 0 5px;
+    }
+    & .index {
+      display: inline-block;
+      font-size: 0.9em;
+      margin: 0 4px 0 16px;
     }
   }
   &__item:nth-child(2n + 1) {

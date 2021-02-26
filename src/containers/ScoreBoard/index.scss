@@ -16,9 +16,9 @@
   }
 
   &__header {
-    font-size: 1.7em;
+    font-size: 1.5em;
     margin-bottom: 30px;
-    letter-spacing: 1px;
+    letter-spacing: .5px;
     font-weight: bold;
   }
 
@@ -33,6 +33,8 @@
       flex-wrap: wrap;
       margin: 0px 0 5px;
       color: $darkWhite;
+      min-height: 200px;
+
       @include rwd(360) {
         justify-content: flex-start;
       }
