@@ -5,7 +5,7 @@ import Chessboard from '@chrisoakman/chessboardjs/dist/chessboard-1.0.0';
 import { withRouter } from 'react-router-dom';
 import Game from '../Game';
 import { firestore } from '../../firebase-config';
-import { figurePlayer, Turn } from '../utils/gameUtils/onlineGameUtils';
+import { figurePlayer } from '../utils/gameUtils/onlineGameUtils';
 import {
   removeDotSquares,
   allowMove,
@@ -32,13 +32,17 @@ function ChessGame({
   const [gameEngine] = useState(new Chess());
   const [state, setState] = useState({
     token: props.match.params.token,
+    moveIndex: 0,
   });
   const songRef = useRef(null);
 
   useEffect(() => {
+    console.log(state);
+  }, [state]);
+  useEffect(() => {
     ListenForUpdates(state.token, (id, game) => {
       updateBoard(id, game);
-      updateState(game);
+      updateState(id, game);
     });
 
     return () => {
@@ -48,16 +52,33 @@ function ChessGame({
   useEffect(() => {
     updateStatusText(state.statusText);
   }, [state.statusText]);
+  useEffect(() => {
+    const { whiteSan, blackSan } = state;
+    if (whiteSan || blackSan) {
+      updateMoves({
+        whiteSan,
+        blackSan,
+        id: generateID(5),
+      });
+    }
+    const chessRef = firestore.collection('games').doc(state.id);
+    if (state.whiteSan && state.blackSan) {
+      chessRef.update({
+        whiteSan: '',
+        blackSan: '',
+      });
+    }
+  }, [state.whiteSan, state.blackSan]);
   // eslint-disable-next-line camelcase
-  function updateState({ p1_token, p2_token, moveFrom, moveTo }) {
+  function updateState(id, { p1_token, p2_token, whiteSan, blackSan }) {
     const playerNum = figurePlayer(state.token, { p1_token, p2_token });
     setState((prevState) => ({
       ...prevState,
+      id,
       p1_token,
       p2_token,
-      moveFrom,
-      moveTo,
-      turn: Turn(playerNum, isMyTurn(playerNum, gameEngine.turn())),
+      whiteSan,
+      blackSan,
       statusText: statusText(
         gameEngine.turn(),
         playerNum,
@@ -120,8 +141,6 @@ function ChessGame({
     function onMouseoverSquare(square) {
       const canIMove = isMyTurn(playerNum, engine.turn());
 
-      // get list of possible moves for this square
-
       if (canIMove) {
         makeDots(gameEngine, square);
       }
@@ -150,16 +169,26 @@ function ChessGame({
 
       if (move === null) return 'snapback';
       const chessRef = firestore.collection('games').doc(id);
-      chessRef.update({
-        fen: engine.fen(),
-        moveFrom: source,
-        moveTo: target,
-      });
-      updateMoves({
-        from: source,
-        to: target,
-        id: generateID(5),
-      });
+
+      if (playerNum === 1) {
+        chessRef.update({
+          fen: engine.fen(),
+          whiteSan: move.san,
+          moveIndex: state.moveIndex + 1,
+        });
+      } else if (playerNum === 2) {
+        chessRef.update({
+          fen: engine.fen(),
+          blackSan: move.san,
+          moveIndex: state.moveIndex + 1,
+        });
+      }
+
+      // chessRef.update({
+      //   fen: engine.fen(),
+      //   moveFrom: source,
+      //   moveTo: target,
+      // });
     }
     function onSnapEnd() {
       songRef.current.play();

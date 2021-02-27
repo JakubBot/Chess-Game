@@ -60,7 +60,6 @@ const mapDispatchToProps = {
   updateStatusText: boardActions.updateStatusText,
   loginUserWithSocials: userActions.loginUserWithSocials,
   loginUserWithForm: userActions.loginUserWithForm,
-  // loginUser: userActions.loginUser,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(OnlineGamePage);

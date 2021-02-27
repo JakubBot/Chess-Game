@@ -175,7 +175,6 @@
 
 .buttons {
   margin: 10px;
-  // font-size: 17px;
 
   &__sign {
     display: flex;
@@ -189,8 +188,9 @@
   cursor: pointer;
   background-color: unset;
   white-space: nowrap;
-  font: inherit;
-  font-weight: bold;
+  font-size: 1em;
+  letter-spacing: .5px;
+  font-weight: normal;
   @extend %rectangle__button;
   @extend %rectangle__button__transform;
 }
