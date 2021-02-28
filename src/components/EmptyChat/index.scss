@@ -24,3 +24,17 @@
   }
 }
 
+.floated__chat .emptyChat {
+  font-size: 1em;
+  flex-direction: row;
+  justify-content: space-around;
+  color: #fff;
+  background-color: rgba($color: #222, $alpha: 0.2);
+  height: 100%;
+}
+.floated__chat .emptyChat h4 {
+  display: none;
+}
+.floated__chat .emptyChat__icons {
+  margin: 0;
+}

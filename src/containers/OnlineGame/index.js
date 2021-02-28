@@ -5,7 +5,7 @@ import Chessboard from '@chrisoakman/chessboardjs/dist/chessboard-1.0.0';
 import { withRouter } from 'react-router-dom';
 import Game from '../Game';
 import { firestore } from '../../firebase-config';
-import { figurePlayer } from '../utils/gameUtils/onlineGameUtils';
+import { figurePlayer, setTimeLeft } from '../utils/gameUtils/onlineGameUtils';
 import {
   removeDotSquares,
   allowMove,
@@ -39,7 +39,7 @@ function ChessGame({
     let timer = null;
     if (state.isGameActive) {
       timer = setInterval(() => {
-        setTimeLeft();
+        setTimeLeft(state, gameEngine);
       }, 1000);
     }
 
@@ -228,26 +228,7 @@ function ChessGame({
       });
     });
   }
-  function setTimeLeft() {
-    const chessRef = firestore.collection('games').doc(state.id);
-    const { timeLeft } = state;
 
-    if (gameEngine.turn() === 'w') {
-      chessRef.update({
-        timeLeft: {
-          ...timeLeft,
-          whiteTime: timeLeft.whiteTime - 1,
-        },
-      });
-    } else {
-      chessRef.update({
-        timeLeft: {
-          ...timeLeft,
-          blackTime: timeLeft.blackTime - 1,
-        },
-      });
-    }
-  }
   return (
     <>
       <Game

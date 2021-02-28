@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable camelcase */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -22,7 +23,10 @@ const GameBoard = ({
             <span className="playerName">{user?.userName ?? 'Guest 120'}</span>
             <span className="points">(500)</span>
           </div>
-          <div className="timer">{playerNum === 2 ? whiteTime : blackTime}</div>
+          <div className="timer">
+            {!playerNum && '5: 00'}
+            {playerNum === 1 ? blackTime : whiteTime}
+          </div>
         </div>
         <div id="board" className="board" />
         <div className="userInformations">
@@ -30,7 +34,10 @@ const GameBoard = ({
             <span className="playerName">{user?.userName ?? 'Guest 152'}</span>
             <span className="points">(500)</span>
           </div>
-          <div className="timer">{playerNum === 1 ? whiteTime : blackTime}</div>
+          <div className="timer">
+            {!playerNum && '5: 00'}
+            {playerNum === 1 ? whiteTime : blackTime}
+          </div>
         </div>
         {links === true && (
           <div className="links">

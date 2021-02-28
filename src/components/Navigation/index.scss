@@ -189,8 +189,13 @@
   background-color: unset;
   white-space: nowrap;
   font-size: 1em;
+  font-weight: bold;
   letter-spacing: .5px;
   font-weight: normal;
+
+  @include phone {
+    font-weight: normal
+  }
   @extend %rectangle__button;
   @extend %rectangle__button__transform;
 }

@@ -21,23 +21,24 @@ const Game = ({
     $('.links').css('display', 'none');
   };
 
-  function convertTime(time = 300) {
+  const convertTime = (time = 300) => {
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time - minutes * 60);
 
     return `${minutes}: ${seconds < 10 ? `0${seconds}` : seconds}`;
-  }
+  };
+
   return (
     <>
       <GameBoard
         whiteTime={convertTime(timeLeft?.whiteTime)}
         blackTime={convertTime(timeLeft?.blackTime)}
+        playerNum={playerNum}
         adress={adress}
         removeLink={removeLink}
         songRef={songRef}
         links={links}
         user={user}
-        playerNum={playerNum}
       />
     </>
   );
