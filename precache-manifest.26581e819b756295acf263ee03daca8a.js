@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "3a7779df2b47c0516560e96d1c995b2c",
+    "revision": "f8f2c7b507d2facd71caad26c335c865",
     "url": "/Chess-Game/index.html"
   },
   {
-    "revision": "e082ab31ee3dc5d67ec6",
+    "revision": "f6658a34a93d549525e7",
     "url": "/Chess-Game/static/css/2.8ee8a604.chunk.css"
   },
   {
-    "revision": "cae7068c172920f0c810",
-    "url": "/Chess-Game/static/css/main.339fdccb.chunk.css"
+    "revision": "dd85398c683c0ba0f588",
+    "url": "/Chess-Game/static/css/main.0728bf66.chunk.css"
   },
   {
-    "revision": "e082ab31ee3dc5d67ec6",
-    "url": "/Chess-Game/static/js/2.5c3c6400.chunk.js"
+    "revision": "f6658a34a93d549525e7",
+    "url": "/Chess-Game/static/js/2.4b4d18f2.chunk.js"
   },
   {
     "revision": "b01cf20ee08477db845d02c3b279da13",
-    "url": "/Chess-Game/static/js/2.5c3c6400.chunk.js.LICENSE.txt"
+    "url": "/Chess-Game/static/js/2.4b4d18f2.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "cae7068c172920f0c810",
-    "url": "/Chess-Game/static/js/main.1cf05e2e.chunk.js"
+    "revision": "dd85398c683c0ba0f588",
+    "url": "/Chess-Game/static/js/main.7ac37e17.chunk.js"
   },
   {
     "revision": "ac5bd5c268760d27f7c6",
