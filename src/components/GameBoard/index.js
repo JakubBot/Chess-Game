@@ -5,13 +5,14 @@ import PropTypes from 'prop-types';
 import './index.scss';
 
 const GameBoard = ({
-  p1_token,
-  p2_token,
   songRef,
   links,
   adress,
   removeLink,
   user,
+  whiteTime,
+  blackTime,
+  playerNum,
 }) => {
   return (
     <>
@@ -21,7 +22,7 @@ const GameBoard = ({
             <span className="playerName">{user?.userName ?? 'Guest 120'}</span>
             <span className="points">(500)</span>
           </div>
-          <div className="timer">3: 00</div>
+          <div className="timer">{playerNum === 2 ? whiteTime : blackTime}</div>
         </div>
         <div id="board" className="board" />
         <div className="userInformations">
@@ -29,7 +30,7 @@ const GameBoard = ({
             <span className="playerName">{user?.userName ?? 'Guest 152'}</span>
             <span className="points">(500)</span>
           </div>
-          <div className="timer">3: 00</div>
+          <div className="timer">{playerNum === 1 ? whiteTime : blackTime}</div>
         </div>
         {links === true && (
           <div className="links">

@@ -99,9 +99,11 @@
       justify-content: flex-end;
       align-items: center;
       color: #fff;
+      min-width: 100px;
       @include tablet {
         padding: 10px 10px 10px 60px;
         font-size: 1.2em;
+        min-width: 120px;
       }
       @include desktop {
         padding: 12px 12px 12px 70px;

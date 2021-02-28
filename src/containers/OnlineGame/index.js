@@ -33,30 +33,19 @@ function ChessGame({
   const [state, setState] = useState({
     token: props.match.params.token,
   });
-
   const songRef = useRef(null);
 
-  // useEffect(() => {
-  //   const timer = setInterval(() => {
-  //     setTimeLeft();
-  //   }, 1000);
-
-  //   return () => clearInterval(timer);
-  // });
-
-  function setTimeLeft() {
-    const chessRef = firestore.collection('games').doc(state.id);
-    const { timeLeft } = state;
-    chessRef.update({
-      timeLeft: {
-        whiteTime: timeLeft.whiteTime - 1,
-        blackTime: timeLeft.blackTime - 1,
-      },
-    });
-  }
   useEffect(() => {
-    // console.log(state);
-  }, [state]);
+    let timer = null;
+    if (state.isGameActive) {
+      timer = setInterval(() => {
+        setTimeLeft();
+      }, 1000);
+    }
+
+    return () => clearInterval(timer);
+  }, [state.isGameActive, state.timeLeft]);
+
   useEffect(() => {
     ListenForUpdates(state.token, (id, game) => {
       updateBoard(id, game);
@@ -67,9 +56,11 @@ function ChessGame({
       unsubscribe();
     };
   }, []);
+
   useEffect(() => {
     updateStatusText(state.statusText);
   }, [state.statusText]);
+
   useEffect(() => {
     const { whiteSan, blackSan } = state;
     if (whiteSan || blackSan) {
@@ -92,11 +83,20 @@ function ChessGame({
 
   function updateState(
     id,
-    { p1_token, p2_token, whiteSan, blackSan, timeLeft, moveIndex }
+    {
+      p1_token,
+      p2_token,
+      whiteSan,
+      blackSan,
+      timeLeft,
+      moveIndex,
+      isGameActive,
+    }
   ) {
     const playerNum = figurePlayer(state.token, { p1_token, p2_token });
     setState((prevState) => ({
       ...prevState,
+      isGameActive,
       timeLeft,
       id,
       moveIndex,
@@ -198,6 +198,7 @@ function ChessGame({
         chessRef.update({
           fen: engine.fen(),
           whiteSan: move.san,
+          isGameActive: true,
         });
       } else if (playerNum === 2) {
         chessRef.update({
@@ -227,15 +228,36 @@ function ChessGame({
       });
     });
   }
+  function setTimeLeft() {
+    const chessRef = firestore.collection('games').doc(state.id);
+    const { timeLeft } = state;
 
+    if (gameEngine.turn() === 'w') {
+      chessRef.update({
+        timeLeft: {
+          ...timeLeft,
+          whiteTime: timeLeft.whiteTime - 1,
+        },
+      });
+    } else {
+      chessRef.update({
+        timeLeft: {
+          ...timeLeft,
+          blackTime: timeLeft.blackTime - 1,
+        },
+      });
+    }
+  }
   return (
     <>
       <Game
+        timeLeft={state.timeLeft}
         links
         songRef={songRef}
         p1_token={state.p1_token}
         p2_token={state.p2_token}
         user={user}
+        playerNum={figurePlayer(state.token, state)}
       />
     </>
   );
