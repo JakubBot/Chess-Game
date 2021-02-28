@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/Chess-Game/static/css/main.0728bf66.chunk.css",
-    "main.js": "/Chess-Game/static/js/main.7ac37e17.chunk.js",
-    "main.js.map": "/Chess-Game/static/js/main.7ac37e17.chunk.js.map",
+    "main.js": "/Chess-Game/static/js/main.abb5bf3f.chunk.js",
+    "main.js.map": "/Chess-Game/static/js/main.abb5bf3f.chunk.js.map",
     "runtime-main.js": "/Chess-Game/static/js/runtime-main.f0937801.js",
     "runtime-main.js.map": "/Chess-Game/static/js/runtime-main.f0937801.js.map",
     "static/css/2.8ee8a604.chunk.css": "/Chess-Game/static/css/2.8ee8a604.chunk.css",
     "static/js/2.4b4d18f2.chunk.js": "/Chess-Game/static/js/2.4b4d18f2.chunk.js",
     "static/js/2.4b4d18f2.chunk.js.map": "/Chess-Game/static/js/2.4b4d18f2.chunk.js.map",
     "index.html": "/Chess-Game/index.html",
-    "precache-manifest.26581e819b756295acf263ee03daca8a.js": "/Chess-Game/precache-manifest.26581e819b756295acf263ee03daca8a.js",
+    "precache-manifest.1d382a9a54cb18d2fb063dcc57fba629.js": "/Chess-Game/precache-manifest.1d382a9a54cb18d2fb063dcc57fba629.js",
     "service-worker.js": "/Chess-Game/service-worker.js",
     "static/css/2.8ee8a604.chunk.css.map": "/Chess-Game/static/css/2.8ee8a604.chunk.css.map",
     "static/css/main.0728bf66.chunk.css.map": "/Chess-Game/static/css/main.0728bf66.chunk.css.map",
@@ -21,6 +21,6 @@
     "static/css/2.8ee8a604.chunk.css",
     "static/js/2.4b4d18f2.chunk.js",
     "static/css/main.0728bf66.chunk.css",
-    "static/js/main.7ac37e17.chunk.js"
+    "static/js/main.abb5bf3f.chunk.js"
   ]
 }
