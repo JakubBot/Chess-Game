@@ -32,12 +32,30 @@ function ChessGame({
   const [gameEngine] = useState(new Chess());
   const [state, setState] = useState({
     token: props.match.params.token,
-    moveIndex: 0,
   });
+
   const songRef = useRef(null);
 
+  // useEffect(() => {
+  //   const timer = setInterval(() => {
+  //     setTimeLeft();
+  //   }, 1000);
+
+  //   return () => clearInterval(timer);
+  // });
+
+  function setTimeLeft() {
+    const chessRef = firestore.collection('games').doc(state.id);
+    const { timeLeft } = state;
+    chessRef.update({
+      timeLeft: {
+        whiteTime: timeLeft.whiteTime - 1,
+        blackTime: timeLeft.blackTime - 1,
+      },
+    });
+  }
   useEffect(() => {
-    console.log(state);
+    // console.log(state);
   }, [state]);
   useEffect(() => {
     ListenForUpdates(state.token, (id, game) => {
@@ -59,6 +77,7 @@ function ChessGame({
         whiteSan,
         blackSan,
         id: generateID(5),
+        moveIndex: state.moveIndex ?? 1,
       });
     }
     const chessRef = firestore.collection('games').doc(state.id);
@@ -66,15 +85,21 @@ function ChessGame({
       chessRef.update({
         whiteSan: '',
         blackSan: '',
+        moveIndex: state.moveIndex + 1,
       });
     }
   }, [state.whiteSan, state.blackSan]);
-  // eslint-disable-next-line camelcase
-  function updateState(id, { p1_token, p2_token, whiteSan, blackSan }) {
+
+  function updateState(
+    id,
+    { p1_token, p2_token, whiteSan, blackSan, timeLeft, moveIndex }
+  ) {
     const playerNum = figurePlayer(state.token, { p1_token, p2_token });
     setState((prevState) => ({
       ...prevState,
+      timeLeft,
       id,
+      moveIndex,
       p1_token,
       p2_token,
       whiteSan,
@@ -118,6 +143,7 @@ function ChessGame({
       onMouseoutSquare: removeDotSquares,
       onMouseoverSquare,
     };
+
     board = Chessboard('board', config);
     if (playerNum === 2) {
       board.orientation('black');
@@ -166,29 +192,19 @@ function ChessGame({
         to: target,
         promotion: 'q',
       });
-
       if (move === null) return 'snapback';
       const chessRef = firestore.collection('games').doc(id);
-
       if (playerNum === 1) {
         chessRef.update({
           fen: engine.fen(),
           whiteSan: move.san,
-          moveIndex: state.moveIndex + 1,
         });
       } else if (playerNum === 2) {
         chessRef.update({
           fen: engine.fen(),
           blackSan: move.san,
-          moveIndex: state.moveIndex + 1,
         });
       }
-
-      // chessRef.update({
-      //   fen: engine.fen(),
-      //   moveFrom: source,
-      //   moveTo: target,
-      // });
     }
     function onSnapEnd() {
       songRef.current.play();

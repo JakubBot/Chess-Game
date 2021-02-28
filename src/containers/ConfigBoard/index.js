@@ -37,6 +37,11 @@ const ConfigBoard = ({ board, piece, mode, history, ...props }) => {
     const newGame = {
       p1_token: generateID(8),
       p2_token: generateID(8),
+      moveIndex: 1,
+      timeLeft: {
+        whiteTime: 300,
+        blackTime: 300,
+      },
     };
 
     if (mode === 'online') {
