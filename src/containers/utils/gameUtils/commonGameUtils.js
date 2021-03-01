@@ -47,16 +47,16 @@ export function statusText(
 ) {
   const move = turn === 'b' ? 'Black' : 'White';
   if (stalemate) {
-    return 'draw by stalemate';
+    return 'Draw by stalemate';
   }
   if (repetition) {
-    return `draw by repetition`;
+    return `Draw by repetition`;
   }
   if (insufficientMaterial) {
-    return 'draw by insufficient material';
+    return 'Draw by insufficient material';
   }
   if (draw) {
-    return `draw position`;
+    return `Draw position`;
   }
   if (checkmate) {
     return `${move} in checkmate, gameover`;

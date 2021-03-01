@@ -43,7 +43,23 @@ const ComputerGamePage = ({
     id: null,
     index: 0,
   });
+  const [timeLeft, setTimeLeft] = useState({
+    whiteTime: 300,
+    blackTime: 300,
+    isGameActive: false,
+  });
   const songRef = useRef(null);
+
+  useEffect(() => {
+    let timer = null;
+    if (timeLeft.isGameActive) {
+      timer = setInterval(() => {
+        updateTimeLeft();
+      }, 1000);
+    }
+
+    return () => clearInterval(timer);
+  }, [timeLeft.isGameActive, timeLeft.timeLeft]);
 
   useEffect(() => {
     unsubscribe = canLogInWithSocials(authUser, user, loginUserWithSocials);
@@ -52,7 +68,19 @@ const ComputerGamePage = ({
 
     return () => unsubscribe && unsubscribe();
   }, [authUser]);
-
+  function updateTimeLeft() {
+    if (game.turn() === 'w') {
+      setTimeLeft((prevState) => ({
+        ...prevState,
+        whiteTime: prevState.whiteTime - 1,
+      }));
+    } else {
+      setTimeLeft((prevState) => ({
+        ...prevState,
+        blackTime: prevState.blackTime - 1,
+      }));
+    }
+  }
   function updateStatus() {
     const statusGame = statusText(
       game.turn(),
@@ -124,12 +152,16 @@ const ComputerGamePage = ({
         return 'snapback';
       }
 
-      window.setTimeout(makeEngineMove, 800);
+      window.setTimeout(makeEngineMove, 2200);
 
       setGameMove((prevState) => ({
         ...prevState,
         whiteSan: move.san,
         index: prevState.index + 1,
+      }));
+      setTimeLeft((prevState) => ({
+        ...prevState,
+        isGameActive: true,
       }));
     }
 
@@ -175,7 +207,12 @@ const ComputerGamePage = ({
   return (
     <>
       <div className="page__wrapper">
-        <Game songRef={songRef} links={false} />
+        <Game
+          timeLeft={timeLeft}
+          songRef={songRef}
+          links={false}
+          playerNum={1}
+        />
         <ScoreBoard moves={moves} statusText={currentStatusText} />
       </div>
     </>

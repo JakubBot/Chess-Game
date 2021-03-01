@@ -24,8 +24,11 @@ const GameBoard = ({
             <span className="points">(500)</span>
           </div>
           <div className="timer">
-            {!playerNum && '5: 00'}
-            {playerNum === 1 ? blackTime : whiteTime}
+            {playerNum === 1
+              ? blackTime
+              : playerNum === 2
+              ? whiteTime
+              : '5: 00'}
           </div>
         </div>
         <div id="board" className="board" />
@@ -35,8 +38,11 @@ const GameBoard = ({
             <span className="points">(500)</span>
           </div>
           <div className="timer">
-            {!playerNum && '5: 00'}
-            {playerNum === 1 ? whiteTime : blackTime}
+            {playerNum === 1
+              ? whiteTime
+              : playerNum === 2
+              ? blackTime
+              : '5: 00'}
           </div>
         </div>
         {links === true && (
