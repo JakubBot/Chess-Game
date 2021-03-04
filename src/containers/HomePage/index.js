@@ -7,7 +7,6 @@ import * as boardActions from '../../redux/actions/boardActions';
 import { auth } from '../../firebase-config';
 import GameBoard from '../../components/GameBoard';
 import * as userActions from '../../redux/actions/userActions';
-import { canLogInWithSocials, canLoginWithForm } from '../utils/loginUitls';
 
 const $ = window.jQuery;
 let unsubscribe = null;
@@ -25,10 +24,12 @@ const HomePage = ({
 }) => {
   const [authUser] = useAuthState(auth);
   useEffect(() => {
-    unsubscribe = canLogInWithSocials(authUser, user, loginUserWithSocials);
-
-    canLoginWithForm(authUser, user, loginUserWithForm);
-
+    if (authUser !== null && user === null) {
+      unsubscribe = loginUserWithSocials(authUser);
+    }
+    if (authUser === null && user === null) {
+      loginUserWithForm();
+    }
     return () => unsubscribe && unsubscribe();
   }, [authUser]);
 
@@ -43,7 +44,7 @@ const HomePage = ({
       pieceTheme: `${process.env.PUBLIC_URL}/img/chesspieces/${piece}/{piece}.png`,
       position: 'start',
     };
-    // eslint-disable-next-line no-unused-vars
+
     const chessBoard = Chessboard('board', config);
 
     const $board = $('.chessboard-63f37');
@@ -92,7 +93,6 @@ const mapDispatchToProps = {
   changeBoard: boardActions.changeBoard,
   changePiece: boardActions.changePiece,
   changeMode: boardActions.changeMode,
-  logIn: userActions.logIn,
   defaultBoardSettings: boardActions.defaultBoardSettings,
   loginUserWithSocials: userActions.loginUserWithSocials,
   loginUserWithForm: userActions.loginUserWithForm,

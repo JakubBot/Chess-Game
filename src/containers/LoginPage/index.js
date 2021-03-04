@@ -11,7 +11,6 @@ import {
 } from '../../firebase-config';
 import LoginForm from '../../components/LoginForm/LoginForm';
 import * as userActions from '../../redux/actions/userActions';
-import { canLogInWithSocials, canLoginWithForm } from '../utils/loginUitls';
 
 let unsubscribe = null;
 const LoginPage = ({
@@ -20,7 +19,6 @@ const LoginPage = ({
   loginUserWithSocials,
   loginUserWithForm,
   logOutUser,
-  saveUserWithForm,
 }) => {
   const [form, setForm] = useState({
     email: '',
@@ -30,13 +28,14 @@ const LoginPage = ({
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
-    unsubscribe = canLogInWithSocials(authUser, user, loginUserWithSocials);
-
-    canLoginWithForm(authUser, user, loginUserWithForm);
-
+    if (authUser !== null && user === null) {
+      unsubscribe = loginUserWithSocials(authUser);
+    }
+    if (authUser === null && user === null) {
+      loginUserWithForm();
+    }
     return () => unsubscribe && unsubscribe();
   }, [authUser]);
-
   const signOut = () => {
     signOutUser(logOutUser);
   };
@@ -58,9 +57,9 @@ const LoginPage = ({
       .where('password', '==', form.password);
     unsubscribe = userRef.onSnapshot((docs) => {
       if (!docs.empty) {
-        saveUserWithForm(docs).then(() => {
-          history.push('/');
-        });
+        const user = docs.docs[0].data();
+        loginUserWithForm({ user, method: 'set' });
+        history.push('/');
       } else {
         setErrors({
           formError:
@@ -92,7 +91,6 @@ const mapDispatchToProps = {
   logOutUser: userActions.logOutUser,
   loginUserWithSocials: userActions.loginUserWithSocials,
   loginUserWithForm: userActions.loginUserWithForm,
-  saveUserWithForm: userActions.saveUserWithForm,
 };
 
 function mapStateToProps(state) {

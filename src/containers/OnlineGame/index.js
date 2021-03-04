@@ -1,10 +1,9 @@
-/* eslint-disable no-use-before-define */
 import React, { useEffect, useRef, useState } from 'react';
 import Chess from 'chess.js/chess';
 import Chessboard from '@chrisoakman/chessboardjs/dist/chessboard-1.0.0';
 import { withRouter } from 'react-router-dom';
 import Game from '../Game';
-import { firestore } from '../../firebase-config';
+import firebase, { firestore } from '../../firebase-config';
 import { figurePlayer, setTimeLeft } from '../utils/gameUtils/onlineGameUtils';
 import {
   removeDotSquares,
@@ -76,7 +75,8 @@ function ChessGame({
       chessRef.update({
         whiteSan: '',
         blackSan: '',
-        moveIndex: state.moveIndex + 1,
+        moveIndex: firebase.firestore.FieldValue.increment(1),
+        // moveIndex: state.moveIndex + 1,
       });
     }
   }, [state.whiteSan, state.blackSan]);

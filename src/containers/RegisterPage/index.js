@@ -1,20 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-
 import { useAuthState } from 'react-firebase-hooks/auth';
 import RegisterForm from '../../components/RegisterForm/RegisterForm';
 import { firestore, auth } from '../../firebase-config';
 import { generateID } from '../utils/utils';
 import * as userActions from '../../redux/actions/userActions';
-import { canLogInWithSocials, canLoginWithForm } from '../utils/loginUitls';
 
 let unsubscribe;
 const RegisterPage = ({
   user,
   history,
   loginUserWithForm,
-  logIn,
   loginUserWithSocials,
 }) => {
   const [form, setForm] = useState({
@@ -25,10 +22,12 @@ const RegisterPage = ({
   const [errors, setErrors] = useState({});
   const [authUser] = useAuthState(auth);
   useEffect(() => {
-    unsubscribe = canLogInWithSocials(authUser, user, loginUserWithSocials);
-
-    canLoginWithForm(authUser, user, loginUserWithForm);
-
+    if (authUser !== null && user === null) {
+      unsubscribe = loginUserWithSocials(authUser);
+    }
+    if (authUser === null && user === null) {
+      loginUserWithForm();
+    }
     return () => unsubscribe && unsubscribe();
   }, [authUser]);
 
@@ -80,7 +79,7 @@ const RegisterPage = ({
     const photo =
       'https://betacssjs.chesscomfiles.com/bundles/web/images/white_400.09ae248e.png';
     const { userName, email, password } = form;
-    const _user = {
+    const user = {
       email,
       password,
       uid,
@@ -89,14 +88,8 @@ const RegisterPage = ({
       points: 500,
     };
     const usersRef = firestore.collection('users');
-    usersRef.add(_user);
-    usersRef.onSnapshot((docs) => {
-      const user = docs.docs.find((doc) => doc.data().uid === uid);
-
-      logIn({
-        ..._user,
-        points: user.data().points,
-      });
+    usersRef.add(user).then(() => {
+      loginUserWithForm({ user, method: 'set' });
     });
 
     setForm({

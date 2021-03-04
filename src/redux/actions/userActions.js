@@ -1,5 +1,6 @@
 /* eslint-disable no-alert */
 import types from './actionTypes';
+import { firestore } from '../../firebase-config';
 
 export function logIn({ userName, photo, uid, points, email, password }) {
   return {
@@ -13,15 +14,8 @@ export function logIn({ userName, photo, uid, points, email, password }) {
   };
 }
 
-async function getUserFromFirestore(docs) {
-  const {
-    uid,
-    points,
-    userName,
-    photo,
-    email,
-    password,
-  } = await docs[0].data();
+function getUserFromFirestore(docs) {
+  const { uid, points, userName, photo, email, password } = docs[0].data();
   return {
     uid,
     points,
@@ -37,24 +31,48 @@ export function logOutUser() {
   return { type: types.LOG_OUT };
 }
 
-export function saveUserWithForm({ docs }) {
-  return async (dispatch) => {
-    const _user = await getUserFromFirestore(docs);
-    localStorage.setItem('user', JSON.stringify(_user));
-    dispatch(logIn(_user));
-  };
-}
-
-export function loginUserWithForm(_user) {
+export function loginUserWithForm(
+  mylocalStorage = { method: 'get', user: null }
+) {
   return (dispatch) => {
-    dispatch(logIn(_user));
+    let { user } = mylocalStorage;
+    const { method } = mylocalStorage;
+
+    if (method === 'set') {
+      localStorage.setItem('user', JSON.stringify(user));
+    } else {
+      user = JSON.parse(localStorage.getItem('user'));
+    }
+
+    if (user) {
+      dispatch(logIn(user));
+    }
   };
 }
 
-export function loginUserWithSocials({ docs }) {
-  return async (dispatch) => {
-    const _user = await getUserFromFirestore(docs);
+export function loginUserWithSocials(authUser) {
+  return (dispatch) => {
+    const userRef = firestore
+      .collection('users')
+      .where('uid', '==', authUser.uid);
 
-    dispatch(logIn(_user));
+    return userRef.onSnapshot(({ size, docs }) => {
+      if (size === 1) {
+        const _user = getUserFromFirestore(docs);
+        dispatch(logIn(_user));
+      } else {
+        register(authUser);
+      }
+    });
   };
+}
+
+function register(authUser) {
+  const { photoURL, displayName, uid } = authUser;
+  firestore.collection('users').add({
+    uid,
+    points: 500,
+    userName: displayName,
+    photo: photoURL,
+  });
 }

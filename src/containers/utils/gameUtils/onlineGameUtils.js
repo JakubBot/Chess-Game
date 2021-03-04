@@ -1,4 +1,4 @@
-import { firestore } from '../../../firebase-config';
+import firebase, { firestore } from '../../../firebase-config';
 /* eslint-disable camelcase */
 export function figurePlayer(token, { p1_token, p2_token }) {
   if (token === p1_token) {
@@ -32,11 +32,12 @@ export function setTimeLeft({ id, timeLeft }, gameEngine) {
 
   if (gameEngine.turn() === 'w') {
     chessRef.update({
-      'timeLeft.whiteTime': timeLeft.whiteTime - 1,
+      'timeLeft.whiteTime': firebase.firestore.FieldValue.increment(-1),
+      // 'timeLeft.whiteTime': timeLeft.whiteTime - 1,
     });
   } else {
     chessRef.update({
-      'timeLeft.blackTime': timeLeft.blackTime - 1,
+      'timeLeft.blackTime': firebase.firestore.FieldValue.increment(-1),
     });
   }
 }

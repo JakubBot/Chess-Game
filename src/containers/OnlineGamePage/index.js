@@ -5,7 +5,6 @@ import OnlineGame from '../OnlineGame';
 import ScoreBoard from '../ScoreBoard';
 import * as boardActions from '../../redux/actions/boardActions';
 import * as userActions from '../../redux/actions/userActions';
-import { canLogInWithSocials, canLoginWithForm } from '../utils/loginUitls';
 import { auth } from '../../firebase-config';
 
 let unsubscribe;
@@ -22,10 +21,12 @@ const OnlineGamePage = ({
 }) => {
   const [authUser] = useAuthState(auth);
   useEffect(() => {
-    unsubscribe = canLogInWithSocials(authUser, user, loginUserWithSocials);
-
-    canLoginWithForm(authUser, user, loginUserWithForm);
-
+    if (authUser !== null && user === null) {
+      unsubscribe = loginUserWithSocials(authUser);
+    }
+    if (authUser === null && user === null) {
+      loginUserWithForm();
+    }
     return () => unsubscribe && unsubscribe();
   }, [authUser]);
 

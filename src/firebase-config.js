@@ -34,8 +34,9 @@ export {
   auth,
   googleProvider,
   facebookProvider,
-  firebase,
   loginGoogle,
   loginFacebook,
   signOutUser,
 };
+
+export default firebase;

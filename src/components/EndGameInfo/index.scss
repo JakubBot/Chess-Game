@@ -1,0 +1,91 @@
+.endGameCard {
+  position: absolute;
+  top: 50vh;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 800;
+
+  width: calc(100% - 40px);
+  padding: 15px 30px;
+  background-color: rgba($color: #fff, $alpha: 1);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    background-color: #85a94e;
+    width: 100%;
+    height: 80px;
+    z-index: -1;
+    clip-path: ellipse(65% 77% at 50% 22%);
+    -webkit-clip-path: ellipse(65% 77% at 50% 22%);
+  }
+  &__close {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    font-size: 1.2em;
+    color: #fff;
+  }
+
+  .wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    &__header {
+      color: #efefef;
+      font-size: 1.7em;
+      margin: 10px 0 60px;
+    }
+
+    &__images {
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+    }
+    &__image {
+      width: 85px;
+      height: 85px;
+      border: 4px solid #666463;
+      //lose color
+      //#666463
+      //win color
+      //#85a94e
+    }
+
+    &__rating {
+      margin: 10px 0;
+
+      &__header {
+        color: rgba($color: #a7a6a2, $alpha: 1);
+        font-size: 1.3em;
+        letter-spacing: 2px;
+        text-align: center;
+      }
+
+      &__points {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      &__point {
+        font-size: 2.2em;
+        font-weight: bold;
+        letter-spacing: 2px;
+        color: #1f1f1f;
+      }
+      &__change {
+        font-size: 1.4em;
+        color: #87b444;
+        font-weight: bold;
+        margin-left: 5px;
+        display: inline-block;
+      }
+    }
+  }
+}

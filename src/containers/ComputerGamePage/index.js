@@ -17,7 +17,7 @@ import {
 import { generateID } from '../utils/utils';
 import * as userActions from '../../redux/actions/userActions';
 import * as boardActions from '../../redux/actions/boardActions';
-import { canLogInWithSocials, canLoginWithForm } from '../utils/loginUitls';
+import EndGameCard from '../../components/EndGameInfo';
 
 const $ = window.jQuery;
 let board = null;
@@ -44,12 +44,19 @@ const ComputerGamePage = ({
     index: 0,
   });
   const [timeLeft, setTimeLeft] = useState({
-    whiteTime: 300,
-    blackTime: 300,
+    whiteTime: 0,
+    blackTime: 0,
     isGameActive: false,
   });
+  const [isGameEndByTime, setIsGameEndByTime] = useState(false);
   const songRef = useRef(null);
 
+  useEffect(() => {
+    setTimeLeft((prevState) => ({
+      ...prevState,
+      isGameActive: false,
+    }));
+  }, [game.game_over(), isGameEndByTime]);
   useEffect(() => {
     let timer = null;
     if (timeLeft.isGameActive) {
@@ -57,15 +64,20 @@ const ComputerGamePage = ({
         updateTimeLeft();
       }, 1000);
     }
-
+    if (timeLeft.whiteTime <= 0 || timeLeft.blackTime <= 0) {
+      clearInterval(timer);
+      setIsGameEndByTime(true);
+    }
     return () => clearInterval(timer);
-  }, [timeLeft.isGameActive, timeLeft.timeLeft]);
+  }, [timeLeft.isGameActive, timeLeft]);
 
   useEffect(() => {
-    unsubscribe = canLogInWithSocials(authUser, user, loginUserWithSocials);
-
-    canLoginWithForm(authUser, user, loginUserWithForm);
-
+    if (authUser !== null && user === null) {
+      unsubscribe = loginUserWithSocials(authUser);
+    }
+    if (authUser === null && user === null) {
+      loginUserWithForm();
+    }
     return () => unsubscribe && unsubscribe();
   }, [authUser]);
   function updateTimeLeft() {
@@ -207,6 +219,7 @@ const ComputerGamePage = ({
   return (
     <>
       <div className="page__wrapper">
+        {(game.game_over() || isGameEndByTime) && <EndGameCard />}
         <Game
           timeLeft={timeLeft}
           songRef={songRef}

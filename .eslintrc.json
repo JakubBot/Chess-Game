@@ -34,7 +34,9 @@
     ],
     "jsx-a11y/media-has-caption": [0],
     "consistent-return": "off",
-    "react/display-name": [0]
+    "react/display-name": [0],
+    "import/no-named-as-default-member": "off"
+  
   },
   "parser": "babel-eslint",
   "env": {

@@ -1,9 +1,9 @@
+/* eslint-disable import/no-named-as-default-member */
 import React, { useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
 import FloatedButton from '../../components/FloatedButton';
-import {
+import firebase, {
   firestore,
-  firebase,
   loginGoogle,
   loginFacebook,
 } from '../../firebase-config';
