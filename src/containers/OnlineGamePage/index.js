@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import OnlineGame from '../OnlineGame';
-import ScoreBoard from '../ScoreBoard';
+import OnlineGame from '../../components/OnlineGame';
+import ScoreBoard from '../../components/ScoreBoard';
 import * as boardActions from '../../redux/actions/boardActions';
 import * as userActions from '../../redux/actions/userActions';
 import { auth } from '../../firebase-config';

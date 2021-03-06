@@ -3,21 +3,21 @@ import Chess from 'chess.js/chess';
 import Chessboard from '@chrisoakman/chessboardjs/dist/chessboard-1.0.0';
 import { connect } from 'react-redux';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import ScoreBoard from '../ScoreBoard';
-import Game from '../Game';
+import ScoreBoard from '../../components/ScoreBoard';
+import Game from '../../components/common/Game';
 import { auth } from '../../firebase-config';
-import { minimaxRoot } from '../utils/gameUtils/computerGameUtils';
+import { minimaxRoot } from '../../components/utils/gameUtils/computerGameUtils';
 import {
   removeDotSquares,
   allowMove,
   makeDots,
   statusText,
   isMyTurn,
-} from '../utils/gameUtils/commonGameUtils';
-import { generateID } from '../utils/utils';
+} from '../../components/utils/gameUtils/commonGameUtils';
+import { generateID } from '../../components/utils';
 import * as userActions from '../../redux/actions/userActions';
 import * as boardActions from '../../redux/actions/boardActions';
-import EndGameCard from '../../components/EndGameInfo';
+import EndGameCard from '../../components/EndGameCard';
 
 const $ = window.jQuery;
 let board = null;
@@ -44,8 +44,8 @@ const ComputerGamePage = ({
     index: 0,
   });
   const [timeLeft, setTimeLeft] = useState({
-    whiteTime: 0,
-    blackTime: 0,
+    whiteTime: 2,
+    blackTime: 2,
     isGameActive: false,
   });
   const [isGameEndByTime, setIsGameEndByTime] = useState(false);
@@ -219,7 +219,9 @@ const ComputerGamePage = ({
   return (
     <>
       <div className="page__wrapper">
-        {(game.game_over() || isGameEndByTime) && <EndGameCard />}
+        {(game.game_over() || isGameEndByTime) && (
+          <EndGameCard timeLeft={timeLeft} turn={game.turn()} />
+        )}
         <Game
           timeLeft={timeLeft}
           songRef={songRef}

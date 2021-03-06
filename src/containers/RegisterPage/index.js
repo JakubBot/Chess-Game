@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import RegisterForm from '../../components/RegisterForm/RegisterForm';
 import { firestore, auth } from '../../firebase-config';
-import { generateID } from '../utils/utils';
+import { generateID } from '../../components/utils';
 import * as userActions from '../../redux/actions/userActions';
 
 let unsubscribe;

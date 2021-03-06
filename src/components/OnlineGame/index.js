@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import Chess from 'chess.js/chess';
 import Chessboard from '@chrisoakman/chessboardjs/dist/chessboard-1.0.0';
 import { withRouter } from 'react-router-dom';
-import Game from '../Game';
+import Game from '../common/Game';
 import firebase, { firestore } from '../../firebase-config';
 import { figurePlayer, setTimeLeft } from '../utils/gameUtils/onlineGameUtils';
 import {
@@ -12,7 +12,7 @@ import {
   statusText,
   isMyTurn,
 } from '../utils/gameUtils/commonGameUtils';
-import { generateID } from '../utils/utils';
+import { generateID } from '../utils';
 
 const $ = window.jQuery;
 

@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import TextInput from '../TextInput';
+import TextInput from '../common/TextInput';
 import ChatMessage from './ChatMessage';
 import EmptyChat from '../EmptyChat';
 import './index.scss';

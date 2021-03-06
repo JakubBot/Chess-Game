@@ -1,8 +1,8 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import { generateID } from '../utils/utils';
+import { generateID } from '../utils';
 import { firestore } from '../../firebase-config';
-import ConfigForm from '../../components/ConfigForm';
+import ConfigForm from './ConfigForm';
 
 const $ = window.jQuery;
 

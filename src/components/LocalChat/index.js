@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import {
   firestore,
@@ -8,8 +7,8 @@ import {
   loginGoogle,
   loginFacebook,
 } from '../../firebase-config';
-import { generateID } from '../utils/utils';
-import ChatMessages from '../../components/ChatMessages';
+import { generateID } from '../utils';
+import ChatMessages from './ChatMessages';
 
 let unsubscribe = null;
 const LocalChat = ({ loginUser, ...props }) => {
@@ -98,7 +97,4 @@ const LocalChat = ({ loginUser, ...props }) => {
   );
 };
 
-const mapDisptachToProps = {
-  // loginUser: userActions.loginUser,
-};
-export default withRouter(connect(null, mapDisptachToProps)(LocalChat));
+export default withRouter(LocalChat);

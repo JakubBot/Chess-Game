@@ -1,5 +1,5 @@
 import React from 'react';
-import BoardMoves from '../../components/BoardMoves';
+import BoardMoves from './BoardMoves';
 import LocalChat from '../LocalChat';
 import './index.scss';
 

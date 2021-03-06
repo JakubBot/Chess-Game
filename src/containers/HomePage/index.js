@@ -2,10 +2,10 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Chessboard from '@chrisoakman/chessboardjs/dist/chessboard-1.0.0';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import ConfigBoard from '../ConfigBoard';
+import ConfigBoard from '../../components/ConfigBoard';
 import * as boardActions from '../../redux/actions/boardActions';
 import { auth } from '../../firebase-config';
-import GameBoard from '../../components/GameBoard';
+import Game from '../../components/common/Game';
 import * as userActions from '../../redux/actions/userActions';
 
 const $ = window.jQuery;
@@ -63,7 +63,7 @@ const HomePage = ({
   return (
     <>
       <div className="page__wrapper">
-        <GameBoard />
+        <Game />
         <ConfigBoard
           board={board}
           piece={piece}

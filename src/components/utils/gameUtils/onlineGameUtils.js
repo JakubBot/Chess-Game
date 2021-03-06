@@ -27,7 +27,7 @@ export const domain = () => {
   return window.location;
 };
 
-export function setTimeLeft({ id, timeLeft }, gameEngine) {
+export function setTimeLeft({ id }, gameEngine) {
   const chessRef = firestore.collection('games').doc(id);
 
   if (gameEngine.turn() === 'w') {
