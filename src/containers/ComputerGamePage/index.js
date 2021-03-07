@@ -45,8 +45,8 @@ const ComputerGamePage = ({
     index: 0,
   });
   const [timeLeft, setTimeLeft] = useState({
-    whiteTime: 2222,
-    blackTime: 2222,
+    whiteTime: 300,
+    blackTime: 300,
     isGameActive: false,
   });
   const [isGameEndByTime, setIsGameEndByTime] = useState(false);
