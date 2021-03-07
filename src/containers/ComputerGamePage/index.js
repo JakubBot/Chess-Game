@@ -35,6 +35,7 @@ const ComputerGamePage = ({
   currentStatusText,
   loginUserWithSocials,
   loginUserWithForm,
+  updateUserPoints,
 }) => {
   const [authUser] = useAuthState(auth);
   const [gameMove, setGameMove] = useState({
@@ -44,12 +45,22 @@ const ComputerGamePage = ({
     index: 0,
   });
   const [timeLeft, setTimeLeft] = useState({
-    whiteTime: 2,
-    blackTime: 2,
+    whiteTime: 2222,
+    blackTime: 2222,
     isGameActive: false,
   });
   const [isGameEndByTime, setIsGameEndByTime] = useState(false);
   const songRef = useRef(null);
+
+  useEffect(() => {
+    if (authUser !== null && user === null) {
+      unsubscribe = loginUserWithSocials(authUser);
+    }
+    if (authUser === null && user === null) {
+      loginUserWithForm();
+    }
+    return () => unsubscribe && unsubscribe();
+  }, [authUser]);
 
   useEffect(() => {
     setTimeLeft((prevState) => ({
@@ -57,6 +68,7 @@ const ComputerGamePage = ({
       isGameActive: false,
     }));
   }, [game.game_over(), isGameEndByTime]);
+
   useEffect(() => {
     let timer = null;
     if (timeLeft.isGameActive) {
@@ -71,15 +83,6 @@ const ComputerGamePage = ({
     return () => clearInterval(timer);
   }, [timeLeft.isGameActive, timeLeft]);
 
-  useEffect(() => {
-    if (authUser !== null && user === null) {
-      unsubscribe = loginUserWithSocials(authUser);
-    }
-    if (authUser === null && user === null) {
-      loginUserWithForm();
-    }
-    return () => unsubscribe && unsubscribe();
-  }, [authUser]);
   function updateTimeLeft() {
     if (game.turn() === 'w') {
       setTimeLeft((prevState) => ({
@@ -93,22 +96,9 @@ const ComputerGamePage = ({
       }));
     }
   }
-  function updateStatus() {
-    const statusGame = statusText(
-      game.turn(),
-      1,
-      isMyTurn(1, game.turn()),
-      game.in_draw(),
-      game.in_check(),
-      game.in_checkmate(),
-      game.in_threefold_repetition(),
-      game.insufficient_material(),
-      game.in_stalemate()
-    );
-    updateStatusText(statusGame);
-  }
 
   useEffect(() => {
+    if (!gameMove) return;
     const { whiteSan, blackSan, index } = gameMove;
     if (whiteSan !== '' || blackSan !== '') {
       updateMoves({
@@ -135,7 +125,7 @@ const ComputerGamePage = ({
 
       setGameMove((prevState) => ({
         ...prevState,
-        blackSan: move.san,
+        blackSan: move?.san,
       }));
       game.move(bestMove);
       board.position(game.fen());
@@ -164,11 +154,11 @@ const ComputerGamePage = ({
         return 'snapback';
       }
 
-      window.setTimeout(makeEngineMove, 2200);
+      window.setTimeout(makeEngineMove, 200);
 
       setGameMove((prevState) => ({
         ...prevState,
-        whiteSan: move.san,
+        whiteSan: move?.san,
         index: prevState.index + 1,
       }));
       setTimeLeft((prevState) => ({
@@ -216,11 +206,31 @@ const ComputerGamePage = ({
     updateStatus();
   }, []);
 
+  function updateStatus() {
+    const statusGame = statusText(
+      game.turn(),
+      1,
+      isMyTurn(1, game.turn()),
+      game.in_draw(),
+      game.in_check(),
+      game.in_checkmate(),
+      game.in_threefold_repetition(),
+      game.insufficient_material(),
+      game.in_stalemate()
+    );
+    updateStatusText(statusGame);
+  }
+
   return (
     <>
       <div className="page__wrapper">
         {(game.game_over() || isGameEndByTime) && (
-          <EndGameCard timeLeft={timeLeft} turn={game.turn()} />
+          <EndGameCard
+            timeLeft={timeLeft}
+            turn={game.turn()}
+            user={user}
+            updateUserPoints={updateUserPoints}
+          />
         )}
         <Game
           timeLeft={timeLeft}
