@@ -6,13 +6,7 @@ import './index.scss';
 
 const $ = window.jQuery;
 
-const unsubscribe = null;
-
 const EndGameCard = ({ timeLeft, turn, playerNum = 1, user }) => {
-  // 'bialy wygral a : End game with b'
-  // console.log(user);
-  // console.log(turn);
-  // console.log(timeLeft);
   useEffect(() => {
     if (!user) return;
     const userRef = firestore.collection('users').where('uid', '==', user.uid);
@@ -39,8 +33,6 @@ const EndGameCard = ({ timeLeft, turn, playerNum = 1, user }) => {
         }
       }
     });
-
-    return () => unsubscribe && unsubscribe();
   }, []);
 
   const deleteCard = () => {

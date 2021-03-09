@@ -59,9 +59,7 @@ function ChessGame({
       updateState(id, game);
     });
 
-    return () => {
-      unsubscribe();
-    };
+    return () => unsubscribe && unsubscribe();
   }, []);
 
   useEffect(() => {

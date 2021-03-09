@@ -39,11 +39,11 @@ const GlobalChat = ({ user }) => {
             };
           });
           const firstMessage = data[0];
-          if (data.length > 12) {
+          if (data.length > 14) {
             deleteFirstMessage(firstMessage.docId);
-            return;
+          } else {
+            setMessages(data);
           }
-          setMessages(data);
         }
       });
   }

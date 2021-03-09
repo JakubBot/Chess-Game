@@ -61,9 +61,6 @@ const FloatedButton = forwardRef(
                     stroke="none"
                   />
                 </svg>
-                {/* <span role="img" aria-label="icon">
-                  🕊️
-                </span> */}
               </button>
             </form>
           </div>
