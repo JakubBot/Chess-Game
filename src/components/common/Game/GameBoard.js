@@ -14,10 +14,19 @@ const GameBoard = ({
   whiteTime,
   blackTime,
   playerNum,
+  isGameEnded,
+  onBackToPlay,
 }) => {
   return (
     <>
       <div className="game">
+        {isGameEnded && (
+          <button type="button" className="backToPlay" onClick={onBackToPlay}>
+            <span className="backToPlay__arrow">🠔</span>
+            Back to Play
+          </button>
+        )}
+
         <div className="userInformations">
           <div className="userWrapper">
             <span className="playerName">{user?.userName ?? 'Guest 120'}</span>

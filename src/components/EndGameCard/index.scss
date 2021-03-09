@@ -10,7 +10,9 @@
   padding: 15px 30px;
   background-color: rgba($color: #fff, $alpha: 1);
 
-  &::before {
+
+  &.greenBackgrond::before,
+  &.greyBackground::before {
     content: '';
     position: absolute;
     top: 0%;
@@ -21,6 +23,12 @@
     z-index: -1;
     clip-path: ellipse(65% 77% at 50% 22%);
     -webkit-clip-path: ellipse(65% 77% at 50% 22%);
+  }
+  &.greenBackgrond::before {
+    background-color: #85a94e;
+  }
+  &.greyBackground::before {
+    background-color: #666463;
   }
   &__close {
     position: absolute;
@@ -81,12 +89,20 @@
         letter-spacing: 2px;
         color: #1f1f1f;
       }
-      &__change {
+
+      &__win,
+      &__lose,
+      &__unranked {
         font-size: 1.4em;
-        color: #87b444;
         font-weight: bold;
         margin-left: 5px;
         display: inline-block;
+      }
+      &__win {
+        color: #87b444;
+      }
+      &__lose {
+        color: #666463;
       }
     }
   }

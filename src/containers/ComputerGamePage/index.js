@@ -23,9 +23,9 @@ const $ = window.jQuery;
 let board = null;
 const game = new Chess();
 const maxDepth = 2;
-let unsubscribe;
 
 const ComputerGamePage = ({
+  history,
   boardType,
   user,
   piece,
@@ -35,7 +35,7 @@ const ComputerGamePage = ({
   currentStatusText,
   loginUserWithSocials,
   loginUserWithForm,
-  updateUserPoints,
+  updateLocalStorage,
 }) => {
   const [authUser] = useAuthState(auth);
   const [gameMove, setGameMove] = useState({
@@ -45,21 +45,20 @@ const ComputerGamePage = ({
     index: 0,
   });
   const [timeLeft, setTimeLeft] = useState({
-    whiteTime: 300,
-    blackTime: 300,
+    whiteTime: 2,
+    blackTime: 2,
     isGameActive: false,
   });
   const [isGameEndByTime, setIsGameEndByTime] = useState(false);
   const songRef = useRef(null);
-
   useEffect(() => {
     if (authUser !== null && user === null) {
-      unsubscribe = loginUserWithSocials(authUser);
+      loginUserWithSocials(authUser);
     }
     if (authUser === null && user === null) {
       loginUserWithForm();
     }
-    return () => unsubscribe && unsubscribe();
+    return () => game.reset();
   }, [authUser]);
 
   useEffect(() => {
@@ -96,7 +95,6 @@ const ComputerGamePage = ({
       }));
     }
   }
-
   useEffect(() => {
     if (!gameMove) return;
     const { whiteSan, blackSan, index } = gameMove;
@@ -220,23 +218,22 @@ const ComputerGamePage = ({
     );
     updateStatusText(statusGame);
   }
-
   return (
     <>
       <div className="page__wrapper">
         {(game.game_over() || isGameEndByTime) && (
-          <EndGameCard
-            timeLeft={timeLeft}
-            turn={game.turn()}
-            user={user}
-            updateUserPoints={updateUserPoints}
-          />
+          <EndGameCard timeLeft={timeLeft} turn={game.turn()} user={user} />
         )}
         <Game
           timeLeft={timeLeft}
           songRef={songRef}
           links={false}
           playerNum={1}
+          isGameEnded={game.game_over() || isGameEndByTime}
+          changeSite={history.push}
+          updateLocalStorage={updateLocalStorage}
+          user={user}
+          turn={game.turn()}
         />
         <ScoreBoard moves={moves} statusText={currentStatusText} />
       </div>
@@ -261,6 +258,7 @@ const mapDispatchToProps = {
   updateStatusText: boardActions.updateStatusText,
   loginUserWithSocials: userActions.loginUserWithSocials,
   loginUserWithForm: userActions.loginUserWithForm,
+  updateLocalStorage: userActions.updateLocalStorage,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ComputerGamePage);

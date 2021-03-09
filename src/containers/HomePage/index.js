@@ -9,7 +9,6 @@ import Game from '../../components/common/Game';
 import * as userActions from '../../redux/actions/userActions';
 
 const $ = window.jQuery;
-let unsubscribe = null;
 const HomePage = ({
   user,
   board,
@@ -25,12 +24,11 @@ const HomePage = ({
   const [authUser] = useAuthState(auth);
   useEffect(() => {
     if (authUser !== null && user === null) {
-      unsubscribe = loginUserWithSocials(authUser);
+      loginUserWithSocials(authUser);
     }
     if (authUser === null && user === null) {
       loginUserWithForm();
     }
-    return () => unsubscribe && unsubscribe();
   }, [authUser]);
 
   useEffect(() => {

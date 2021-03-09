@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { domain } from '../../utils/gameUtils/onlineGameUtils';
+import { winLoseStatus } from '../../utils/gameUtils/commonGameUtils';
 import GameBoard from './GameBoard';
 
 const $ = window.jQuery;
@@ -12,11 +13,28 @@ const Game = ({
   user,
   timeLeft,
   playerNum,
+  isGameEnded,
+  changeSite,
+  updateLocalStorage,
+  turn,
 }) => {
+  useEffect(() => {
+    let localStorageUser = localStorage.getItem('user');
+    const status = winLoseStatus(playerNum, timeLeft, turn);
+    if (localStorageUser !== null) {
+      localStorageUser = JSON.parse(localStorageUser);
+      if (isGameEnded && localStorageUser) {
+        status === 'You won'
+          ? updateLocalStorage(localStorageUser?.points + 8)
+          : updateLocalStorage(localStorageUser?.points - 8);
+      }
+    }
+  }, [isGameEnded]);
   const adress = {
     firstPlayer: `${domain()}/play/${p1_token}`,
     secondPlayer: `${domain()}/play/${p2_token}`,
   };
+
   const removeLink = () => {
     $('.links').css('display', 'none');
   };
@@ -26,6 +44,10 @@ const Game = ({
     const seconds = Math.floor(time - minutes * 60);
 
     return `${minutes}: ${seconds < 10 ? `0${seconds}` : seconds}`;
+  };
+
+  const onBackToPlay = () => {
+    changeSite('/');
   };
 
   return (
@@ -39,6 +61,8 @@ const Game = ({
         songRef={songRef}
         links={links}
         user={user}
+        isGameEnded={isGameEnded}
+        onBackToPlay={onBackToPlay}
       />
     </>
   );

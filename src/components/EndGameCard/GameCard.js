@@ -3,10 +3,20 @@ import React from 'react';
 const defaultIMG =
   'https://betacssjs.chesscomfiles.com/bundles/web/images/white_400.09ae248e.png';
 
-const GameCard = ({ status, photo = defaultIMG, points, deleteCard }) => {
+const GameCard = ({
+  status,
+  photo = defaultIMG,
+  points,
+  isSignedIn,
+  deleteCard,
+}) => {
   return (
     <>
-      <div className="endGameCard">
+      <div
+        className={`endGameCard ${
+          status === 'You won' ? 'greenBackgrond' : 'greyBackground'
+        }`}
+      >
         <div className="endGameCard__close">
           <button
             className="endGameCard__close__button"
@@ -38,9 +48,15 @@ const GameCard = ({ status, photo = defaultIMG, points, deleteCard }) => {
             <h3 className="wrapper__rating__header">Rating</h3>
             <div className="wrapper__rating__points">
               <span className="wrapper__rating__point">{points}</span>
-              <span className="wrapper__rating__change">
-                {status === 'You won' ? '+8' : '-8'}
-              </span>
+              {isSignedIn ? (
+                status === 'You won' ? (
+                  <span className="wrapper__rating__win">+8</span>
+                ) : (
+                  <span className="wrapper__rating__lose">-8</span>
+                )
+              ) : (
+                <span className="wrapper__rating__unranked">Unranked</span>
+              )}
             </div>
           </div>
         </div>

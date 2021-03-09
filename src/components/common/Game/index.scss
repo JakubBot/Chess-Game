@@ -12,6 +12,22 @@
     flex: 0 1 auto;
   }
 
+  .backToPlay {
+    align-self: flex-start;
+    color: #efefef;
+    display: flex;
+    place-items: center;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    font-size: .9em;
+
+    &__arrow {
+      font-size: 1.8em;
+      margin-right: 5px;
+    }
+  }
+
   .board {
     width: calc(100% - 23px);
     height: 100%;
@@ -88,8 +104,9 @@
     align-items: center;
     justify-content: space-between;
     padding: 0 11px;
-    color: $brightWhite;
+    color:rgba($color: #efefef, $alpha: 0.75);
     margin: 10px 0;
+    
     .timer {
       padding: 10px 10px 10px 50px;
       opacity: 0.65;

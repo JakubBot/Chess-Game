@@ -76,3 +76,23 @@ export function statusText(
 export function isMyTurn(playerNum, turn) {
   return (playerNum === 1 && turn === 'w') || (playerNum === 2 && turn === 'b');
 }
+
+export function winLoseStatus(playerNum, timeLeft, turn) {
+  // console.log(`End game with ${turn}`);
+  if (playerNum === 1) {
+    if (timeLeft.blackTime === 0 || turn === 'b') {
+      return 'You won';
+    }
+    if (timeLeft.whiteTime === 0 || turn === 'w') {
+      return 'You lost';
+    }
+  }
+  if (playerNum === 2) {
+    if (timeLeft.whiteTime === 0 || turn === 'w') {
+      return 'You won';
+    }
+    if (timeLeft.blackTime === 0 || turn === 'b') {
+      return 'You lost';
+    }
+  }
+}

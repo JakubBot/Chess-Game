@@ -12,7 +12,6 @@ import {
 import LoginForm from '../../components/LoginForm/LoginForm';
 import * as userActions from '../../redux/actions/userActions';
 
-let unsubscribe = null;
 const LoginPage = ({
   user,
   history,
@@ -29,12 +28,11 @@ const LoginPage = ({
 
   useEffect(() => {
     if (authUser !== null && user === null) {
-      unsubscribe = loginUserWithSocials(authUser);
+      loginUserWithSocials(authUser);
     }
     if (authUser === null && user === null) {
       loginUserWithForm();
     }
-    return () => unsubscribe && unsubscribe();
   }, [authUser]);
   const signOut = () => {
     signOutUser(logOutUser);
@@ -55,7 +53,7 @@ const LoginPage = ({
       .collection('users')
       .where('email', '==', form.email)
       .where('password', '==', form.password);
-    unsubscribe = userRef.onSnapshot((docs) => {
+    userRef.get().then((docs) => {
       if (!docs.empty) {
         const user = docs.docs[0].data();
         loginUserWithForm({ user, method: 'set' });

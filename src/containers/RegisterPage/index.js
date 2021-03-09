@@ -7,7 +7,6 @@ import { firestore, auth } from '../../firebase-config';
 import { generateID } from '../../components/utils';
 import * as userActions from '../../redux/actions/userActions';
 
-let unsubscribe;
 const RegisterPage = ({
   user,
   history,
@@ -23,12 +22,11 @@ const RegisterPage = ({
   const [authUser] = useAuthState(auth);
   useEffect(() => {
     if (authUser !== null && user === null) {
-      unsubscribe = loginUserWithSocials(authUser);
+      loginUserWithSocials(authUser);
     }
     if (authUser === null && user === null) {
       loginUserWithForm();
     }
-    return () => unsubscribe && unsubscribe();
   }, [authUser]);
 
   const handleChange = ({ target }) => {

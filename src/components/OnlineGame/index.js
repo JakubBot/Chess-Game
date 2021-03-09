@@ -3,6 +3,7 @@ import Chess from 'chess.js/chess';
 import Chessboard from '@chrisoakman/chessboardjs/dist/chessboard-1.0.0';
 import { withRouter } from 'react-router-dom';
 import Game from '../common/Game';
+import EndGameCard from '../EndGameCard';
 import firebase, { firestore } from '../../firebase-config';
 import { figurePlayer, setTimeLeft } from '../utils/gameUtils/onlineGameUtils';
 import {
@@ -26,6 +27,8 @@ function ChessGame({
   user,
   updateMoves,
   updateStatusText,
+  changeSite,
+  updateLocalStorage,
   ...props
 }) {
   const [gameEngine] = useState(new Chess());
@@ -34,6 +37,8 @@ function ChessGame({
   });
   const songRef = useRef(null);
 
+  const [isGameEndByTime, setIsGameEndByTime] = useState(false);
+
   useEffect(() => {
     let timer = null;
     if (state.isGameActive) {
@@ -41,7 +46,10 @@ function ChessGame({
         setTimeLeft(state, gameEngine);
       }, 1000);
     }
-
+    if (state.timeLeft?.whiteTime <= 0 || state.timeLeft?.blackTime <= 0) {
+      clearInterval(timer);
+      setIsGameEndByTime(true);
+    }
     return () => clearInterval(timer);
   }, [state.isGameActive, state.timeLeft]);
 
@@ -228,9 +236,16 @@ function ChessGame({
       });
     });
   }
-
   return (
     <>
+      {(gameEngine.game_over() || isGameEndByTime) && (
+        <EndGameCard
+          timeLeft={state.timeLeft}
+          turn={gameEngine.turn()}
+          user={user}
+        />
+      )}
+
       <Game
         timeLeft={state.timeLeft}
         links
@@ -239,6 +254,9 @@ function ChessGame({
         p2_token={state.p2_token}
         user={user}
         playerNum={figurePlayer(state.token, state)}
+        isGameEnded={gameEngine.game_over() || isGameEndByTime}
+        changeSite={changeSite}
+        updateLocalStorage={updateLocalStorage}
       />
     </>
   );

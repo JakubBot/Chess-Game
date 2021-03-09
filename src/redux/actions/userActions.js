@@ -43,10 +43,21 @@ export function loginUserWithForm(
     } else {
       user = JSON.parse(localStorage.getItem('user'));
     }
+    if (!user) return;
 
-    if (user) {
-      dispatch(logIn(user));
-    }
+    dispatch(logIn(user));
+  };
+}
+
+export function updateLocalStorage(points) {
+  return (dispatch) => {
+    let user = localStorage.getItem('user');
+
+    if (user === null) return;
+    user = JSON.parse(user);
+
+    localStorage.setItem('user', JSON.stringify({ ...user, points }));
+    dispatch(logIn({ ...user, points }));
   };
 }
 
