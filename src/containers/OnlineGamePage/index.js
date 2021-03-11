@@ -40,6 +40,8 @@ const OnlineGamePage = ({
           updateMoves={updateMoves}
           updateStatusText={updateStatusText}
           updateLocalStorage={updateLocalStorage}
+          userName={user?.userName}
+          points={user?.points}
         />
         <ScoreBoard isOnline moves={moves} statusText={statusText} />
       </div>

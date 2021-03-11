@@ -232,7 +232,8 @@ const ComputerGamePage = ({
           isGameEnded={game.game_over() || isGameEndByTime}
           changeSite={history.push}
           updateLocalStorage={updateLocalStorage}
-          user={user}
+          userName={user?.userName}
+          points={user?.points}
           turn={game.turn()}
         />
         <ScoreBoard moves={moves} statusText={currentStatusText} />

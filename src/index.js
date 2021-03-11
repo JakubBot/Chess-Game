@@ -1,11 +1,19 @@
 import React, { lazy, Suspense } from 'react';
 import ReactDOM from 'react-dom';
-import './index.scss';
 import { Provider as ReduxProvider } from 'react-redux';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import GlobalChat from './containers/GlobalChat';
 import Navbar from './containers/Navbar';
+
+// import OnlineGamePage from './containers/OnlineGamePage';
+// import HomePage from './containers/HomePage';
+// import LoginPage from './containers/LoginPage';
+// import RegisterPage from './containers/RegisterPage';
+// import PageNotFound from './containers/PageNotFound';
+// import ComputerGamePage from './containers/ComputerGamePage';
+
 import configureStore from './redux/store';
+import './index.scss';
 
 const OnlineGamePage = lazy(() => import('./containers/OnlineGamePage'));
 const HomePage = lazy(() => import('./containers/HomePage'));
@@ -39,10 +47,3 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
-
-// import OnlineGamePage from './containers/OnlineGamePage';
-// import HomePage from './containers/HomePage';
-// import LoginPage from './containers/LoginPage';
-// import RegisterPage from './containers/RegisterPage';
-// import PageNotFound from './containers/PageNotFound';
-// import ComputerGamePage from './containers/ComputerGamePage';

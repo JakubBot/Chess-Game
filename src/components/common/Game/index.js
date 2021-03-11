@@ -10,7 +10,8 @@ const Game = ({
   p1_token,
   p2_token,
   links,
-  user,
+  userName,
+  points,
   timeLeft,
   playerNum,
   isGameEnded,
@@ -60,7 +61,8 @@ const Game = ({
         removeLink={removeLink}
         songRef={songRef}
         links={links}
-        user={user}
+        userName={userName}
+        points={points}
         isGameEnded={isGameEnded}
         onBackToPlay={onBackToPlay}
       />

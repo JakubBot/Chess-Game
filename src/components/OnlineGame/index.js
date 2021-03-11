@@ -250,7 +250,8 @@ function ChessGame({
         songRef={songRef}
         p1_token={state.p1_token}
         p2_token={state.p2_token}
-        user={user}
+        userName={user?.userName}
+        points={user?.points}
         playerNum={figurePlayer(state.token, state)}
         isGameEnded={gameEngine.game_over() || isGameEndByTime}
         changeSite={changeSite}

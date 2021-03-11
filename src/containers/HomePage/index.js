@@ -61,7 +61,7 @@ const HomePage = ({
   return (
     <>
       <div className="page__wrapper">
-        <Game />
+        <Game userName={user?.userName} points={user?.points} />
         <ConfigBoard
           board={board}
           piece={piece}

@@ -10,7 +10,8 @@ const GameBoard = ({
   links,
   adress,
   removeLink,
-  user,
+  userName,
+  points,
   whiteTime,
   blackTime,
   playerNum,
@@ -29,7 +30,7 @@ const GameBoard = ({
 
         <div className="userInformations">
           <div className="userWrapper">
-            <span className="playerName">{user?.userName ?? 'Guest 120'}</span>
+            <span className="playerName">{userName ?? 'Guest 120'}</span>
             <span className="points">(500)</span>
           </div>
           <div className="timer">
@@ -43,8 +44,8 @@ const GameBoard = ({
         <div id="board" className="board" />
         <div className="userInformations">
           <div className="userWrapper">
-            <span className="playerName">{user?.userName ?? 'Guest 152'}</span>
-            <span className="points">(500)</span>
+            <span className="playerName">{userName ?? 'Guest 152'}</span>
+            <span className="points">{`(${points ?? 500})`}</span>
           </div>
           <div className="timer">
             {playerNum === 1

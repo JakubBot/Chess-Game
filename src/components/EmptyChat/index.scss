@@ -1,4 +1,13 @@
 .emptyChat {
+
+
+  .login__buttons__button {
+    outline: none;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1em;
+  }
+  
   position: absolute;
   left: 50%;
   top: 0%;
@@ -19,7 +28,6 @@
 
     &:hover {
       filter: brightness(130%);
-
     }
   }
 }
@@ -37,4 +45,20 @@
 }
 .floated__chat .emptyChat__icons {
   margin: 0;
+}
+.google {
+  color: #db4437;
+}
+.google::before {
+  color: #db4437;
+  font-size: 1.3em;
+}
+
+.facebook {
+  color: #1778f2;
+}
+
+.facebook::before {
+  color: #1778f2;
+  font-size: 1.3em;
 }
