@@ -2,27 +2,23 @@
 import types from './actionTypes';
 import { firestore } from '../../firebase-config';
 
-export function logIn({ userName, photo, uid, points, email, password }) {
+export function logIn({ userName, photo, uid, points }) {
   return {
     type: types.LOGIN_USER,
     userName,
     photo,
     uid,
     points,
-    email,
-    password,
   };
 }
 
 function getUserFromFirestore(docs) {
-  const { uid, points, userName, photo, email, password } = docs[0].data();
+  const { uid, points, userName, photo } = docs[0].data();
   return {
     uid,
     points,
     userName,
     photo,
-    email,
-    password,
   };
 }
 

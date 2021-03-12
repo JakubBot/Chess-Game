@@ -59,6 +59,7 @@ const HomePage = ({
 
     $(window).resize(chessBoard.resize);
   };
+
   return (
     <>
       <div className="page__wrapper">
@@ -95,6 +96,24 @@ const mapDispatchToProps = {
   defaultBoardSettings: boardActions.defaultBoardSettings,
   loginUserWithSocials: userActions.loginUserWithSocials,
   loginUserWithForm: userActions.loginUserWithForm,
+};
+
+HomePage.propTypes = {
+  user: PropTypes.shape({
+    userName: PropTypes.string,
+    photo: PropTypes.string,
+    uid: PropTypes.string,
+    points: PropTypes.number,
+  }),
+  board: PropTypes.string.isRequired,
+  piece: PropTypes.string.isRequired,
+  mode: PropTypes.string.isRequired,
+  changeBoard: PropTypes.func.isRequired,
+  changePiece: PropTypes.func.isRequired,
+  changeMode: PropTypes.func.isRequired,
+  defaultBoardSettings: PropTypes.func.isRequired,
+  loginUserWithSocials: PropTypes.func.isRequired,
+  loginUserWithForm: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
