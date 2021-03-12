@@ -1,5 +1,6 @@
 /* eslint-disable import/no-named-as-default-member */
 import React, { useEffect, useRef, useState } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import FloatedButton from '../../components/FloatedButton';
 import firebase, {
@@ -11,6 +12,7 @@ import firebase, {
 const $ = window.jQuery;
 
 let unsubscribe = null;
+
 const GlobalChat = ({ user }) => {
   const [formMessage, setFormMessage] = useState('');
   const [messages, setMessages] = useState([]);
@@ -99,5 +101,14 @@ function mapStateToProps(state) {
     user,
   };
 }
+
+GlobalChat.propTypes = {
+  user: PropTypes.shape({
+    userName: PropTypes.string,
+    photo: PropTypes.string,
+    uid: PropTypes.string,
+    points: PropTypes.number,
+  }),
+};
 
 export default connect(mapStateToProps, null)(GlobalChat);

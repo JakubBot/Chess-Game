@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -6,6 +7,7 @@ import RegisterForm from '../../components/RegisterForm/RegisterForm';
 import { firestore, auth } from '../../firebase-config';
 import { generateID } from '../../components/utils';
 import * as userActions from '../../redux/actions/userActions';
+
 
 const RegisterPage = ({
   user,
@@ -120,6 +122,20 @@ function mapStateToProps({ user }) {
 const mapDispatchToProps = {
   loginUserWithSocials: userActions.loginUserWithSocials,
   loginUserWithForm: userActions.loginUserWithForm,
+};
+
+RegisterPage.propTypes = {
+  user: PropTypes.shape({
+    userName: PropTypes.string,
+    photo: PropTypes.string,
+    uid: PropTypes.string,
+    points: PropTypes.number,
+  }),
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }),
+  loginUserWithForm: PropTypes.func.isRequired,
+  loginUserWithSocials: PropTypes.func.isRequired,
 };
 
 export default withRouter(

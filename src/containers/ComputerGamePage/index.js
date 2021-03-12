@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import PropTypes from 'prop-types';
 import Chess from 'chess.js/chess';
 import Chessboard from '@chrisoakman/chessboardjs/dist/chessboard-1.0.0';
 import { connect } from 'react-redux';
@@ -260,6 +261,34 @@ const mapDispatchToProps = {
   loginUserWithSocials: userActions.loginUserWithSocials,
   loginUserWithForm: userActions.loginUserWithForm,
   updateLocalStorage: userActions.updateLocalStorage,
+};
+
+ComputerGamePage.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }),
+  boardType: PropTypes.string.isRequired,
+  piece: PropTypes.string.isRequired,
+  user: PropTypes.shape({
+    userName: PropTypes.string,
+    photo: PropTypes.string,
+    uid: PropTypes.string,
+    points: PropTypes.number,
+  }),
+  moves: PropTypes.arrayOf(
+    PropTypes.shape({
+      whiteSan: PropTypes.string,
+      blackSan: PropTypes.string,
+      index: PropTypes.number,
+      id: PropTypes.string,
+    })
+  ).isRequired,
+  currentStatusText: PropTypes.string.isRequired,
+  updateMoves: PropTypes.func.isRequired,
+  updateStatusText: PropTypes.func.isRequired,
+  loginUserWithSocials: PropTypes.func.isRequired,
+  loginUserWithForm: PropTypes.func.isRequired,
+  updateLocalStorage: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ComputerGamePage);

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { withRouter } from 'react-router-dom';
@@ -97,6 +98,21 @@ function mapStateToProps(state) {
     user,
   };
 }
+
+LoginPage.propTypes = {
+  user: PropTypes.shape({
+    userName: PropTypes.string,
+    photo: PropTypes.string,
+    uid: PropTypes.string,
+    points: PropTypes.number,
+  }),
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }),
+  loginUserWithSocials: PropTypes.func.isRequired,
+  loginUserWithForm: PropTypes.func.isRequired,
+  logOutUser: PropTypes.func.isRequired,
+};
 
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(LoginPage)

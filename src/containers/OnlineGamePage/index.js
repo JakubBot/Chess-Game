@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import OnlineGame from '../../components/OnlineGame';
@@ -12,7 +13,7 @@ const OnlineGamePage = ({
   moves,
   statusText,
   piece,
-  board,
+  boardType,
   history,
   updateMoves,
   updateStatusText,
@@ -36,7 +37,7 @@ const OnlineGamePage = ({
           changeSite={history.push}
           user={user}
           piece={piece}
-          boardType={board}
+          boardType={boardType}
           updateMoves={updateMoves}
           updateStatusText={updateStatusText}
           updateLocalStorage={updateLocalStorage}
@@ -55,7 +56,7 @@ function mapStateToProps(state) {
     moves,
     statusText,
     piece,
-    board,
+    boardType: board,
     user,
   };
 }
@@ -66,6 +67,34 @@ const mapDispatchToProps = {
   loginUserWithSocials: userActions.loginUserWithSocials,
   loginUserWithForm: userActions.loginUserWithForm,
   updateLocalStorage: userActions.updateLocalStorage,
+};
+
+OnlineGamePage.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }),
+  boardType: PropTypes.string.isRequired,
+  piece: PropTypes.string.isRequired,
+  user: PropTypes.shape({
+    userName: PropTypes.string,
+    photo: PropTypes.string,
+    uid: PropTypes.string,
+    points: PropTypes.number,
+  }),
+  moves: PropTypes.arrayOf(
+    PropTypes.shape({
+      whiteSan: PropTypes.string,
+      blackSan: PropTypes.string,
+      index: PropTypes.number,
+      id: PropTypes.string,
+    })
+  ).isRequired,
+  statusText: PropTypes.string.isRequired,
+  updateMoves: PropTypes.func.isRequired,
+  updateStatusText: PropTypes.func.isRequired,
+  loginUserWithSocials: PropTypes.func.isRequired,
+  loginUserWithForm: PropTypes.func.isRequired,
+  updateLocalStorage: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(OnlineGamePage);

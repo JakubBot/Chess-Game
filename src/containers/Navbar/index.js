@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Navigation from '../../components/Navigation';
 import * as userActions from '../../redux/actions/userActions';
@@ -38,6 +39,16 @@ function mapStateToProps({ user }) {
 
 const mapDispatchToProps = {
   logOutUser: userActions.logOutUser,
+};
+
+Navbar.propTypes = {
+  user: PropTypes.shape({
+    userName: PropTypes.string,
+    photo: PropTypes.string,
+    uid: PropTypes.string,
+    points: PropTypes.number,
+  }),
+  logOutUser: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
