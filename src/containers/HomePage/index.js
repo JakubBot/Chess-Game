@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Chessboard from '@chrisoakman/chessboardjs/dist/chessboard-1.0.0';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -95,4 +96,5 @@ const mapDispatchToProps = {
   loginUserWithSocials: userActions.loginUserWithSocials,
   loginUserWithForm: userActions.loginUserWithForm,
 };
+
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

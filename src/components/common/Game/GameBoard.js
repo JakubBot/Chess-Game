@@ -9,12 +9,12 @@ const GameBoard = ({
   songRef,
   links,
   adress,
-  removeLink,
   userName,
   points,
   whiteTime,
   blackTime,
   playerNum,
+  removeLink,
   isGameEnded,
   onBackToPlay,
 }) => {
@@ -97,16 +97,24 @@ const GameBoard = ({
   );
 };
 
-GameBoard.propType = {
-  songRef: PropTypes.object.isRequired,
-  p1_token: PropTypes.number.isRequired,
-  p2_token: PropTypes.number.isRequired,
-  links: PropTypes.bool.isRequired,
-  user: PropTypes.shape({
-    points: PropTypes.number,
-    userName: PropTypes.string,
-    photo: PropTypes.string,
+GameBoard.propTypes = {
+  songRef: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+  ]),
+  links: PropTypes.bool,
+  adress: PropTypes.shape({
+    firstPlayer: PropTypes.string,
+    secondPlayer: PropTypes.string,
   }),
+  userName: PropTypes.string,
+  points: PropTypes.number,
+  whiteTime: PropTypes.string.isRequired,
+  blackTime: PropTypes.string.isRequired,
+  playerNum: PropTypes.number,
+  isGameEnded: PropTypes.bool,
+  removeLink: PropTypes.func.isRequired,
+  onBackToPlay: PropTypes.func.isRequired,
 };
 
 // songRef, p1_token, p2_token, links, user
