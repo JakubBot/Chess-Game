@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import TextInput from '../common/TextInput';
 import SubmitButton from '../common/SubmitButton';
@@ -6,12 +7,12 @@ import './LoginForm.scss';
 
 const LoginForm = ({
   user,
+  form,
   errors,
-  loginGoogle,
   signOut,
   loginFacebook,
+  loginGoogle,
   onChange,
-  form,
   onSubmit,
 }) => {
   return (
@@ -98,6 +99,27 @@ const LoginForm = ({
       </footer>
     </>
   );
+};
+
+LoginForm.propTypes = {
+  user: PropTypes.shape({
+    userName: PropTypes.string,
+    photo: PropTypes.string,
+    uid: PropTypes.string,
+    points: PropTypes.number,
+  }),
+  error: PropTypes.shape({
+    formError: PropTypes.string,
+  }),
+  form: PropTypes.shape({
+    email: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired,
+  }),
+  loginGoogle: PropTypes.func.isRequired,
+  signOut: PropTypes.func.isRequired,
+  loginFacebook: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };
 
 export default LoginForm;

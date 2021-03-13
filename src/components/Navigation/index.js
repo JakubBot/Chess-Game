@@ -1,10 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/img/logo.png';
 
 import './index.scss';
 
-const Navbar = ({ user, onClick, signOut }) => {
+const Navigation = ({ user, onClick, signOut }) => {
   return (
     <>
       <div className="menu-btn" role="button" tabIndex="0" onClick={onClick}>
@@ -90,4 +91,15 @@ const Navbar = ({ user, onClick, signOut }) => {
   );
 };
 
-export default Navbar;
+Navigation.propTypes = {
+  user: PropTypes.shape({
+    userName: PropTypes.string,
+    photo: PropTypes.string,
+    uid: PropTypes.string,
+    points: PropTypes.number,
+  }),
+  onClick: PropTypes.func.isRequired,
+  signOut: PropTypes.func.isRequired,
+};
+
+export default Navigation;

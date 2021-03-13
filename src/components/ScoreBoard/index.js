@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import BoardMoves from './BoardMoves';
 import LocalChat from '../LocalChat';
 import './index.scss';
@@ -32,6 +33,19 @@ const ScoreBoard = ({ moves, statusText, isOnline }) => {
       </div>
     </>
   );
+};
+
+ScoreBoard.propTypes = {
+  moves: PropTypes.arrayOf(
+    PropTypes.shape({
+      blackSan: PropTypes.string,
+      whiteSan: PropTypes.string,
+      id: PropTypes.string,
+      index: PropTypes.number,
+    })
+  ),
+  statusText: PropTypes.string,
+  isOnline: PropTypes.bool,
 };
 
 export default ScoreBoard;

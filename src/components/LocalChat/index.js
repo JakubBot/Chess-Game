@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { withRouter } from 'react-router-dom';
 import {
@@ -12,7 +11,7 @@ import { generateID } from '../utils';
 import ChatMessages from './ChatMessages';
 
 let unsubscribe = null;
-const LocalChat = ({ loginUser, ...props }) => {
+const LocalChat = (props) => {
   const [formValue, setFormValue] = useState('');
   const [user] = useAuthState(auth);
   const lastMessageRef = useRef(null);
@@ -96,10 +95,6 @@ const LocalChat = ({ loginUser, ...props }) => {
       />
     </>
   );
-};
-
-LocalChat.propTypes = {
-  loginUser: PropTypes.func.isRequired,
 };
 
 export default withRouter(LocalChat);

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import PropTypes from 'prop-types';
 import Chess from 'chess.js/chess';
 import Chessboard from '@chrisoakman/chessboardjs/dist/chessboard-1.0.0';
 import { withRouter } from 'react-router-dom';
@@ -21,7 +22,7 @@ const INITIAL_FEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR';
 let unsubscribe = null;
 let board = null;
 
-function ChessGame({
+const OnlineGame = ({
   boardType,
   piece,
   user,
@@ -30,7 +31,7 @@ function ChessGame({
   changeSite,
   updateLocalStorage,
   ...props
-}) {
+}) => {
   const [gameEngine] = useState(new Chess());
   const [state, setState] = useState({
     token: props.match.params.token,
@@ -259,6 +260,21 @@ function ChessGame({
       />
     </>
   );
-}
+};
 
-export default withRouter(ChessGame);
+OnlineGame.propTypesd = {
+  board: PropTypes.string,
+  piece: PropTypes.string,
+  user: PropTypes.shape({
+    userName: PropTypes.string,
+    photo: PropTypes.string,
+    uid: PropTypes.string,
+    points: PropTypes.number,
+  }),
+  updateMoves: PropTypes.func.isRequired,
+  updateStatusText: PropTypes.func.isRequired,
+  changeSite: PropTypes.func.isRequired,
+  updateLocalStorage: PropTypes.func.isRequired,
+};
+
+export default withRouter(OnlineGame);

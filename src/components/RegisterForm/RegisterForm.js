@@ -1,10 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import TextInput from '../common/TextInput';
 import SubmitButton from '../common/SubmitButton';
 import './RegisterForm.scss';
 
-const RegisterForm = ({ form, onChange, errors, onSubmit }) => {
+const RegisterForm = ({ form, errors, onChange, onSubmit }) => {
   return (
     <>
       <div className="register">
@@ -47,4 +48,20 @@ const RegisterForm = ({ form, onChange, errors, onSubmit }) => {
     </>
   );
 };
+
+RegisterForm.propTypes = {
+  form: PropTypes.shape({
+    email: PropTypes.string.isRequired,
+    userName: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired,
+  }),
+  errors: PropTypes.shape({
+    email: PropTypes.string,
+    userName: PropTypes.string,
+    password: PropTypes.string,
+  }),
+  onChange: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+};
+
 export default RegisterForm;

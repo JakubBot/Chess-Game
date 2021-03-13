@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './BoardMoves.scss';
 
 const BoardMoves = ({ moves }) => {
@@ -18,5 +19,16 @@ const BoardMoves = ({ moves }) => {
       </ul>
     </>
   );
+};
+
+BoardMoves.propTypes = {
+  moves: PropTypes.arrayOf(
+    PropTypes.shape({
+      blackSan: PropTypes.string,
+      whiteSan: PropTypes.string,
+      id: PropTypes.string,
+      index: PropTypes.number,
+    })
+  ),
 };
 export default BoardMoves;
