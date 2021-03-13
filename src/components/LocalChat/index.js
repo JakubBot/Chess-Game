@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { withRouter } from 'react-router-dom';
 import {
@@ -95,6 +96,10 @@ const LocalChat = ({ loginUser, ...props }) => {
       />
     </>
   );
+};
+
+LocalChat.propTypes = {
+  loginUser: PropTypes.func.isRequired,
 };
 
 export default withRouter(LocalChat);

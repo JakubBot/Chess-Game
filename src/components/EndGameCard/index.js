@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import GameCard from './GameCard';
 import firebase, { firestore } from '../../firebase-config';
 import { winLoseStatus } from '../utils/gameUtils/commonGameUtils';
@@ -38,6 +39,7 @@ const EndGameCard = ({ timeLeft, turn, playerNum = 1, user }) => {
   const deleteCard = () => {
     $('.endGameCard').css('display', 'none');
   };
+
   return (
     <>
       <GameCard
@@ -49,6 +51,22 @@ const EndGameCard = ({ timeLeft, turn, playerNum = 1, user }) => {
       />
     </>
   );
+};
+
+EndGameCard.propTypes = {
+  timeLeft: PropTypes.shape({
+    whiteTime: PropTypes.number.isRequired,
+    blackTime: PropTypes.number.isRequired,
+    isGameActive: PropTypes.bool.isRequired,
+  }),
+  turn: PropTypes.string.isRequired,
+  playerNum: PropTypes.number,
+  user: PropTypes.shape({
+    userName: PropTypes.string,
+    photo: PropTypes.string,
+    uid: PropTypes.string,
+    points: PropTypes.number,
+  }),
 };
 
 export default EndGameCard;

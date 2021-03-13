@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './index.scss';
 
 const EmptyChat = ({ loginGoogle, loginFacebook }) => {
@@ -31,6 +32,11 @@ const EmptyChat = ({ loginGoogle, loginFacebook }) => {
       </div>
     </>
   );
+};
+
+EmptyChat.propTypes = {
+  loginGoogle: PropTypes.func.isRequired,
+  loginFacebook: PropTypes.func.isRequired,
 };
 
 export default EmptyChat;

@@ -1,4 +1,5 @@
 import React, { forwardRef } from 'react';
+import PropTypes from 'prop-types';
 import TextInput from '../common/TextInput';
 import ChatMessage from './ChatMessage';
 import EmptyChat from '../EmptyChat';
@@ -69,5 +70,28 @@ const FloatedButton = forwardRef(
     );
   }
 );
+
+FloatedButton.propTypes = {
+  messages: PropTypes.arrayOf(
+    PropTypes.shape({
+      docId: PropTypes.string,
+      message: PropTypes.string,
+      photoURL: PropTypes.string,
+      uid: PropTypes.string,
+    })
+  ),
+  user: PropTypes.shape({
+    userName: PropTypes.string,
+    photo: PropTypes.string,
+    uid: PropTypes.string,
+    points: PropTypes.number,
+  }),
+  formMessage: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  loginGoogle: PropTypes.func.isRequired,
+  loginFacebook: PropTypes.func.isRequired,
+};
 
 export default FloatedButton;

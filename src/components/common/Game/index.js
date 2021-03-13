@@ -52,7 +52,6 @@ const Game = ({
     changeSite('/');
   };
 
-
   return (
     <>
       <GameBoard
@@ -85,8 +84,8 @@ GameBoard.propTypes = {
   p1_token: PropTypes.string,
   p2_token: PropTypes.string,
   timeLeft: PropTypes.shape({
-    whiteTime: PropTypes.string,
-    blackTime: PropTypes.string,
+    whiteTime: PropTypes.number,
+    blackTime: PropTypes.number,
     isGameActive: PropTypes.bool,
   }),
   changeSite: PropTypes.func,

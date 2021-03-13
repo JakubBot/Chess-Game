@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const ChatMessage = (props) => {
-  const { uid, message, photoURL } = props.message;
-  const userUID = props.user.uid;
+const ChatMessage = ({ msg, user }) => {
+  const { uid, message, photoURL } = msg;
+  const userUID = user.uid;
 
   const messageClass = uid === userUID ? 'sent' : 'received';
   return (
@@ -15,6 +16,23 @@ const ChatMessage = (props) => {
       </div>
     </>
   );
+};
+
+ChatMessage.propTypes = {
+  msg: PropTypes.arrayOf(
+    PropTypes.shape({
+      docId: PropTypes.string,
+      message: PropTypes.string,
+      photoURL: PropTypes.string,
+      uid: PropTypes.string,
+    })
+  ),
+  user: PropTypes.shape({
+    userName: PropTypes.string,
+    photo: PropTypes.string,
+    uid: PropTypes.string,
+    points: PropTypes.number,
+  }),
 };
 
 export default ChatMessage;

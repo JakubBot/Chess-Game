@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const ChatMessage = ({ message, uid, photoURL, userUID }) => {
   const messageClass = uid === userUID ? 'sent' : 'received';
@@ -14,4 +15,10 @@ const ChatMessage = ({ message, uid, photoURL, userUID }) => {
   );
 };
 
+ChatMessage.propTypes = {
+  message: PropTypes.string.isRequired,
+  uid: PropTypes.string.isRequired,
+  photoURL: PropTypes.string.isRequired,
+  userUID: PropTypes.string.isRequired,
+};
 export default ChatMessage;

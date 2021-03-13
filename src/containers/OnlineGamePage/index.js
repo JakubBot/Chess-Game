@@ -89,7 +89,7 @@ OnlineGamePage.propTypes = {
       id: PropTypes.string,
     })
   ).isRequired,
-  statusText: PropTypes.string.isRequired,
+  statusText: PropTypes.string,
   updateMoves: PropTypes.func.isRequired,
   updateStatusText: PropTypes.func.isRequired,
   loginUserWithSocials: PropTypes.func.isRequired,
