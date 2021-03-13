@@ -31,3 +31,18 @@
 .italic {
   font-style: italic;
 }
+
+.footer {
+  width: 90%;
+  max-width: 350px;
+  background: #f1f1f1;
+  padding: 30px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 0.9em;
+
+  &__link {
+    color: #005e94;
+    margin: 0 8px;
+  }
+}
