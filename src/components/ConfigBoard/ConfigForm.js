@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './index.scss';
 
 const ConfigForm = ({ changeBoard, changePiece, changeMode, createGame }) => {
@@ -103,4 +104,10 @@ const ConfigForm = ({ changeBoard, changePiece, changeMode, createGame }) => {
   );
 };
 
+ConfigForm.propTypes = {
+  changeBoard: PropTypes.func.isRequired,
+  changePiece: PropTypes.func.isRequired,
+  changeMode: PropTypes.func.isRequired,
+  createGame: PropTypes.func.isRequired,
+};
 export default ConfigForm;

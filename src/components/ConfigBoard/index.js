@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { generateID } from '../utils';
 import { firestore } from '../../firebase-config';
@@ -32,7 +33,6 @@ const ConfigBoard = ({ board, piece, mode, history, ...props }) => {
     $(activeButton).addClass('configBoard__options__btn--active');
     props.changeMode(target.name);
   };
-
   const createGame = () => {
     const newGame = {
       p1_token: generateID(8),
@@ -69,4 +69,14 @@ const ConfigBoard = ({ board, piece, mode, history, ...props }) => {
   );
 };
 
+ConfigForm.propTypes = {
+  board: PropTypes.string,
+  piece: PropTypes.string,
+  mode: PropTypes.string,
+  history: PropTypes.string,
+  changeBoard: PropTypes.func.isRequired,
+  changePiece: PropTypes.func.isRequired,
+  changeMode: PropTypes.func.isRequired,
+};
+// PropTypes;
 export default withRouter(ConfigBoard);

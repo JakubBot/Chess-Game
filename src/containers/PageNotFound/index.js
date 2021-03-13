@@ -4,7 +4,7 @@ import './index.scss';
 const PageNotFound = () => {
   return (
     <>
-      <div id="message">
+      <div className="message">
         <h2>404</h2>
         <h1>Page Not Found</h1>
         <p>

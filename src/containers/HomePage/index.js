@@ -59,7 +59,6 @@ const HomePage = ({
 
     $(window).resize(chessBoard.resize);
   };
-
   return (
     <>
       <div className="page__wrapper">

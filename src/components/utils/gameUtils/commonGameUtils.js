@@ -78,7 +78,6 @@ export function isMyTurn(playerNum, turn) {
 }
 
 export function winLoseStatus(playerNum, timeLeft, turn) {
-  // console.log(`End game with ${turn}`);
   if (playerNum === 1) {
     if (timeLeft.blackTime === 0 || turn === 'b') {
       return 'You won';

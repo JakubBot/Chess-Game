@@ -110,7 +110,6 @@ export function minimaxRoot(game, depth, isMaxPlayer) {
     }
   }
   const move = _moves.find((move) => move.san === bestMove);
-  // console.log(_moves);
   return { bestMove, move };
 }
 

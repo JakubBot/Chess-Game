@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './index.scss';
 
 const TextInput = ({
@@ -28,4 +29,12 @@ const TextInput = ({
   );
 };
 
+TextInput.propTypes = {
+  value: PropTypes.string,
+  errors: PropTypes.string,
+  name: PropTypes.string,
+  labelText: PropTypes.string,
+  placeHolder: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+};
 export default TextInput;

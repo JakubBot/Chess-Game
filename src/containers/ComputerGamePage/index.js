@@ -219,6 +219,7 @@ const ComputerGamePage = ({
     );
     updateStatusText(statusGame);
   }
+
   return (
     <>
       <div className="page__wrapper">

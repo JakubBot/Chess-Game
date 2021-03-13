@@ -8,7 +8,6 @@ import { firestore, auth } from '../../firebase-config';
 import { generateID } from '../../components/utils';
 import * as userActions from '../../redux/actions/userActions';
 
-
 const RegisterPage = ({
   user,
   history,

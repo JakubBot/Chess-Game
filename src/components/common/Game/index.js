@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { domain } from '../../utils/gameUtils/onlineGameUtils';
 import { winLoseStatus } from '../../utils/gameUtils/commonGameUtils';
 import GameBoard from './GameBoard';
@@ -51,6 +52,7 @@ const Game = ({
     changeSite('/');
   };
 
+
   return (
     <>
       <GameBoard
@@ -68,6 +70,28 @@ const Game = ({
       />
     </>
   );
+};
+
+GameBoard.propTypes = {
+  songRef: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+  ]),
+  links: PropTypes.bool,
+  userName: PropTypes.string,
+  points: PropTypes.number,
+  playerNum: PropTypes.number,
+  isGameEnded: PropTypes.bool,
+  p1_token: PropTypes.string,
+  p2_token: PropTypes.string,
+  timeLeft: PropTypes.shape({
+    whiteTime: PropTypes.string,
+    blackTime: PropTypes.string,
+    isGameActive: PropTypes.bool,
+  }),
+  changeSite: PropTypes.func,
+  updateLocalStorage: PropTypes.func,
+  turn: PropTypes.string,
 };
 
 export default Game;
