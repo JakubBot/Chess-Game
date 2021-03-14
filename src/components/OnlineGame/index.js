@@ -258,7 +258,7 @@ const OnlineGame = ({
         isGameEnded={gameEngine.game_over() || isGameEndByTime}
         changeSite={changeSite}
         updateLocalStorage={updateLocalStorage}
-        mode={mode}
+        token={state.token}
       />
     </>
   );
@@ -267,7 +267,7 @@ const OnlineGame = ({
 OnlineGame.propTypesd = {
   board: PropTypes.string,
   piece: PropTypes.string,
-  mode: PropTypes.string,
+  token: PropTypes.string,
   user: PropTypes.shape({
     userName: PropTypes.string,
     photo: PropTypes.string,

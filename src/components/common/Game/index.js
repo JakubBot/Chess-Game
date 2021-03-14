@@ -13,7 +13,7 @@ const Game = ({
   links,
   userName,
   points,
-  mode,
+  token,
   timeLeft,
   playerNum,
   isGameEnded,
@@ -34,8 +34,8 @@ const Game = ({
     }
   }, [isGameEnded]);
   const adress = {
-    firstPlayer: `${domain()}/play/${p1_token}`,
-    secondPlayer: `${domain()}/play/${p2_token}`,
+    firstPlayer: `${domain()}/play/online/${p1_token}`,
+    secondPlayer: `${domain()}/play/online/${p2_token}`,
   };
 
   const removeLink = () => {
@@ -67,7 +67,7 @@ const Game = ({
         points={points}
         isGameEnded={isGameEnded}
         onBackToHome={handleBackToHome}
-        mode={mode}
+        token={token}
       />
     </>
   );
@@ -81,7 +81,7 @@ GameBoard.propTypes = {
   links: PropTypes.bool,
   userName: PropTypes.string,
   points: PropTypes.number,
-  mode: PropTypes.string,
+  token: PropTypes.string,
   playerNum: PropTypes.number,
   isGameEnded: PropTypes.bool,
   p1_token: PropTypes.string,

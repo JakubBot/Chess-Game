@@ -7,7 +7,7 @@ import './index.scss';
 
 const GameBoard = ({
   songRef,
-  mode,
+  token,
   links,
   adress,
   userName,
@@ -31,7 +31,7 @@ const GameBoard = ({
         <div className="userInformations">
           <div className="userWrapper">
             <span className="playerName">
-              {mode === 'online' || playerNum === 2 ? 'Friend' : 'Guest 120'}
+              {token || playerNum === 2 ? 'Friend' : 'Guest 120'}
             </span>
             <span className="points">(500)</span>
           </div>
@@ -110,6 +110,7 @@ GameBoard.propTypes = {
     secondPlayer: PropTypes.string,
   }),
   userName: PropTypes.string,
+  token: PropTypes.string,
   points: PropTypes.number,
   whiteTime: PropTypes.string.isRequired,
   blackTime: PropTypes.string.isRequired,

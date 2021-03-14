@@ -31,7 +31,7 @@ ReactDOM.render(
               <Route path="/login" component={LoginPage} />
               <Route path="/register" component={RegisterPage} />
               <Route path="/play/computer" component={ComputerGamePage} />
-              <Route path="/play/:token" component={OnlineGamePage} />
+              <Route path="/play/online/:token" component={OnlineGamePage} />
               <Route component={PageNotFound} />
             </Switch>
           </Suspense>
