@@ -10,19 +10,9 @@ export function figurePlayer(token, { p1_token, p2_token }) {
   return 0;
 }
 
-// export function Turn(playerNum, isMyTurn) {
-//   if (playerNum > 0) {
-//     if (isMyTurn) {
-//       return 'Your Turn';
-//     }
-//     return "Waiting for opponent's move...";
-//   }
-//   return 'View Only';
-// }
-
 export const domain = () => {
   if (window.location) {
-    return `${window.location.origin}${process.env.PUBLIC_URL}`;
+    return `${window.location.origin}${window.location.pathname}#`;
   }
   return window.location;
 };
@@ -33,7 +23,6 @@ export function setTimeLeft({ id }, gameEngine) {
   if (gameEngine.turn() === 'w') {
     chessRef.update({
       'timeLeft.whiteTime': firebase.firestore.FieldValue.increment(-1),
-      // 'timeLeft.whiteTime': timeLeft.whiteTime - 1,
     });
   } else {
     chessRef.update({

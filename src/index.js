@@ -1,7 +1,7 @@
 import React, { lazy, Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider as ReduxProvider } from 'react-redux';
-import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+import { Route, Switch, HashRouter as Router } from 'react-router-dom';
 import GlobalChat from './containers/GlobalChat';
 import Navbar from './containers/Navbar';
 import Spinner from './components/Spinner';
@@ -17,13 +17,12 @@ const ComputerGamePage = lazy(() => import('./containers/ComputerGamePage'));
 const PageNotFound = lazy(() => import('./containers/PageNotFound'));
 
 const store = configureStore();
-
 ReactDOM.render(
   <React.StrictMode>
     <ReduxProvider store={store}>
       <div className="container">
-        <Router basename={process.env.PUBLIC_URL}>
-          <Suspense fallback={<Spinner />}>
+        <Suspense fallback={<Spinner />}>
+          <Router basename={process.env.PUBLIC_URL}>
             <GlobalChat />
             <Navbar />
             <Switch>
@@ -34,8 +33,8 @@ ReactDOM.render(
               <Route path="/play/online/:token" component={OnlineGamePage} />
               <Route component={PageNotFound} />
             </Switch>
-          </Suspense>
-        </Router>
+          </Router>
+        </Suspense>
       </div>
     </ReduxProvider>
   </React.StrictMode>,

@@ -38,6 +38,7 @@ const HomePage = ({
   useEffect(() => {
     defaultBoardSettings();
   }, []);
+
   const updateConfig = () => {
     const config = {
       pieceTheme: `${process.env.PUBLIC_URL}/img/chesspieces/${piece}/{piece}.png`,

@@ -40,10 +40,10 @@ const OnlineGame = ({
   const songRef = useRef(null);
 
   const [isGameEndByTime, setIsGameEndByTime] = useState(false);
-
   useEffect(() => {
     let timer = null;
-    if (state.isGameActive) {
+    const playerNum = figurePlayer(state.token, state);
+    if (state.isGameActive && playerNum === 1) {
       timer = setInterval(() => {
         setTimeLeft(state, gameEngine);
       }, 1000);
