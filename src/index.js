@@ -4,13 +4,7 @@ import { Provider as ReduxProvider } from 'react-redux';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import GlobalChat from './containers/GlobalChat';
 import Navbar from './containers/Navbar';
-
-// import OnlineGamePage from './containers/OnlineGamePage';
-// import HomePage from './containers/HomePage';
-// import LoginPage from './containers/LoginPage';
-// import RegisterPage from './containers/RegisterPage';
-// import PageNotFound from './containers/PageNotFound';
-// import ComputerGamePage from './containers/ComputerGamePage';
+import Spinner from './components/Spinner';
 
 import configureStore from './redux/store';
 import './index.scss';
@@ -29,7 +23,7 @@ ReactDOM.render(
     <ReduxProvider store={store}>
       <div className="container">
         <Router basename={process.env.PUBLIC_URL}>
-          <Suspense fallback={<div>Waiting</div>}>
+          <Suspense fallback={<Spinner />}>
             <GlobalChat />
             <Navbar />
             <Switch>
