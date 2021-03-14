@@ -30,8 +30,8 @@ ReactDOM.render(
               <Route exact path="/" component={HomePage} />
               <Route path="/login" component={LoginPage} />
               <Route path="/register" component={RegisterPage} />
-              <Route exact path="/play/computer" component={ComputerGamePage} />
-              <Route exact path="/play/:token" component={OnlineGamePage} />
+              <Route path="/play/computer" component={ComputerGamePage} />
+              <Route path="/play/:token" component={OnlineGamePage} />
               <Route component={PageNotFound} />
             </Switch>
           </Suspense>

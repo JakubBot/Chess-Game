@@ -13,6 +13,7 @@ const Game = ({
   links,
   userName,
   points,
+  mode,
   timeLeft,
   playerNum,
   isGameEnded,
@@ -66,6 +67,7 @@ const Game = ({
         points={points}
         isGameEnded={isGameEnded}
         onBackToHome={handleBackToHome}
+        mode={mode}
       />
     </>
   );
@@ -79,6 +81,7 @@ GameBoard.propTypes = {
   links: PropTypes.bool,
   userName: PropTypes.string,
   points: PropTypes.number,
+  mode: PropTypes.string,
   playerNum: PropTypes.number,
   isGameEnded: PropTypes.bool,
   p1_token: PropTypes.string,

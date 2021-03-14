@@ -14,6 +14,7 @@ const OnlineGamePage = ({
   statusText,
   piece,
   boardType,
+  mode,
   history,
   updateMoves,
   updateStatusText,
@@ -43,6 +44,7 @@ const OnlineGamePage = ({
           updateLocalStorage={updateLocalStorage}
           userName={user?.userName}
           points={user?.points}
+          mode={mode}
         />
         <ScoreBoard isOnline moves={moves} statusText={statusText} />
       </div>
@@ -50,12 +52,13 @@ const OnlineGamePage = ({
   );
 };
 function mapStateToProps(state) {
-  const { moves, statusText, piece, board } = state.boardInfo;
+  const { moves, statusText, piece, board, mode } = state.boardInfo;
   const { user } = state;
   return {
     moves,
     statusText,
     piece,
+    mode,
     boardType: board,
     user,
   };
@@ -75,6 +78,7 @@ OnlineGamePage.propTypes = {
   }),
   boardType: PropTypes.string.isRequired,
   piece: PropTypes.string.isRequired,
+  mode: PropTypes.string.isRequired,
   user: PropTypes.shape({
     userName: PropTypes.string,
     photo: PropTypes.string,

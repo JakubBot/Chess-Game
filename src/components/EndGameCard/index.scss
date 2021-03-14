@@ -1,6 +1,8 @@
+@import '../../assets/styles/style.scss';
+
 .endGameCard {
   position: absolute;
-  top: 50vh;
+  top: 60vh;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 800;
@@ -10,7 +12,9 @@
   padding: 15px 30px;
   background-color: rgba($color: #fff, $alpha: 1);
 
-
+  @include phone {
+  top: 50vh;
+  }
   &.greenBackgrond::before,
   &.greyBackground::before {
     content: '';
