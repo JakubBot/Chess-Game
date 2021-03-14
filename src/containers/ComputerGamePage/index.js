@@ -46,8 +46,8 @@ const ComputerGamePage = ({
     index: 0,
   });
   const [timeLeft, setTimeLeft] = useState({
-    whiteTime: 2,
-    blackTime: 2,
+    whiteTime: 300,
+    blackTime: 300,
     isGameActive: false,
   });
   const [isGameEndByTime, setIsGameEndByTime] = useState(false);
@@ -153,7 +153,7 @@ const ComputerGamePage = ({
         return 'snapback';
       }
 
-      window.setTimeout(makeEngineMove, 200);
+      window.setTimeout(makeEngineMove, 3200);
 
       setGameMove((prevState) => ({
         ...prevState,

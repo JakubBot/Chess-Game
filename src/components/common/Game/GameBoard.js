@@ -16,15 +16,14 @@ const GameBoard = ({
   playerNum,
   removeLink,
   isGameEnded,
-  onBackToPlay,
+  onBackToHome,
 }) => {
   return (
     <>
       <div className="game">
         {isGameEnded && (
-          <button type="button" className="backToPlay" onClick={onBackToPlay}>
-            <span className="backToPlay__arrow">🠔</span>
-            Back to Play
+          <button type="button" className="backToHome" onClick={onBackToHome}>
+            Back to Home
           </button>
         )}
 
@@ -114,7 +113,7 @@ GameBoard.propTypes = {
   playerNum: PropTypes.number,
   isGameEnded: PropTypes.bool,
   removeLink: PropTypes.func.isRequired,
-  onBackToPlay: PropTypes.func.isRequired,
+  onBackToHome: PropTypes.func.isRequired,
 };
 
 // songRef, p1_token, p2_token, links, user

@@ -39,8 +39,8 @@ const ConfigBoard = ({ board, piece, mode, history, ...props }) => {
       p2_token: generateID(8),
       moveIndex: 1,
       timeLeft: {
-        whiteTime: 3,
-        blackTime: 2,
+        whiteTime: 300,
+        blackTime: 300,
       },
     };
 

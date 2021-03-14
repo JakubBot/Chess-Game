@@ -12,20 +12,19 @@
     flex: 0 1 auto;
   }
 
-  .backToPlay {
+  .backToHome {
     align-self: flex-start;
     color: #efefef;
     display: flex;
     place-items: center;
     cursor: pointer;
-    background-color: transparent;
     border: none;
     font-size: .9em;
-
-    &__arrow {
-      font-size: 1.8em;
-      margin-right: 5px;
-    }
+    background: transparent url("../../../assets/img/btn-background-blue.png")  0 0 / cover no-repeat;
+   width: 120px;
+   height: 30px;
+   display: flex;
+   justify-content: center;
   }
 
   .board {
@@ -187,3 +186,4 @@
 .row-5277c .square-55d63:nth-child(even) .alpha-d2270 {
   color: #835f42;
 }
+

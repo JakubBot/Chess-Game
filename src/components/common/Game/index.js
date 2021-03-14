@@ -48,7 +48,7 @@ const Game = ({
     return `${minutes}: ${seconds < 10 ? `0${seconds}` : seconds}`;
   };
 
-  const onBackToPlay = () => {
+  const handleBackToHome = () => {
     changeSite('/');
   };
 
@@ -65,7 +65,7 @@ const Game = ({
         userName={userName}
         points={points}
         isGameEnded={isGameEnded}
-        onBackToPlay={onBackToPlay}
+        onBackToHome={handleBackToHome}
       />
     </>
   );
