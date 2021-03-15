@@ -37,7 +37,8 @@ const OnlineGame = ({
   const [state, setState] = useState({
     token: props.match.params.token,
   });
-  const songRef = useRef(null);
+  const moveSongRef = useRef(null);
+  const checkSongRef = useRef(null);
 
   const [isGameEndByTime, setIsGameEndByTime] = useState(false);
   useEffect(() => {
@@ -65,6 +66,11 @@ const OnlineGame = ({
   }, []);
 
   useEffect(() => {
+    if (state?.statusText?.split(' ').includes('check')) {
+      checkSongRef.current.play();
+    } else {
+      moveSongRef.current.play();
+    }
     updateStatusText(state.statusText);
   }, [state.statusText]);
 
@@ -84,7 +90,6 @@ const OnlineGame = ({
         whiteSan: '',
         blackSan: '',
         moveIndex: firebase.firestore.FieldValue.increment(1),
-        // moveIndex: state.moveIndex + 1,
       });
     }
   }, [state.whiteSan, state.blackSan]);
@@ -216,10 +221,11 @@ const OnlineGame = ({
       }
     }
     function onSnapEnd() {
-      songRef.current.play();
+      // moveSongRef.current.play();
       return board.position(engine.fen());
     }
   }
+
   function ListenForUpdates(token, cb) {
     ['p1_token', 'p2_token'].forEach((name) => {
       const chessRef = firestore.collection('games').where(name, '==', token);
@@ -249,7 +255,8 @@ const OnlineGame = ({
       <Game
         timeLeft={state.timeLeft}
         links
-        songRef={songRef}
+        moveSongRef={moveSongRef}
+        checkSongRef={checkSongRef}
         p1_token={state.p1_token}
         p2_token={state.p2_token}
         userName={user?.userName}

@@ -7,7 +7,8 @@ import GameBoard from './GameBoard';
 
 const $ = window.jQuery;
 const Game = ({
-  songRef,
+  moveSongRef,
+  checkSongRef,
   p1_token,
   p2_token,
   links,
@@ -61,7 +62,8 @@ const Game = ({
         playerNum={playerNum}
         adress={adress}
         removeLink={removeLink}
-        songRef={songRef}
+        moveSongRef={moveSongRef}
+        checkSongRef={checkSongRef}
         links={links}
         userName={userName}
         points={points}
@@ -74,7 +76,11 @@ const Game = ({
 };
 
 GameBoard.propTypes = {
-  songRef: PropTypes.oneOfType([
+  moveSongRef: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+  ]),
+  checkSongRef: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
   ]),

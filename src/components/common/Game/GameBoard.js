@@ -2,11 +2,12 @@
 /* eslint-disable camelcase */
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import { gameMusics, checkMusics } from './Musics';
 import './index.scss';
 
 const GameBoard = ({
-  songRef,
+  moveSongRef,
+  checkSongRef,
   token,
   links,
   adress,
@@ -76,31 +77,26 @@ const GameBoard = ({
           </div>
         )}
       </div>
-
-      <audio id="myAudio" ref={songRef}>
-        <source
-          src="https://images.chesscomfiles.com/chess-themes/sounds/_WEBM_/default/game-start.webm"
-          type="audio/webm"
-        />
-        <source
-          src="https://images.chesscomfiles.com/chess-themes/sounds/_OGG_/default/game-start.ogg"
-          type="audio/ogg"
-        />
-        <source
-          src="https://images.chesscomfiles.com/chess-themes/sounds/_MP3_/default/game-start.mp3"
-          type="audio/mpeg"
-        />
-        <source
-          src="https://images.chesscomfiles.com/chess-themes/sounds/_WAV_/default/game-start.wav"
-          type="audio/wav"
-        />
+      <audio ref={moveSongRef}>
+        {gameMusics.map((music) => (
+          <source src={music.src} key={music.id} type={music.type} />
+        ))}
+      </audio>
+      <audio ref={checkSongRef}>
+        {checkMusics.map((music) => (
+          <source src={music.src} key={music.id} type={music.type} />
+        ))}
       </audio>
     </>
   );
 };
 
 GameBoard.propTypes = {
-  songRef: PropTypes.oneOfType([
+  moveSongRef: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+  ]),
+  checkSongRef: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
   ]),

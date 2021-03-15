@@ -7,10 +7,10 @@ const BoardMoves = ({ moves }) => {
     <>
       <ul className="moves">
         {[...moves].reverse().map((move) => {
-          const { whiteSan, blackSan, moveIndex } = move;
+          const { whiteSan, blackSan, index, id } = move;
           return (
-            <li className="moves__item" key={move.id}>
-              <span className="index">{moveIndex}</span>
+            <li className="moves__item" key={id}>
+              <span className="index">{index}</span>
               <span className="san">{whiteSan}</span>
               <span className="san">{blackSan}</span>
             </li>

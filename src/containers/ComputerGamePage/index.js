@@ -51,7 +51,9 @@ const ComputerGamePage = ({
     isGameActive: false,
   });
   const [isGameEndByTime, setIsGameEndByTime] = useState(false);
-  const songRef = useRef(null);
+  const moveSongRef = useRef(null);
+  const checkSongRef = useRef(null);
+
   useEffect(() => {
     if (authUser !== null && user === null) {
       loginUserWithSocials(authUser);
@@ -117,11 +119,8 @@ const ComputerGamePage = ({
     }
   }, [gameMove]);
   useEffect(() => {
-    songRef.current.play();
-
     function makeEngineMove() {
       const { bestMove, move } = minimaxRoot(game, maxDepth, true);
-
       setGameMove((prevState) => ({
         ...prevState,
         blackSan: move?.san,
@@ -167,8 +166,6 @@ const ComputerGamePage = ({
     }
 
     function onSnapEnd() {
-      songRef.current.play();
-
       board.position(game.fen());
       updateStatus();
     }
@@ -217,6 +214,11 @@ const ComputerGamePage = ({
       game.insufficient_material(),
       game.in_stalemate()
     );
+    if (statusGame.split(' ').includes('check')) {
+      checkSongRef.current.play();
+    } else {
+      moveSongRef.current.play();
+    }
     updateStatusText(statusGame);
   }
 
@@ -228,7 +230,8 @@ const ComputerGamePage = ({
         )}
         <Game
           timeLeft={timeLeft}
-          songRef={songRef}
+          moveSongRef={moveSongRef}
+          checkSongRef={checkSongRef}
           links={false}
           playerNum={1}
           isGameEnded={game.game_over() || isGameEndByTime}
