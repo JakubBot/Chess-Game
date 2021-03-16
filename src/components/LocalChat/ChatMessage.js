@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const ChatMessage = ({ msg, user }) => {
   const { uid, message, photoURL } = msg;
-  const userUID = user.uid;
+  const userUID = user?.uid;
 
   const messageClass = uid === userUID ? 'sent' : 'received';
   return (

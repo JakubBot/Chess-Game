@@ -7,6 +7,11 @@
 This Project was cretated for users which are bored and wanna play some chess games!
 Game is simple and I'm sure you'll like it. Good luck!
 
+## Online Version
+
+Online Version
+- [https://jakubbot.github.io/Chess-Game](https://jakubbot.github.io/Chess-Game)
+
 ## Features
 
 - login with: 
@@ -23,12 +28,6 @@ Game is simple and I'm sure you'll like it. Good luck!
   - online - against your friend and save it to firebase to prevent cheating
 - config board and shows last moves in game
 
-
-## Online Version
-
-Online Version
-- [https://jakubbot.github.io/Chess-Game](https://jakubbot.github.io/Chess-Game)
-
 ## Getting Started
 
 ```sh
@@ -40,13 +39,6 @@ $ npm start
 ```
 
 With the commands above, you have everything to start.
-
-### Tasks
-
-- `npm start`: run all tasks and initialize watch for changes and a server
-- `npm run build`: run all production tasks create a `dist` folder to deploy
-- `npm run lint`: lint javascript and css
-- `npm run fix`: command to fix all eslint errors
 
 ## Technologies
 
