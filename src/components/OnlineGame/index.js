@@ -18,7 +18,7 @@ import { generateID } from '../utils';
 
 const $ = window.jQuery;
 
-const INITIAL_FEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR';
+const INITIAL_FEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
 let unsubscribe = null;
 let board = null;
 

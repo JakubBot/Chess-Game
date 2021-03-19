@@ -4,10 +4,10 @@ import Chess from 'chess.js/chess';
 import Chessboard from '@chrisoakman/chessboardjs/dist/chessboard-1.0.0';
 import { connect } from 'react-redux';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { aiMove } from 'js-chess-engine';
 import ScoreBoard from '../../components/ScoreBoard';
 import Game from '../../components/common/Game';
 import { auth } from '../../firebase-config';
-import { minimaxRoot } from '../../components/utils/gameUtils/computerGameUtils';
 import {
   removeDotSquares,
   allowMove,
@@ -21,9 +21,9 @@ import * as boardActions from '../../redux/actions/boardActions';
 import EndGameCard from '../../components/EndGameCard';
 
 const $ = window.jQuery;
+
 let board = null;
 const game = new Chess();
-const maxDepth = 2;
 
 const ComputerGamePage = ({
   history,
@@ -120,12 +120,31 @@ const ComputerGamePage = ({
   }, [gameMove]);
   useEffect(() => {
     function makeEngineMove() {
-      const { bestMove, move } = minimaxRoot(game, maxDepth, true);
+      let lvl = 2;
+
+      if (window.innerWidth < 520) {
+        setTimeLeft((prevState) => ({
+          ...prevState,
+          blackTime: prevState.blackTime - 1,
+        }));
+        lvl = 1;
+      }
+      const computerMove = aiMove(game.fen(), lvl);
+
+      const from = Object.keys(computerMove)[0].toLocaleLowerCase();
+      const to = Object.values(computerMove)[0].toLocaleLowerCase();
+
+      const move = game.move({
+        from,
+        to,
+        promotion: 'q',
+      });
+
       setGameMove((prevState) => ({
         ...prevState,
         blackSan: move?.san,
       }));
-      game.move(bestMove);
+
       board.position(game.fen());
       updateStatus();
     }
@@ -142,7 +161,6 @@ const ComputerGamePage = ({
 
     function onDrop(source, target) {
       removeDotSquares();
-
       const move = game.move({
         from: source,
         to: target,
@@ -152,7 +170,9 @@ const ComputerGamePage = ({
         return 'snapback';
       }
 
-      window.setTimeout(makeEngineMove, 3200);
+      window.innerWidth < 520
+        ? window.setTimeout(makeEngineMove, 2400)
+        : window.setTimeout(makeEngineMove, 3200);
 
       setGameMove((prevState) => ({
         ...prevState,
