@@ -12,6 +12,18 @@ Game is simple and I'm sure you'll like it. Good luck!
 Online Version
 - [https://jakubbot.github.io/Chess-Game](https://jakubbot.github.io/Chess-Game)
 
+## Getting Started
+
+```sh
+# install dependencies
+$ npm i
+
+# Run the project
+$ npm start
+```
+
+With the commands above, you have everything to start.
+
 ## Features
 
 - login with: 
@@ -27,18 +39,6 @@ Online Version
   - local - against bot
   - online - against your friend and save current game to firebase to prevent cheating
 - And much more
-
-## Getting Started
-
-```sh
-# install dependencies
-$ npm i
-
-# Run the project
-$ npm start
-```
-
-With the commands above, you have everything to start.
 
 ## Technologies
 
