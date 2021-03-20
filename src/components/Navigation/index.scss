@@ -16,6 +16,10 @@
   outline: none;
   z-index: 1000;
   opacity: 0.9;
+  background-color: transparent;
+  outline: none;
+  border: unset;
+  text-align: unset;
   @include phone {
     display: none;
   }

@@ -8,9 +8,9 @@ import './index.scss';
 const Navigation = ({ user, onClick, signOut }) => {
   return (
     <>
-      <div className="menu-btn" role="button" tabIndex="0" onClick={onClick}>
+      <button type="button" className="menu-btn" onClick={onClick}>
         <div className="menu-btn__burger" />
-      </div>
+      </button>
       <div className="menu__socials">
         <span className="icon-home icon" />
         <span className="icon-twitter-squared icon" />
