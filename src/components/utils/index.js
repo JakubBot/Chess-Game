@@ -18,13 +18,3 @@ export const generateID = (number = 28) => {
 
   return text;
 };
-
-// const [timer, setTimer] = useState(12);
-// useEffect(() => {
-//   const interval = setInterval(() => {
-//     if (timer > 0) setTimer((timer) => timer - 1);
-//     else clearInterval(interval);
-//   }, 1000);
-
-//   return () => clearInterval(interval);
-// }, [timer]);

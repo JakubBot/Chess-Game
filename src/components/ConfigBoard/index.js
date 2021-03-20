@@ -77,5 +77,4 @@ ConfigForm.propTypes = {
   changePiece: PropTypes.func.isRequired,
   changeMode: PropTypes.func.isRequired,
 };
-// PropTypes;
 export default withRouter(ConfigBoard);

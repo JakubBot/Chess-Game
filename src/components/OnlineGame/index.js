@@ -21,7 +21,6 @@ const $ = window.jQuery;
 const INITIAL_FEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
 let unsubscribe = null;
 let board = null;
-
 const OnlineGame = ({
   boardType,
   piece,
@@ -132,19 +131,17 @@ const OnlineGame = ({
   }
 
   function updateBoard(id, game) {
-    const engine = gameEngine;
     const playerNum = figurePlayer(state.token, game);
-    engine.load(game.fen || INITIAL_FEN);
+    gameEngine.load(game.fen || INITIAL_FEN);
 
     if (!board) {
       board = initBoard(id, game);
-      board.position(engine.fen());
-    } else if (isMyTurn(playerNum, engine.turn())) {
-      board.position(engine.fen());
+      board.position(gameEngine.fen());
+    } else if (isMyTurn(playerNum, gameEngine.turn())) {
+      board.position(gameEngine.fen());
     }
   }
   function initBoard(id, game) {
-    const engine = gameEngine;
     const playerNum = figurePlayer(state.token, game);
     const config = {
       pieceTheme: `${process.env.PUBLIC_URL}/img/chesspieces/${piece}/{piece}.png`,
@@ -178,7 +175,7 @@ const OnlineGame = ({
     return board;
 
     function onMouseoverSquare(square) {
-      const canIMove = isMyTurn(playerNum, engine.turn());
+      const canIMove = isMyTurn(playerNum, gameEngine.turn());
 
       if (canIMove) {
         makeDots(gameEngine, square);
@@ -190,9 +187,9 @@ const OnlineGame = ({
       const img = $(`img[data-piece="${piece}"]`);
       img.addClass('z-index');
       return (
-        !engine.game_over() &&
-        isMyTurn(playerNum, engine.turn()) &&
-        allowMove(engine.turn(), piece)
+        !gameEngine.game_over() &&
+        isMyTurn(playerNum, gameEngine.turn()) &&
+        allowMove(gameEngine.turn(), piece)
       );
     }
 
@@ -209,20 +206,20 @@ const OnlineGame = ({
       const chessRef = firestore.collection('games').doc(id);
       if (playerNum === 1) {
         chessRef.update({
-          fen: engine.fen(),
+          fen: gameEngine.fen(),
           whiteSan: move.san,
           isGameActive: true,
         });
       } else if (playerNum === 2) {
         chessRef.update({
-          fen: engine.fen(),
+          fen: gameEngine.fen(),
           blackSan: move.san,
         });
       }
     }
+
     function onSnapEnd() {
-      // moveSongRef.current.play();
-      return board.position(engine.fen());
+      return board.position(gameEngine.fen());
     }
   }
 

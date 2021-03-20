@@ -221,7 +221,6 @@ const ComputerGamePage = ({
     }
     updateStatus();
   }, []);
-
   function updateStatus() {
     const statusGame = statusText(
       game.turn(),

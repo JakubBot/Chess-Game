@@ -20,8 +20,3 @@ export function updateStatusText(statusText) {
 export function defaultBoardSettings() {
   return { type: types.DEFAULT_BOARD_SETTINGS };
 }
-
-// setState({
-//   ...state,
-//   board: target.name,
-// });

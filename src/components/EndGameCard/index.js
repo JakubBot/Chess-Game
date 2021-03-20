@@ -55,9 +55,9 @@ const EndGameCard = ({ timeLeft, turn, playerNum = 1, user }) => {
 
 EndGameCard.propTypes = {
   timeLeft: PropTypes.shape({
-    whiteTime: PropTypes.number.isRequired,
-    blackTime: PropTypes.number.isRequired,
-    isGameActive: PropTypes.bool.isRequired,
+    whiteTime: PropTypes.number,
+    blackTime: PropTypes.number,
+    isGameActive: PropTypes.bool,
   }),
   turn: PropTypes.string.isRequired,
   playerNum: PropTypes.number,

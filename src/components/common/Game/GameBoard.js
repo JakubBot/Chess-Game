@@ -116,5 +116,4 @@ GameBoard.propTypes = {
   onBackToHome: PropTypes.func.isRequired,
 };
 
-// songRef, p1_token, p2_token, links, user
 export default GameBoard;
