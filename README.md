@@ -22,11 +22,11 @@ Online Version
 - local chat for each game with other user
 - global chat to speak with everyone
 - regain users informations after refresh page
-- uses local storage if user is signed in with form(email, password) to cash user data 
+- uses local storage if user is signed in with form(email, password) to cache user data 
 - games (realtime updates board position, time, points)
-  - local - against 800 points bot and save informations to firebase to prevent cheating
-  - online - against your friend and save it to firebase to prevent cheating
-- config board and shows last moves in game
+  - local - against bot
+  - online - against your friend and save current game to firebase to prevent cheating
+- And much more
 
 ## Getting Started
 
