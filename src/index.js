@@ -15,7 +15,6 @@ const LoginPage = lazy(() => import('./containers/LoginPage'));
 const RegisterPage = lazy(() => import('./containers/RegisterPage'));
 const ComputerGamePage = lazy(() => import('./containers/ComputerGamePage'));
 const PageNotFound = lazy(() => import('./containers/PageNotFound'));
-
 const store = configureStore();
 ReactDOM.render(
   <React.StrictMode>
