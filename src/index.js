@@ -5,6 +5,8 @@ import { Route, Switch, HashRouter as Router } from 'react-router-dom';
 import GlobalChat from './containers/GlobalChat';
 import Navbar from './containers/Navbar';
 import Spinner from './components/Spinner';
+import * as serviceWorker from './serviceWorker';
+import LocalServiceWorkerRegister from './sw-register';
 
 import configureStore from './redux/store';
 import './index.scss';
@@ -39,3 +41,6 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
+
+LocalServiceWorkerRegister();
+serviceWorker.register();
