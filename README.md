@@ -22,7 +22,7 @@ $ npm i
 $ npm start
 ```
 
-With the commands above, you have everything to start.
+Note that chessboard package don't have export by defualt so if you want to start project you have to add it by yourself
 
 ## Features
 
