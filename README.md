@@ -2,14 +2,12 @@
 
 # Chess Game
 
-<!-- https://user-images.githubusercontent.com/64312840/110952685-cc17e700-8346-11eb-8e9d-f363e6da104d.png -->
 
 This Project was cretated for users which are bored and wanna play some chess games!
 Game is simple and I'm sure you'll like it. Good luck!
 
 ## Online Version
 
-Online Version
 - [https://jakubbot.github.io/Chess-Game](https://jakubbot.github.io/Chess-Game)
 
 ## Getting Started
@@ -51,6 +49,29 @@ Project is created with:
 - Firebase, firebase hooks
 - Chess.js, chessboard.js, jQuery
 - PropTypes
+
+## Prerequisites
+
+Before running the application, ensure you have **Node.js** and **npm** installed. You will also need a **Firebase project** to handle authentication and real-time database features.
+
+### Environment Variables
+
+To enable the online multiplayer features, authentication, and database synchronization, you must set up your Firebase credentials. Create a `.env` file in the root directory and add the following variables:
+
+```env
+# Optional: Prevents the browser from opening automatically during development
+BROWSER=none
+
+# Firebase Configuration
+REACT_APP_API_KEY=your_api_key
+REACT_APP_AUTH_DOMAIN=your_auth_domain
+REACT_APP_PROJECT_ID=your_project_id
+REACT_APP_STORAGE_BUCKET=your_storage_bucket
+REACT_APP_MESSAGING_SENDER_ID=your_messaging_sender_id
+REACT_APP_APP_ID=your_app_id
+REACT_APP_MEASUREMENT_ID=your_measurement_id
+```
+
 
 ## Code Standards
 
